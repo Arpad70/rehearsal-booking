@@ -28,5 +28,10 @@ class Room extends Model
     public function devices(): HasMany
     {
         return $this->hasMany(Device::class);
-    }  
+    }
+
+    public function readers(): HasMany
+    {
+        return $this->hasMany(RoomReader::class);
+    }
 }

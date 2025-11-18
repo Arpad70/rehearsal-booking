@@ -18,13 +18,16 @@ use Database\Factories\ReservationFactory;
  * @property \Illuminate\Support\Carbon|null $token_valid_from
  * @property \Illuminate\Support\Carbon|null $token_expires_at
  * @property \Illuminate\Support\Carbon|null $used_at
+ * @property string|null $qr_code
+ * @property \Illuminate\Support\Carbon|null $qr_generated_at
+ * @property \Illuminate\Support\Carbon|null $qr_sent_at
  * @property \App\Models\Room $room
  * @property \App\Models\User $user
  */
 class Reservation extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id','room_id','start_at','end_at','status','access_token','token_valid_from','token_expires_at','used_at'];  
+    protected $fillable = ['user_id','room_id','start_at','end_at','status','access_token','token_valid_from','token_expires_at','used_at','qr_code','qr_generated_at','qr_sent_at'];  
     /**
      * @var array<string,string>
      */
@@ -34,6 +37,8 @@ class Reservation extends Model
         'token_valid_from' => 'datetime',
         'token_expires_at' => 'datetime',
         'used_at' => 'datetime',
+        'qr_generated_at' => 'datetime',
+        'qr_sent_at' => 'datetime',
     ];
 
     protected static function booted() {  
@@ -99,5 +104,42 @@ class Reservation extends Model
         if ($this->access_token !== $token) return false;  
         if (!$this->token_valid_from || !$this->token_expires_at) return false;  
         return now()->between($this->token_valid_from, $this->token_expires_at);  
-    }  
+    }
+
+    /**
+     * Check if QR code is valid and within access window
+     * 15 minutes before start, up to end time
+     */
+    public function isQRValid(): bool
+    {
+        if (!$this->qr_code || !$this->qr_generated_at) {
+            return false;
+        }
+
+        $now = now();
+        $start = $this->start_at;
+        $end = $this->end_at;
+
+        // 15 minutes before to end of reservation
+        $accessStart = $start->copy()->subMinutes(15);
+        $accessEnd = $end;
+
+        return $now->isBetween($accessStart, $accessEnd);
+    }
+
+    /**
+     * Get QR access window information
+     */
+    public function getQRAccessWindow(): array
+    {
+        if (!$this->start_at || !$this->end_at) {
+            return [];
+        }
+
+        return [
+            'earliest_access' => $this->start_at->copy()->subMinutes(15),
+            'latest_access' => $this->end_at,
+            'window_minutes' => $this->start_at->diffInMinutes($this->end_at) + 15,
+        ];
+    }
 }
