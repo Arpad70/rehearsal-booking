@@ -85,10 +85,7 @@ class RoomReaderResource extends Resource
                             ->label('Lock Configuration (JSON)')
                             ->addButtonLabel('Add Configuration')
                             ->keyPlaceholder('Key (e.g., relay_pin, duration)')
-                            ->valuePlaceholder('Value')
-                            ->reorderable(false)
-                            ->editableKeys(false)
-                            ->disableItemDeletion(),
+                            ->valuePlaceholder('Value'),
                     ]),
 
                 Section::make('Configuration Details')
