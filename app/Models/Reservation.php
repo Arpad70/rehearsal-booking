@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Database\Factories\ReservationFactory;
 
 /**
@@ -99,6 +100,51 @@ class Reservation extends Model
     public function user(): BelongsTo {  
         return $this->belongsTo(\App\Models\User::class);  
     }
+
+    /**
+     * Relationship: Reservation has many backup QR codes
+     */
+    public function backupQRCodes(): HasMany
+    {
+        return $this->hasMany(BackupQRCode::class);
+    }
+
+    /**
+     * Generate backup QR codes (for redundancy)
+     */
+    public function generateBackupQRCodes(int $count = 2): void
+    {
+        // Remove old backup codes
+        $this->backupQRCodes()->where('status', '!=', 'used')->delete();
+
+        // Generate new ones
+        for ($i = 2; $i <= ($count + 1); $i++) {
+            $qrData = json_encode([
+                'rid' => $this->id,
+                'token' => substr($this->access_token, 0, 32),
+                'room' => $this->room_id,
+                'start' => $this->start_at->timestamp,
+                'end' => $this->end_at->timestamp,
+                'type' => 'reservation',
+                'backup_seq' => $i,
+            ]);
+
+            // Genero QR
+            app(\App\Services\QRCodeService::class)->generateQRImageFromData(
+                $qrData,
+                "qr_backup_{$this->id}_{$i}"
+            );
+
+            BackupQRCode::create([
+                'reservation_id' => $this->id,
+                'qr_code' => "/media/qrcodes/qr_backup_{$this->id}_{$i}.png",
+                'qr_data' => $qrData,
+                'sequence_number' => $i,
+                'status' => 'active',
+            ]);
+        }
+    }
+
 
     public function isTokenValid(string $token): bool {  
         if ($this->access_token !== $token) return false;  
