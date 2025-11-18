@@ -17,7 +17,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Filters\TrashedFilter;
 
 class ReaderAlertResource extends Resource
 {
@@ -128,11 +127,7 @@ class ReaderAlertResource extends Resource
 
                 IconColumn::make('resolved')
                     ->label('Status')
-                    ->boolean()
-                    ->trueIcon('heroicon-o-check-circle')
-                    ->falseIcon('heroicon-o-x-circle')
-                    ->trueColor('success')
-                    ->falseColor('danger'),
+                    ->boolean(),
 
                 TextColumn::make('message')
                     ->label('Zpráva')
@@ -176,8 +171,6 @@ class ReaderAlertResource extends Resource
                         true => '✅ Vyřešeno',
                         false => '⏳ Čeká na řešení',
                     ]),
-
-                TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
