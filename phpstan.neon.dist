@@ -1,0 +1,35 @@
+includes:
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+
+parameters:
+  level: max
+  paths:
+    - app
+    - routes
+    - database
+  inferPrivatePropertyTypeFromConstructor: true
+  treatPhpDocTypesAsCertain: false
+  ignoreErrors:
+    # Laravel Model/Relation/Facade related
+    - '#Call to an undefined static method [a-zA-Z0-9\\_]+::(where|create|find|format|registerPanels)\(\)#'
+    - '#Call to an undefined method [a-zA-Z0-9\\_]+::(reservations|fill|save|update|delete|user|id|check|hasRole)\(\)#'
+    - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$(email|name|password|company_id)#'
+    - '#Call to static method error\(\) on an unknown class Log#'
+    
+    # View/Response related
+    - '#Method [a-zA-Z0-9\\_]+::render\(\) should return Illuminate\\View\\View but returns Illuminate\\Contracts\\View\\View#'
+    - '#Parameter \#1 \$content of function response expects array\|Illuminate\\Contracts\\View\\View\|string\|null#'
+    
+    # View/Response/Render related
+    - '#Method [a-zA-Z0-9\\_]+::[a-zA-Z0-9\\_]+\(\) should return Illuminate\\View\\View but returns Illuminate\\Contracts\\View\\View#'
+    
+    # Generic types and relations
+    - '#Class [a-zA-Z0-9\\_]+ uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types: TFactory#'
+    - '#Method [a-zA-Z0-9\\_]+::[a-zA-Z0-9\\_]+\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\[a-zA-Z0-9\\_]+ does not specify its types: TRelatedModel#'
+    
+    # Framework specifics
+    - '#Parameter \#1 \$key of function __ expects string\|null#'
+    - '#Cannot call method name\(\) on array\|Illuminate\\Routing\\Route#'
+    - '#Using nullsafe property access on non-nullable type#'
+    - '#Undefined variable: \$this#'
+    - '#Negated boolean expression is always false#'
