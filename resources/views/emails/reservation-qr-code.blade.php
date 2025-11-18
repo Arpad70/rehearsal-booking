@@ -10,9 +10,9 @@ Vaše rezervace byla **úspěšně potvrzena**. Níže najdete všechny důleži
 
 ## Informace o místnosti
 **Místnost:** {{ $room->name }}  
-**Datum:** {{ $reservation->start_date->format('j. n. Y') }}  
-**Čas začátku:** {{ $reservation->start_time->format('H:i') }}  
-**Čas konce:** {{ $reservation->end_time->format('H:i') }}
+**Datum:** {{ $reservation->start_at->format('j. n. Y') }}  
+**Čas začátku:** {{ $reservation->start_at->format('H:i') }}  
+**Čas konce:** {{ $reservation->end_at->format('H:i') }}
 
 **Doba přístupu:** {{ $accessWindow['earliest_access'] }} až {{ $accessWindow['latest_access'] }}
 

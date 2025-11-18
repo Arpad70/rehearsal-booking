@@ -22,7 +22,7 @@ class ReservationObserver
     public function updated(Reservation $reservation): void
     {
         // Pokud se změnila místnost nebo čas, znovu vytvořit QR
-        if ($reservation->isDirty(['room_id', 'start_date', 'start_time', 'end_date', 'end_time'])) {
+        if ($reservation->isDirty(['room_id', 'start_at', 'end_at'])) {
             $reservation->update([
                 'qr_code' => null,
                 'qr_generated_at' => null,
