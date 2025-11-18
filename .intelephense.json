@@ -1,0 +1,32 @@
+{
+  "diagnosticsFormat": "table",
+  "php.version": "8.3",
+  "php.stdlib": [],
+  "analysisMaxMemory": 512,
+  "phpcbf.enable": false,
+  "php.executablePath": "/usr/bin/php",
+  "php.memoryLimit": "2G",
+  "excludeFiles": [
+    "**/node_modules",
+    "**/vendor"
+  ],
+  "rules": {
+    "parseError": "error",
+    "undefinedSymbol": "warning",
+    "undefinedConstant": "warning",
+    "undefinedMethod": "warning",
+    "undefinedProperty": "warning",
+    "undefinedType": "warning",
+    "undefinedVariable": "warning",
+    "unusedSymbol": "none",
+    "unusedVariable": "none"
+  },
+  "stubs": [
+    "Core",
+    "SPL",
+    "standard",
+    "Reflection",
+    "pcre",
+    "bcmath"
+  ]
+}
