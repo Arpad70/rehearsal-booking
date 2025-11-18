@@ -152,16 +152,12 @@ class GlobalReaderResource extends Resource
 
                 TextColumn::make('access_minutes_after')
                     ->label('After (min)')
-                    ->alignCenter(),
+                    ->toggleable(isToggledHiddenByDefault: true),
 
-                BadgeColumn::make('enabled')
+                Tables\Columns\IconColumn::make('enabled')
                     ->label('Status')
-                    ->trueIcon('heroicon-m-check-circle')
-                    ->falseIcon('heroicon-m-x-circle')
-                    ->colors([
-                        'success' => true,
-                        'danger' => false,
-                    ]),
+                    ->boolean()
+                    ->sortable(),
 
                 TextColumn::make('created_at')
                     ->label('Created')
