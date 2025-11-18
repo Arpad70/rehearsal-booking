@@ -159,4 +159,4 @@ class ToggleShellyJob implements ShouldQueue
     {
         Log::warning('ToggleShellyJob: '.$reason, ['room_id' => $this->room->id]);
     }
-
+}

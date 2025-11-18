@@ -174,7 +174,7 @@ class AccessValidationTest extends TestCase
             ]);
 
             if ($i < 60) {
-                $this->assertNotEqual(429, $response->status());
+                $this->assertNotSame(429, $response->status());
             }
         }
 
