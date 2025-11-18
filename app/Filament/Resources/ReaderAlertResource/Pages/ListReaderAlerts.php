@@ -7,6 +7,7 @@ use App\Models\ReaderAlert;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Actions;
 use Filament\Support\Enums\ActionSize;
+use Filament\Notifications\Notification;
 
 class ListReaderAlerts extends ListRecords
 {
@@ -28,7 +29,10 @@ class ListReaderAlerts extends ListRecords
                         'resolved' => true,
                         'resolved_at' => now(),
                     ]);
-                    $this->notify('success', "Vyřešeno {$count} upozornění");
+                    Notification::make()
+                        ->success()
+                        ->title("Vyřešeno {$count} upozornění")
+                        ->send();
                 }),
 
             Actions\CreateAction::make(),
