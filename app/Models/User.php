@@ -23,6 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'is_active',
     ];
 
     /**
@@ -48,7 +50,21 @@ class User extends Authenticatable
         ];
     }
 
-    public function reservations(): HasMany
+    /**
+     * Check if user has a specific role
+     */
+    public function hasRole(string $role): bool
+    {
+        return $this->role === $role || $this->role === 'superuser';
+    }
+
+    /**
+     * Check if user is admin or superuser
+     */
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('admin');
+    }    public function reservations(): HasMany
     {
         return $this->hasMany(Reservation::class);
     }
