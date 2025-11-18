@@ -111,7 +111,7 @@
                                                         <form action="{{ route('reservations.destroy', $reservation) }}" method="POST" class="inline">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" onclick="return confirm('{{ __('Opravdu chcete zrušit tuto rezervaci?') }}')"
+                                                            <button type="submit" onclick="return confirm('Opravdu chcete zrušit tuto rezervaci?')"
                                                                 class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">
                                                                 {{ __('Zrušit') }}
                                                             </button>

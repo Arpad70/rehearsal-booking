@@ -71,7 +71,8 @@ class ReservationResource extends Resource
                 Tables\Columns\TextColumn::make('end_at')
                     ->dateTime()
                     ->sortable(),
-                Tables\Columns\BadgeColumn::make('status')
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
                     ->colors([
                         'pending' => 'gray',
                         'active' => 'blue',
