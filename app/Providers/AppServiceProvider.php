@@ -28,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-    Vite::macro('image', fn(string $asset) => Vite::asset("resources/images/{$asset}"));  
+        Vite::macro('image', fn(string $asset) => Vite::asset("resources/images/{$asset}"));  
+
+        // Register model observers
+        \App\Models\Reservation::observe(\App\Observers\ReservationObserver::class);
+        \App\Models\ServiceAccess::observe(\App\Observers\ServiceAccessObserver::class);
     }
 }

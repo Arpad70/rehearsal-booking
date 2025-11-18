@@ -333,4 +333,33 @@ class QRCodeService
 
         return $deleted;
     }
+
+    /**
+     * Generate QR code image from arbitrary data
+     * Used for service access codes
+     */
+    public function generateQRImageFromData(string $qrData, string $identifier): ?string
+    {
+        $this->ensureStorageDirectory();
+
+        $filename = $identifier . "_" . time() . ".png";
+        $filepath = storage_path(self::QR_STORAGE_PATH . "/" . $filename);
+
+        // Try QR code generators with fallback
+        if ($this->tryGoogleChartsAPI($qrData, $filepath)) {
+            return self::QR_PUBLIC_PATH . "/" . $filename;
+        }
+
+        if ($this->tryQRServerAPI($qrData, $filepath)) {
+            return self::QR_PUBLIC_PATH . "/" . $filename;
+        }
+
+        if ($this->tryAlternativeQRAPI($qrData, $filepath)) {
+            return self::QR_PUBLIC_PATH . "/" . $filename;
+        }
+
+        $this->createTextQRPlaceholder($qrData, $filepath);
+        return self::QR_PUBLIC_PATH . "/" . $filename;
+    }
 }
+

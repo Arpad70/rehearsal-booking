@@ -113,4 +113,24 @@ class ServiceAccess extends Model
             'revoke_reason' => $reason,
         ]);
     }
+
+    /**
+     * Get allowed rooms with their names
+     */
+    public function getAllowedRoomsWithNames(): array
+    {
+        if ($this->unlimited_access || !$this->allowed_rooms) {
+            return [];
+        }
+
+        return Room::whereIn('id', $this->allowed_rooms)->get()->toArray();
+    }
+
+    /**
+     * Generate and send access code email
+     */
+    public function sendAccessCodeEmail(): void
+    {
+        \App\Jobs\SendServiceAccessCodeEmail::dispatch($this);
+    }
 }
