@@ -48,6 +48,7 @@ Then visit `/admin` → QR Reader to add your first reader.
 - 📘 [Quick Reference](./QUICK_REFERENCE.md) - 5-minute overview
 - 📗 [Complete Guide](./COMPLETE_DOCUMENTATION.md) - Full documentation
 - 📙 [Implementation Guide](./QR_IMPLEMENTATION_GUIDE.md) - Setup & API
+- 📕 **[Admin Backend Guide](./ADMIN_BACKEND_GUIDE.md)** - Detailed admin UI walkthrough ⭐ NEW!
 - 📕 [Phase Summary](./PHASE_SUMMARY.md) - Technical details
 
 ---
