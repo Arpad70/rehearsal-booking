@@ -19,7 +19,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Room extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','location','capacity','shelly_ip','shelly_token'];  
+    protected $fillable = ['name','location','capacity','shelly_ip','shelly_token','enabled'];
+
+    protected $casts = [
+        'enabled' => 'boolean',
+    ];  
 
     public function reservations(): HasMany {  
         return $this->hasMany(Reservation::class);  

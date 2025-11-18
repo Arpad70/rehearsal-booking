@@ -37,6 +37,10 @@ class RoomResource extends Resource
                 Forms\Components\TextInput::make('shelly_ip')
                     ->maxLength(255)
                     ->default(null),
+                Forms\Components\Toggle::make('enabled')
+                    ->label('Místnost aktivní')
+                    ->default(true)
+                    ->helperText('Zapnutá místnost je dostupná pro rezervace'),
             ]);
     }
 
@@ -53,6 +57,10 @@ class RoomResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('shelly_ip')
                     ->searchable(),
+                Tables\Columns\IconColumn::make('enabled')
+                    ->label('Aktivní')
+                    ->boolean()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
