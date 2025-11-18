@@ -87,7 +87,8 @@ class RoomReaderResource extends Resource
                             ->keyPlaceholder('Key (e.g., relay_pin, duration)')
                             ->valuePlaceholder('Value')
                             ->reorderable(false)
-                            ->disableAllToolbarButtons(),
+                            ->editableKeys(false)
+                            ->disableItemDeletion(),
                     ]),
 
                 Section::make('Configuration Details')
