@@ -3,65 +3,55 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ReaderAlert extends Model
 {
     protected $fillable = [
-        'alertable_type',
-        'alertable_id',
+        'room_reader_id',
+        'global_reader_id',
+        'reader_type',
         'alert_type',
         'message',
-        'metadata',
         'severity',
-        'acknowledged',
-        'acknowledged_at',
-        'acknowledged_by',
+        'resolved',
+        'resolution_notes',
         'resolved_at',
+        'metadata',
     ];
 
     protected $casts = [
         'metadata' => 'array',
-        'acknowledged' => 'boolean',
-        'acknowledged_at' => 'datetime',
+        'resolved' => 'boolean',
         'resolved_at' => 'datetime',
     ];
 
     /**
-     * Polymorphic relationship to either RoomReader or GlobalReader
+     * Relationship: Alert belongs to RoomReader
      */
-    public function alertable(): MorphTo
+    public function roomReader(): BelongsTo
     {
-        return $this->morphTo();
+        return $this->belongsTo(RoomReader::class)->withDefault();
     }
 
     /**
-     * The user who acknowledged this alert
+     * Relationship: Alert belongs to GlobalReader
      */
-    public function acknowledgedBy(): BelongsTo
+    public function globalReader(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'acknowledged_by');
+        return $this->belongsTo(GlobalReader::class)->withDefault();
     }
 
     /**
-     * Acknowledge this alert
+     * Mark as resolved
      */
-    public function acknowledge(): void
+    public function markResolved(string $notes = null): void
     {
         $this->update([
-            'acknowledged' => true,
-            'acknowledged_at' => now(),
-            'acknowledged_by' => auth()->id(),
+            'resolved' => true,
+            'resolved_at' => now(),
+            'resolution_notes' => $notes,
         ]);
-    }
-
-    /**
-     * Resolve this alert
-     */
-    public function resolve(): void
-    {
-        $this->update(['resolved_at' => now()]);
     }
 
     /**
@@ -69,14 +59,14 @@ class ReaderAlert extends Model
      */
     public static function unresolved()
     {
-        return static::whereNull('resolved_at');
+        return static::where('resolved', false);
     }
 
     /**
-     * Get unacknowledged alerts
+     * Get critical alerts
      */
-    public static function unacknowledged()
+    public static function critical()
     {
-        return static::where('acknowledged', false);
+        return static::where('severity', 'critical')->where('resolved', false);
     }
 }

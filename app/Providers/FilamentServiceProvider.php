@@ -6,6 +6,10 @@ use Filament\Facades\Filament;
 use Filament\Panel;
 use Filament\Navigation\NavigationItem;
 use App\Filament\Pages\AdminDashboard;
+use App\Filament\Resources\RoomReaderResource;
+use App\Filament\Resources\GlobalReaderResource;
+use App\Filament\Resources\ServiceAccessResource;
+use App\Filament\Resources\ReaderAlertResource;
 use Illuminate\Support\ServiceProvider;
 
 class FilamentServiceProvider extends ServiceProvider
@@ -19,6 +23,12 @@ class FilamentServiceProvider extends ServiceProvider
                 ->default()
                 ->pages([
                     AdminDashboard::class,
+                ])
+                ->resources([
+                    RoomReaderResource::class,
+                    GlobalReaderResource::class,
+                    ServiceAccessResource::class,
+                    ReaderAlertResource::class,
                 ])
                 ->navigation(function (): array {
                     return [

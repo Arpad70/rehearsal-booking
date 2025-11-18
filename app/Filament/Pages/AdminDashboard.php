@@ -38,7 +38,7 @@ class AdminDashboard extends Page implements HasTable
         // Dnes
         $todayAccess = AccessLog::whereDate('created_at', today())->count();
         $todayErrors = AccessLog::whereDate('created_at', today())
-            ->where('access_granted', false)
+            ->where('access_granted', '!=', true)
             ->count();
 
         // Tento týden

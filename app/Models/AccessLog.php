@@ -11,18 +11,29 @@ class AccessLog extends Model
     use HasFactory;
 
     protected $fillable = [
+        'reservation_id',
+        'room_id',
         'user_id',
-        'validation_result',
-        'ip_address',
-        'user_agent',
+        'location',
+        'action',
+        'result',
+        'access_granted',
+        'failure_reason',
+        'ip',
         'access_code',
         'access_type',
         'reader_type',
         'global_reader_id',
+        'ip_address',
+        'user_agent',
+        'validated_at',
     ];
 
     protected $casts = [
+        'access_granted' => 'boolean',
         'validated_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     /**
@@ -31,6 +42,14 @@ class AccessLog extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class)->withDefault();
+    }
+
+    /**
+     * Relationship: Log belongs to Room
+     */
+    public function room(): BelongsTo
+    {
+        return $this->belongsTo(Room::class)->withDefault();
     }
 
     /**
@@ -46,7 +65,7 @@ class AccessLog extends Model
      */
     public function wasSuccessful(): bool
     {
-        return $this->validation_result === 'success';
+        return $this->access_granted === true;
     }
 
     /**
@@ -58,31 +77,6 @@ class AccessLog extends Model
             return null;
         }
 
-        return $this->access_code ?? 'unknown';
-    }
-
-    /**
-     * Log an access attempt
-     */
-    public static function logAttempt(
-        ?int $userId,
-        string $result,
-        string $ipAddress,
-        string $userAgent,
-        string $accessCode = null,
-        string $accessType = 'reservation',
-        string $readerType = 'room',
-        ?int $globalReaderId = null
-    ): self {
-        return static::create([
-            'user_id' => $userId,
-            'validation_result' => $result,
-            'ip_address' => $ipAddress,
-            'user_agent' => $userAgent,
-            'access_code' => $accessCode,
-            'access_type' => $accessType,
-            'reader_type' => $readerType,
-            'global_reader_id' => $globalReaderId,
-        ]);
+        return $this->failure_reason ?? 'unknown';
     }
 }

@@ -10,26 +10,48 @@ return new class extends Migration
     {
         Schema::create('reader_alerts', function (Blueprint $table) {
             $table->id();
-            $table->morphs('alertable'); // room_reader or global_reader
+            
+            // Reader reference
+            $table->unsignedBigInteger('room_reader_id')->nullable();
+            $table->unsignedBigInteger('global_reader_id')->nullable();
+            $table->enum('reader_type', ['room_reader', 'global_reader'])->default('room_reader');
+            
+            // Alert details
             $table->enum('alert_type', [
-                'offline',
+                'connection_failed',
                 'high_failure_rate',
-                'no_activity',
-                'suspicious_access',
+                'offline',
                 'configuration_error',
-            ]);
+            ])->default('offline');
+            
             $table->text('message');
-            $table->json('metadata')->nullable(); // Additional context
-            $table->enum('severity', ['info', 'warning', 'critical'])->default('warning');
-            $table->boolean('acknowledged')->default(false);
-            $table->timestamp('acknowledged_at')->nullable();
-            $table->foreignId('acknowledged_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->enum('severity', ['low', 'medium', 'high', 'critical'])->default('medium');
+            
+            // Resolution tracking
+            $table->boolean('resolved')->default(false);
+            $table->text('resolution_notes')->nullable();
             $table->timestamp('resolved_at')->nullable();
+            
+            // Metadata
+            $table->json('metadata')->nullable();
+            
             $table->timestamps();
             
-            $table->index(['alertable_type', 'alertable_id']);
-            $table->index(['severity', 'acknowledged']);
+            // Indexes
+            $table->index(['reader_type', 'resolved']);
+            $table->index(['severity', 'resolved']);
             $table->index('created_at');
+            
+            // Foreign keys
+            $table->foreign('room_reader_id')
+                ->references('id')
+                ->on('room_readers')
+                ->nullOnDelete();
+                
+            $table->foreign('global_reader_id')
+                ->references('id')
+                ->on('global_readers')
+                ->nullOnDelete();
         });
     }
 
