@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Filament\Widgets;
+
+use App\Models\Room;
+use Filament\Widgets\ChartWidget;
+use Illuminate\Support\Facades\DB;
+
+class RoomUsageChart extends ChartWidget
+{
+    protected static ?string $heading = 'Využití místností (posledních 30 dní)';
+    protected static ?int $sort = 3;
+
+    protected function getData(): array
+    {
+        $rooms = Room::where('enabled', true)
+            ->withCount([
+                'reservations' => fn($query) => $query->where('start_date', '>=', now()->subDays(30)->toDateString())
+            ])
+            ->orderByDesc('reservations_count')
+            ->limit(10)
+            ->get();
+
+        return [
+            'datasets' => [
+                [
+                    'label' => 'Počet rezervací',
+                    'data' => $rooms->pluck('reservations_count')->toArray(),
+                    'backgroundColor' => [
+                        '#3b82f6',
+                        '#10b981',
+                        '#f59e0b',
+                        '#ef4444',
+                        '#8b5cf6',
+                        '#ec4899',
+                        '#06b6d4',
+                        '#14b8a6',
+                        '#f97316',
+                        '#6366f1',
+                    ],
+                ],
+            ],
+            'labels' => $rooms->pluck('name')->toArray(),
+        ];
+    }
+
+    protected function getType(): string
+    {
+        return 'bar';
+    }
+}

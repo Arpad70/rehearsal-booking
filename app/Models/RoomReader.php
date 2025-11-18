@@ -83,4 +83,38 @@ class RoomReader extends Model
             'message' => 'Reader unreachable',
         ];
     }
+
+    /**
+     * Get access attempts in last 30 days
+     */
+    public function getAccessAttemptsLast30Days(): int
+    {
+        return AccessLog::where('reader_type', 'room')
+            ->where('created_at', '>=', now()->subDays(30))
+            ->join('room_readers', 'access_logs.id', '=', 'room_readers.id', 'left')
+            ->where('room_readers.id', $this->id)
+            ->count();
+    }
+
+    /**
+     * Get success rate percentage (last 30 days)
+     */
+    public function getSuccessRate(): float
+    {
+        $total = AccessLog::where('reader_type', 'room')
+            ->where('created_at', '>=', now()->subDays(30))
+            ->count();
+
+        if ($total === 0) {
+            return 100.0;
+        }
+
+        $successful = AccessLog::where('reader_type', 'room')
+            ->where('validation_result', 'success')
+            ->where('created_at', '>=', now()->subDays(30))
+            ->count();
+
+        return ($successful / $total) * 100;
+    }
 }
+
