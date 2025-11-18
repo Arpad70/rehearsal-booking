@@ -201,6 +201,26 @@ class ServiceAccessResource extends Resource
                             ->send();
                     }),
 
+                Tables\Actions\Action::make('toggleEnabled')
+                    ->label(fn (ServiceAccess $record) => $record->enabled ? 'Vypnout' : 'Zapnout')
+                    ->icon(fn (ServiceAccess $record) => $record->enabled ? 'heroicon-o-power' : 'heroicon-m-power')
+                    ->color(fn (ServiceAccess $record) => $record->enabled ? 'warning' : 'success')
+                    ->action(function (ServiceAccess $record): void {
+                        $record->update(['enabled' => !$record->enabled]);
+
+                        \Filament\Notifications\Notification::make()
+                            ->success()
+                            ->title("Přístup uživatele '{$record->user->name}' je nyní " . ($record->enabled ? 'aktivní' : 'vypnutý'))
+                            ->send();
+                    })
+                    ->requiresConfirmation()
+                    ->modalHeading(fn (ServiceAccess $record) => $record->enabled ? 'Vypnout přístup?' : 'Zapnout přístup?')
+                    ->modalDescription(fn (ServiceAccess $record) => $record->enabled 
+                        ? "Přístup uživatele {$record->user->name} bude dočasně vypnut"
+                        : "Přístup uživatele {$record->user->name} bude znovu aktivován")
+                    ->modalSubmitActionLabel('Potvrdit')
+                    ->modalCancelActionLabel('Zrušit'),
+
                 Tables\Actions\Action::make('revoke')
                     ->label('Revoke')
                     ->icon('heroicon-m-lock-closed')

@@ -197,6 +197,26 @@ class GlobalReaderResource extends Resource
                             ->send();
                     }),
 
+                Tables\Actions\Action::make('toggleEnabled')
+                    ->label(fn (GlobalReader $record) => $record->enabled ? 'Vypnout' : 'Zapnout')
+                    ->icon(fn (GlobalReader $record) => $record->enabled ? 'heroicon-o-power' : 'heroicon-m-power')
+                    ->color(fn (GlobalReader $record) => $record->enabled ? 'warning' : 'success')
+                    ->action(function (GlobalReader $record): void {
+                        $record->update(['enabled' => !$record->enabled]);
+
+                        \Filament\Notifications\Notification::make()
+                            ->success()
+                            ->title("Čtečka '{$record->reader_name}' je nyní " . ($record->enabled ? 'aktivní' : 'vypnutá'))
+                            ->send();
+                    })
+                    ->requiresConfirmation()
+                    ->modalHeading(fn (GlobalReader $record) => $record->enabled ? 'Vypnout čtečku?' : 'Zapnout čtečku?')
+                    ->modalDescription(fn (GlobalReader $record) => $record->enabled 
+                        ? 'Vypnutá čtečka nebude přijímat QR kódy'
+                        : 'Zapnutá čtečka bude přijímat QR kódy')
+                    ->modalSubmitActionLabel('Potvrdit')
+                    ->modalCancelActionLabel('Zrušit'),
+
                 EditAction::make(),
                 DeleteAction::make(),
             ])

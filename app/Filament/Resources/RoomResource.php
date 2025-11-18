@@ -75,6 +75,26 @@ class RoomResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('toggleEnabled')
+                    ->label(fn (Room $record) => $record->enabled ? 'Vypnout' : 'Zapnout')
+                    ->icon(fn (Room $record) => $record->enabled ? 'heroicon-o-power' : 'heroicon-m-power')
+                    ->color(fn (Room $record) => $record->enabled ? 'warning' : 'success')
+                    ->action(function (Room $record): void {
+                        $record->update(['enabled' => !$record->enabled]);
+
+                        \Filament\Notifications\Notification::make()
+                            ->success()
+                            ->title("Místnost '{$record->name}' je nyní " . ($record->enabled ? 'aktivní' : 'vypnutá'))
+                            ->send();
+                    })
+                    ->requiresConfirmation()
+                    ->modalHeading(fn (Room $record) => $record->enabled ? 'Vypnout místnost?' : 'Zapnout místnost?')
+                    ->modalDescription(fn (Room $record) => $record->enabled 
+                        ? 'Vypnutá místnost bude nedostupná pro nové rezervace'
+                        : 'Zapnutá místnost bude dostupná pro nové rezervace')
+                    ->modalSubmitActionLabel('Potvrdit')
+                    ->modalCancelActionLabel('Zrušit'),
+
                 Tables\Actions\Action::make('toggleShelly')
                     ->label('Přepnout Shelly')
                     ->icon('heroicon-o-power')
