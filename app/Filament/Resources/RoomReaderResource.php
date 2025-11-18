@@ -91,13 +91,9 @@ class RoomReaderResource extends Resource
                 Section::make('Configuration Details')
                     ->collapsed()
                     ->schema([
-                        Forms\Components\Placeholder::make('relay_help')
-                            ->label('Relay Configuration Help')
-                            ->content(fn () => view('help.room-reader-relay')),
-
-                        Forms\Components\Placeholder::make('api_help')
-                            ->label('API Configuration Help')
-                            ->content(fn () => view('help.room-reader-api')),
+                        Forms\Components\Placeholder::make('config_info')
+                            ->label('Configuration Information')
+                            ->content('Configure the lock type above to set up access control. Relay configurations require GPIO pin numbers and duration settings.'),
                     ]),
             ]);
     }
