@@ -22,23 +22,55 @@ A Laravel-based management system for scheduling and controlling access to rehea
 
 ---
 
+## 🎫 QR Reader System (NEW!)
+
+Complete QR code access control system with automatic email delivery, multi-protocol door support, and comprehensive monitoring.
+
+**Features:**
+- 🎫 Automatic QR generation for reservations
+- 📧 Email delivery with QR codes
+- 👥 Staff service access codes (cleaning, maintenance, admin)
+- 🔓 Multi-protocol door control (Relay, API, Webhook)
+- 📊 Real-time dashboard with metrics
+- 🚨 Monitoring and alerts system
+- 📈 Detailed access reporting
+- 🔄 Backup QR codes for redundancy
+
+**Quick Setup:**
+```bash
+php artisan migrate
+php artisan queue:work --queue=emails
+```
+
+Then visit `/admin` → QR Reader to add your first reader.
+
+**Documentation:**
+- 📘 [Quick Reference](./QUICK_REFERENCE.md) - 5-minute overview
+- 📗 [Complete Guide](./COMPLETE_DOCUMENTATION.md) - Full documentation
+- 📙 [Implementation Guide](./QR_IMPLEMENTATION_GUIDE.md) - Setup & API
+- 📕 [Phase Summary](./PHASE_SUMMARY.md) - Technical details
+
+---
+
 ## Quick Start
 
 ### Prerequisites
 - PHP 8.3+
 - Laravel 12.35
-- SQLite or MySQL
+- MySQL 8.0+ (or SQLite)
 - Composer
+- Node.js (for frontend)
 
 ### Installation
 
 ```bash
 # Clone repository
-git clone <repo-url>
-cd rehearsal-app
+git clone https://github.com/Arpad70/rehearsal-booking.git
+cd rehearsal-booking
 
 # Install dependencies
 composer install
+npm install
 
 # Copy environment file
 cp .env.example .env
@@ -46,18 +78,25 @@ cp .env.example .env
 # Generate app key
 php artisan key:generate
 
-# Run migrations
+# Run migrations (includes QR reader system)
 php artisan migrate
+
+# Create storage symlink
+php artisan storage:link
 
 # Start development server
 php artisan serve
 
-# In another terminal, start queue worker (for Shelly device control)
+# In another terminal, start queue worker (for emails & device control)
 php artisan queue:work
 
-# In another terminal, start scheduler (for access log cleanup)
+# In another terminal, start scheduler (for cleanup jobs)
 php artisan schedule:work
 ```
+
+**Access the application:**
+- App: `http://localhost:8000`
+- Admin: `http://localhost:8000/admin`
 
 ### Configuration
 
@@ -66,14 +105,24 @@ Edit `.env`:
 ```env
 APP_NAME="Rehearsal App"
 APP_URL=http://localhost:8000
-DB_CONNECTION=sqlite
-SANCTUM_STATEFUL_DOMAINS=localhost:8000
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_DATABASE=rehearsal_booking
+DB_USERNAME=root
+DB_PASSWORD=
 
-# Optional: Shelly gateway (if using centralized control)
+# Email (for QR delivery)
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your-email@gmail.com
+MAIL_PASSWORD=app-password
+
+# Shelly smart device (optional)
 SERVICES_SHELLY_GATEWAY_URL=http://192.168.1.50:5000/toggle
 SHELLY_FAILURE_NOTIFY_EMAIL=admin@example.com
 
-# Optional: IP whitelist for access validation
+# IP whitelist (optional)
 RESERVATIONS_IP_WHITELIST_ENABLED=false
 RESERVATIONS_IP_WHITELIST=192.168.1.0/24
 ```
