@@ -19,11 +19,11 @@ class AccessStatsOverview extends BaseWidget
 
         // Today's statistics
         $todayAccess = AccessLog::where('created_at', '>=', $today)
-            ->where('validation_result', 'success')
+            ->where('access_granted', true)
             ->count();
 
         $todayFailed = AccessLog::where('created_at', '>=', $today)
-            ->where('validation_result', '!=', 'success')
+            ->where('access_granted', false)
             ->count();
 
         // This week's reservations
@@ -32,7 +32,7 @@ class AccessStatsOverview extends BaseWidget
 
         // This month's access logs
         $monthAccess = AccessLog::where('created_at', '>=', $month)
-            ->where('validation_result', 'success')
+            ->where('access_granted', true)
             ->count();
 
         return [
@@ -68,7 +68,7 @@ class AccessStatsOverview extends BaseWidget
         }
 
         $successful = AccessLog::where('created_at', '>=', $thirtyDaysAgo)
-            ->where('validation_result', 'success')
+            ->where('access_granted', true)
             ->count();
 
         return round(($successful / $total) * 100);

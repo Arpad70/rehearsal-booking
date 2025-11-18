@@ -110,7 +110,7 @@ class RoomReader extends Model
         }
 
         $successful = AccessLog::where('reader_type', 'room')
-            ->where('validation_result', 'success')
+            ->where('access_granted', true)
             ->where('created_at', '>=', now()->subDays(30))
             ->count();
 

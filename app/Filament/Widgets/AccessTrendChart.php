@@ -19,7 +19,7 @@ class AccessTrendChart extends ChartWidget
 
         $data = AccessLog::selectRaw('DATE(created_at) as date')
             ->selectRaw('COUNT(*) as total')
-            ->selectRaw("SUM(CASE WHEN validation_result = 'success' THEN 1 ELSE 0 END) as successful")
+            ->selectRaw("SUM(CASE WHEN access_granted = 1 THEN 1 ELSE 0 END) as successful")
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy(DB::raw('DATE(created_at)'))
             ->orderBy('date')

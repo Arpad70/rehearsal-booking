@@ -111,7 +111,7 @@ class ReaderMonitoringService
         }
 
         $successful = \App\Models\AccessLog::where('reader_type', $type)
-            ->where('validation_result', 'success')
+            ->where('access_granted', true)
             ->where('created_at', '>=', now()->subHours(24))
             ->count();
 

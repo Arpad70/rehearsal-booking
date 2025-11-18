@@ -16,12 +16,12 @@ class AccessReportStats extends BaseWidget
         
         // All time stats
         $totalAccess = AccessLog::count();
-        $successfulAccess = AccessLog::where('validation_result', 'success')->count();
+        $successfulAccess = AccessLog::where('access_granted', true)->count();
         
         // Last 30 days
         $thirtyDaysAccess = AccessLog::where('created_at', '>=', $thirtyDaysAgo)->count();
         $thirtyDaysSuccessful = AccessLog::where('created_at', '>=', $thirtyDaysAgo)
-            ->where('validation_result', 'success')
+            ->where('access_granted', true)
             ->count();
 
         $successRate = $thirtyDaysAccess > 0 

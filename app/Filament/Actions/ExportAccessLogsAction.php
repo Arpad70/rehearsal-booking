@@ -56,7 +56,7 @@ class ExportAccessLogsAction extends Action
                             'global' => 'Globální',
                             default => $log->reader_type,
                         },
-                        ucfirst(str_replace('_', ' ', $log->validation_result)),
+                        $log->access_granted ? 'Přístup povolen' : 'Přístup odepřen',
                         $log->ip_address,
                         $log->user?->room?->name ?? 'N/A',
                     ]);

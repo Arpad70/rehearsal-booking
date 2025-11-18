@@ -53,11 +53,15 @@ class AccessReportResource extends Resource
                             ->disabled(),
 
                         Forms\Components\TextInput::make('access_code')
-                            ->label('Výsledek')
+                            ->label('Přístupový kód')
                             ->disabled(),
 
-                        Forms\Components\TextInput::make('validation_result')
-                            ->label('Ověření')
+                        Forms\Components\Toggle::make('access_granted')
+                            ->label('Přístup povolen')
+                            ->disabled(),
+
+                        Forms\Components\TextInput::make('failure_reason')
+                            ->label('Důvod chyby')
                             ->disabled(),
                     ])
                     ->columns(2),
@@ -113,14 +117,13 @@ class AccessReportResource extends Resource
                     })
                     ->toggleable(),
 
-                Tables\Columns\BadgeColumn::make('validation_result')
+                Tables\Columns\BadgeColumn::make('access_granted')
                     ->label('Výsledek')
                     ->colors([
-                        'success' => 'success',
-                        'danger' => static fn($state) => in_array($state, ['failed', 'expired', 'invalid', 'unauthorized']),
-                        'warning' => static fn($state) => in_array($state, ['too_early', 'wrong_room']),
+                        'success' => true,
+                        'danger' => false,
                     ])
-                    ->formatStateUsing(fn($state) => ucfirst(str_replace('_', ' ', $state)))
+                    ->formatStateUsing(fn($state) => $state ? 'Přístup povolen' : 'Přístup odepřen')
                     ->toggleable(),
 
                 Tables\Columns\TextColumn::make('ip_address')
@@ -142,15 +145,11 @@ class AccessReportResource extends Resource
                     ->toggleable(),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('validation_result')
+                Tables\Filters\SelectFilter::make('access_granted')
                     ->label('Výsledek')
                     ->options([
-                        'success' => 'Úspěšně',
-                        'failed' => 'Selhalo',
-                        'expired' => 'Vypršelo',
-                        'invalid' => 'Neplatné',
-                        'too_early' => 'Příliš brzy',
-                        'wrong_room' => 'Špatná místnost',
+                        '1' => 'Úspěšně',
+                        '0' => 'Selhalo',
                     ]),
 
                 Tables\Filters\SelectFilter::make('access_type')
