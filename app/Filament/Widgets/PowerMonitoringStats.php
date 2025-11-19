@@ -31,7 +31,7 @@ class PowerMonitoringStats extends BaseWidget
 
         // Get daily energy consumption
         $todayEnergy = PowerMonitoring::where('created_at', '>=', now()->startOfDay())
-            ->sum('energy_daily') ?? 0;
+            ->sum('energy_today') ?? 0;
 
         return [
             Stat::make('Total Power', number_format($totalPower, 0) . ' W')

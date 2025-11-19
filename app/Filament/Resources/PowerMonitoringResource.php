@@ -50,11 +50,11 @@ class PowerMonitoringResource extends Resource
 
                 Forms\Components\Section::make('Power Metrics')
                     ->schema([
-                        Forms\Components\TextInput::make('voltage_v')
+                        Forms\Components\TextInput::make('voltage')
                             ->label('Voltage (V)')
                             ->numeric()
                             ->disabled(),
-                        Forms\Components\TextInput::make('current_a')
+                        Forms\Components\TextInput::make('current')
                             ->label('Current (A)')
                             ->numeric()
                             ->disabled(),
@@ -75,12 +75,12 @@ class PowerMonitoringResource extends Resource
                             ->label('Total Energy (Wh)')
                             ->numeric()
                             ->disabled(),
-                        Forms\Components\TextInput::make('energy_daily')
-                            ->label('Daily Energy (Wh)')
+                        Forms\Components\TextInput::make('energy_today')
+                            ->label('Today Energy (Wh)')
                             ->numeric()
                             ->disabled(),
-                        Forms\Components\TextInput::make('energy_monthly')
-                            ->label('Monthly Energy (Wh)')
+                        Forms\Components\TextInput::make('energy_month')
+                            ->label('Month Energy (Wh)')
                             ->numeric()
                             ->disabled(),
                     ])
