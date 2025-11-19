@@ -38,7 +38,7 @@ class BackupQRCode extends Model
     /**
      * Mark QR as used
      */
-    public function markAsUsed(string $readerName = null): void
+    public function markAsUsed(?string $readerName = null): void
     {
         $this->update([
             'status' => 'used',

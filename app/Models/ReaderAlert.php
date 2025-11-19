@@ -45,7 +45,7 @@ class ReaderAlert extends Model
     /**
      * Mark as resolved
      */
-    public function markResolved(string $notes = null): void
+    public function markResolved(?string $notes = null): void
     {
         $this->update([
             'resolved' => true,

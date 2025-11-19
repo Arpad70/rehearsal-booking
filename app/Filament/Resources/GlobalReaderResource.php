@@ -102,7 +102,6 @@ class GlobalReaderResource extends Resource
 
                         Forms\Components\KeyValue::make('door_lock_config')
                             ->label('Lock Configuration')
-                            ->addButtonLabel('Add Configuration')
                             ->keyPlaceholder('Key')
                             ->valuePlaceholder('Value')
                             ->reorderable(false)

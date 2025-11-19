@@ -17,7 +17,7 @@ class ShellyGen2Service
      * @param string|null $baseUrl Shelly Gateway URL from config
      * @param string|null $authToken Authentication token for Shelly device
      */
-    public function __construct(string $baseUrl = null, ?string $authToken = null)
+    public function __construct(?string $baseUrl = null, ?string $authToken = null)
     {
         $this->baseUrl = $baseUrl ?? config('services.shelly.gateway_url', env('SHELLY_GATEWAY_URL'));
         $this->authToken = $authToken ?? config('services.shelly.auth_token');

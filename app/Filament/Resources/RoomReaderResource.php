@@ -82,7 +82,6 @@ class RoomReaderResource extends Resource
 
                         Forms\Components\KeyValue::make('door_lock_config')
                             ->label('Lock Configuration (JSON)')
-                            ->addButtonLabel('Add Configuration')
                             ->keyPlaceholder('Key (e.g., relay_pin, duration)')
                             ->valuePlaceholder('Value'),
                     ]),
