@@ -13,9 +13,10 @@ class AccessStatsOverview extends BaseWidget
 {
     protected function getStats(): array
     {
-        $today = Carbon::now()->startOfDay();
-        $week = Carbon::now()->startOfWeek();
-        $month = Carbon::now()->startOfMonth();
+        $now = Carbon::now();
+        $today = $now->copy()->startOfDay();
+        $week = $now->copy()->startOfWeek();
+        $month = $now->copy()->startOfMonth();
 
         // Today's statistics
         $todayAccess = AccessLog::where('created_at', '>=', $today)
@@ -27,7 +28,7 @@ class AccessStatsOverview extends BaseWidget
             ->count();
 
         // This week's reservations
-        $weekReservations = Reservation::whereBetween('created_at', [$week, now()])
+        $weekReservations = Reservation::whereBetween('created_at', [$week, $now])
             ->count();
 
         // This month's access logs
@@ -51,17 +52,17 @@ class AccessStatsOverview extends BaseWidget
                 ->descriptionIcon('heroicon-m-check-circle', IconPosition::Before)
                 ->color('success'),
 
-            Stat::make('Úspěšnost', $this->getSuccessRate() . '%')
+            Stat::make('Úspěšnost', $this->getSuccessRate($now) . '%')
                 ->description('Poslední 30 dní')
                 ->descriptionIcon('heroicon-m-chart-bar', IconPosition::Before)
                 ->color('success'),
         ];
     }
-
-    private function getSuccessRate(): int
+    private function getSuccessRate(?Carbon $now = null): int
     {
-        $thirtyDaysAgo = Carbon::now()->subDays(30)->startOfDay();
-        
+        $now = $now ?? Carbon::now();
+        $thirtyDaysAgo = $now->copy()->subDays(30)->startOfDay();
+
         $total = AccessLog::where('created_at', '>=', $thirtyDaysAgo)->count();
         if ($total === 0) {
             return 100;
@@ -71,6 +72,6 @@ class AccessStatsOverview extends BaseWidget
             ->where('access_granted', true)
             ->count();
 
-        return round(($successful / $total) * 100);
+        return (int) round(($successful / $total) * 100);
     }
 }
