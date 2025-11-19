@@ -11,10 +11,9 @@ class PowerConsumptionChart extends ChartWidget
 {
     protected static ?string $heading = 'Current Power Consumption';
     
-    // Posuneme graf níže, aby se nad ním zobrazily obchodní widgety
-    protected static ?int $sort = 5;
+    protected static ?int $sort = 4;
 
-    protected int | string | array $columnSpan = 'full';
+    protected int | string | array $columnSpan = 6;
 
     public function getDescription(): ?string
     {

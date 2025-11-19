@@ -11,6 +11,10 @@ use Illuminate\Support\Carbon;
 
 class AccessStatsOverview extends BaseWidget
 {
+    protected static ?int $sort = 2;
+    
+    protected int | string | array $columnSpan = 3;
+
     protected function getStats(): array
     {
         $now = Carbon::now();

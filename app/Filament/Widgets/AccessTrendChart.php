@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\DB;
 class AccessTrendChart extends ChartWidget
 {
     protected static ?string $heading = 'Trend přístupů (posledních 7 dní)';
+    
     protected static ?int $sort = 2;
+
+    protected int | string | array $columnSpan = 3;
 
     protected function getData(): array
     {

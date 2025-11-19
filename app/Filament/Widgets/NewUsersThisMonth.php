@@ -8,8 +8,9 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class NewUsersThisMonth extends BaseWidget
 {
-    // Umístíme tento widget těsně za MonthlyRevenue a před grafem Power Consumption
-    protected static ?int $sort = 2;
+    protected static ?int $sort = 3;
+
+    protected int | string | array $columnSpan = 'full';
 
     protected function getStats(): array
     {

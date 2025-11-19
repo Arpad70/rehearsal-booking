@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\DB;
 class RoomUsageChart extends ChartWidget
 {
     protected static ?string $heading = 'Využití místností (posledních 30 dní)';
-    protected static ?int $sort = 3;
+    
+    protected static ?int $sort = 4;
+
+    protected int | string | array $columnSpan = 6;
 
     protected function getData(): array
     {

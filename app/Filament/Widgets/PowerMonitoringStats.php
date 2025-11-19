@@ -10,6 +10,8 @@ class PowerMonitoringStats extends BaseWidget
 {
     protected static ?int $sort = 0;
 
+    protected int | string | array $columnSpan = 'full';
+
     protected function getStats(): array
     {
         // Get latest data for all devices

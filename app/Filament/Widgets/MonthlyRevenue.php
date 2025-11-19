@@ -9,8 +9,9 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class MonthlyRevenue extends BaseWidget
 {
-    // Umístíme tento widget před graf Current Power Consumption
-    protected static ?int $sort = 1;
+    protected static ?int $sort = 2;
+    
+    protected int | string | array $columnSpan = 3;
 
     protected function getStats(): array
     {

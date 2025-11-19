@@ -12,7 +12,10 @@ use Filament\Widgets\TableWidget as BaseWidget;
 class ReaderAlertsWidget extends BaseWidget
 {
     protected static ?string $heading = 'Aktivní upozornění čteček';
+    
     protected static ?int $sort = 1;
+
+    protected int | string | array $columnSpan = 'full';
 
     public function table(Table $table): Table
     {
