@@ -64,7 +64,9 @@ class ExportAccessLogsAction extends Action
             });
 
         return Response::streamDownload(
-            fn() => echo $csv->getContent(),
+            function() use ($csv) {
+                echo $csv->getContent();
+            },
             'access-logs-' . now()->format('Y-m-d-His') . '.csv',
             ['Content-Type' => 'text/csv']
         );
