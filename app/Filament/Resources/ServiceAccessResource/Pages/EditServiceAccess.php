@@ -15,6 +15,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Actions;
 use Filament\Support\Enums\ActionSize;
+use Filament\Notifications\Notification;
 
 class EditServiceAccess extends EditRecord
 {
@@ -143,9 +144,15 @@ class EditServiceAccess extends EditRecord
                         // Odeslat QR kód na email
                         \Illuminate\Support\Facades\Mail::to($record->email)
                             ->queue(new \App\Mail\ServiceAccessCodeMail($record));
-                        $this->notify('success', 'QR kód byl odeslán na email: ' . $record->email);
+                        Notification::make()
+                            ->success()
+                            ->title('QR kód byl odeslán na email: ' . $record->email)
+                            ->send();
                     } catch (\Exception $e) {
-                        $this->notify('danger', 'Chyba: ' . $e->getMessage());
+                        Notification::make()
+                            ->danger()
+                            ->title('Chyba: ' . $e->getMessage())
+                            ->send();
                     }
                 }),
 
@@ -167,7 +174,10 @@ class EditServiceAccess extends EditRecord
                         'revocation_reason' => $data['reason'],
                         'enabled' => false,
                     ]);
-                    $this->notify('success', 'Přístup byl zrušen');
+                    Notification::make()
+                        ->success()
+                        ->title('Přístup byl zrušen')
+                        ->send();
                 }),
 
             Actions\DeleteAction::make(),

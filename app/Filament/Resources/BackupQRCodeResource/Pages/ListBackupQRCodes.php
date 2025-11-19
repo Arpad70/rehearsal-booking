@@ -8,6 +8,7 @@ use Filament\Resources\Pages\ListRecords;
 use Filament\Actions;
 use Filament\Support\Enums\ActionSize;
 use Illuminate\Support\Facades\Storage;
+use Filament\Notifications\Notification;
 
 class ListBackupQRCodes extends ListRecords
 {
@@ -26,7 +27,10 @@ class ListBackupQRCodes extends ListRecords
                 ->modalDescription('Vytvoří nové záložní QR kódy pro všechny rezervace bez záloh')
                 ->action(function () {
                     $count = BackupQRCode::generateMissingBackups();
-                    $this->notify('success', "Vytvořeno {$count} nových záložních QR kódů");
+                    Notification::make()
+                        ->success()
+                        ->title("Vytvořeno {$count} nových záložních QR kódů")
+                        ->send();
                 }),
 
             Actions\Action::make('export_all')
@@ -37,10 +41,16 @@ class ListBackupQRCodes extends ListRecords
                 ->action(function () {
                     try {
                         $file = BackupQRCode::exportAsZip();
-                        $this->notify('success', 'Soubor je připraven k stažení');
+                        Notification::make()
+                            ->success()
+                            ->title('Soubor je připraven k stažení')
+                            ->send();
                         return redirect()->download(storage_path("app/{$file}"));
                     } catch (\Exception $e) {
-                        $this->notify('danger', 'Chyba: ' . $e->getMessage());
+                        Notification::make()
+                            ->danger()
+                            ->title('Chyba: ' . $e->getMessage())
+                            ->send();
                     }
                 }),
 

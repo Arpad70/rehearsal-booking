@@ -14,6 +14,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Actions;
 use Filament\Support\Enums\ActionSize;
+use Filament\Notifications\Notification;
 
 class EditGlobalReader extends EditRecord
 {
@@ -210,9 +211,15 @@ class EditGlobalReader extends EditRecord
                 ->action(function (GlobalReader $record) {
                     $result = $record->testConnection();
                     if ($result['success']) {
-                        $this->notify('success', $result['message']);
+                        Notification::make()
+                            ->success()
+                            ->title($result['message'])
+                            ->send();
                     } else {
-                        $this->notify('danger', $result['message']);
+                        Notification::make()
+                            ->danger()
+                            ->title($result['message'])
+                            ->send();
                     }
                 }),
 
@@ -226,12 +233,21 @@ class EditGlobalReader extends EditRecord
                     try {
                         $result = app(\App\Services\DoorLockService::class)->unlockGlobalReader($record);
                         if ($result['success']) {
-                            $this->notify('success', 'Dveře odemčeny na ' . $result['duration'] . ' sekund');
+                            Notification::make()
+                                ->success()
+                                ->title('Dveře odemčeny na ' . $result['duration'] . ' sekund')
+                                ->send();
                         } else {
-                            $this->notify('danger', $result['message']);
+                            Notification::make()
+                                ->danger()
+                                ->title($result['message'])
+                                ->send();
                         }
                     } catch (\Exception $e) {
-                        $this->notify('danger', 'Chyba: ' . $e->getMessage());
+                        Notification::make()
+                            ->danger()
+                            ->title('Chyba: ' . $e->getMessage())
+                            ->send();
                     }
                 }),
 
