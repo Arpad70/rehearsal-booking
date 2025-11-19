@@ -30,7 +30,10 @@ class AdminDashboard extends Page implements HasTable
 
     public function getWidgets(): array
     {
-        return [];
+        return [
+            \App\Filament\Widgets\PowerMonitoringStats::class,
+            \App\Filament\Widgets\PowerConsumptionChart::class,
+        ];
     }
 
     public function getStats(): array

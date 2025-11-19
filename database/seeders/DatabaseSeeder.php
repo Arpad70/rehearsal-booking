@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
             RoomSeeder::class,
             UserSeeder::class,
             
+            // Devices system
+            DeviceSeeder::class,
+            
             // Equipment system
             EquipmentSeeder::class,
             RoomEquipmentSeeder::class,
@@ -38,6 +41,9 @@ class DatabaseSeeder extends Seeder
             // Access logs and audit trail
             AccessLogSeeder::class,
             AuditLogSeeder::class,
+            
+            // Power monitoring data
+            PowerMonitoringSeeder::class,
         ]);
     }
 }

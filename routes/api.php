@@ -52,5 +52,34 @@ Route::prefix('v1/devices')->name('devices.')->middleware('auth:sanctum')->group
     Route::post('/service-access/{serviceAccess}/toggle', [\App\Http\Controllers\Api\DeviceControlController::class, 'toggleServiceAccess'])
         ->name('service-access.toggle');
 });
+
+// Power Monitoring endpoints (authenticated)
+Route::prefix('v1/power-monitoring')->name('power-monitoring.')->middleware('auth:sanctum')->group(function () {
+    // Collect data
+    Route::post('/collect', [\App\Http\Controllers\Api\PowerMonitoringController::class, 'collectAll'])
+        ->name('collect-all');
+    Route::post('/collect/{deviceId}', [\App\Http\Controllers\Api\PowerMonitoringController::class, 'collectDevice'])
+        ->name('collect-device');
+    
+    // Get data
+    Route::get('/{deviceId}', [\App\Http\Controllers\Api\PowerMonitoringController::class, 'getDeviceData'])
+        ->name('device-data');
+    Route::get('/{deviceId}/latest', [\App\Http\Controllers\Api\PowerMonitoringController::class, 'getLatest'])
+        ->name('latest');
+    Route::get('/{deviceId}/channel/{channel}', [\App\Http\Controllers\Api\PowerMonitoringController::class, 'getChannelData'])
+        ->name('channel-data');
+    
+    // Statistics
+    Route::get('/{deviceId}/stats/energy', [\App\Http\Controllers\Api\PowerMonitoringController::class, 'getEnergyStats'])
+        ->name('stats-energy');
+    Route::get('/{deviceId}/stats/temperature', [\App\Http\Controllers\Api\PowerMonitoringController::class, 'getTemperatureStats'])
+        ->name('stats-temperature');
+    Route::get('/{deviceId}/daily', [\App\Http\Controllers\Api\PowerMonitoringController::class, 'getDailyEnergy'])
+        ->name('daily-energy');
+    
+    // Alerts
+    Route::get('/{deviceId}/alerts', [\App\Http\Controllers\Api\PowerMonitoringController::class, 'getAlerts'])
+        ->name('alerts');
+});
   
 Route::post('/reservations', [\App\Http\Controllers\ReservationController::class,'store'])->middleware('auth:sanctum');  
