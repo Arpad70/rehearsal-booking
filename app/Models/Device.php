@@ -20,11 +20,14 @@ class Device extends Model
     protected $fillable = ['room_id', 'type', 'ip', 'meta'];
     
     /**
-     * @var array<string,string>
+     * @return array<string,string>
      */
-    protected $casts = [
-        'meta' => 'array'
-    ];
+    protected function casts(): array
+    {
+        return [
+            'meta' => 'array'
+        ];
+    }
 
     public function room(): BelongsTo
     {

@@ -43,12 +43,15 @@ class AccessLog extends Model
         'validated_at',
     ];
 
-    protected $casts = [
-        'access_granted' => 'boolean',
-        'validated_at' => 'datetime',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'access_granted' => 'boolean',
+            'validated_at' => 'datetime',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+        ];
+    }
 
     /**
      * Relationship: Log belongs to User

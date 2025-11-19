@@ -38,14 +38,17 @@ class ServiceAccess extends Model
         'revoke_reason',
     ];
 
-    protected $casts = [
-        'allowed_rooms' => 'array',
-        'unlimited_access' => 'boolean',
-        'enabled' => 'boolean',
-        'revoked' => 'boolean',
-        'valid_from' => 'datetime',
-        'valid_until' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'allowed_rooms' => 'array',
+            'unlimited_access' => 'boolean',
+            'enabled' => 'boolean',
+            'revoked' => 'boolean',
+            'valid_from' => 'datetime',
+            'valid_until' => 'datetime',
+        ];
+    }
 
     /**
      * Relationship: Access belongs to User

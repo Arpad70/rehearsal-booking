@@ -20,11 +20,14 @@ class ReaderAlert extends Model
         'metadata',
     ];
 
-    protected $casts = [
-        'metadata' => 'array',
-        'resolved' => 'boolean',
-        'resolved_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'metadata' => 'array',
+            'resolved' => 'boolean',
+            'resolved_at' => 'datetime',
+        ];
+    }
 
     /**
      * Relationship: Alert belongs to RoomReader

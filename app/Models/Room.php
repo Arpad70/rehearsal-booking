@@ -22,10 +22,13 @@ class Room extends Model
     use HasFactory;
     protected $fillable = ['name','location','capacity','shelly_ip','shelly_token','enabled','reservation_default_price'];
 
-    protected $casts = [
-        'enabled' => 'boolean',
-        'reservation_default_price' => 'decimal:2',
-    ];  
+    protected function casts(): array
+    {
+        return [
+            'enabled' => 'boolean',
+            'reservation_default_price' => 'decimal:2',
+        ];
+    }  
 
     public function reservations(): HasMany {  
         return $this->hasMany(Reservation::class);  

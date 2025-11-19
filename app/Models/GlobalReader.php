@@ -35,11 +35,14 @@ class GlobalReader extends Model
         'allowed_service_types',
     ];
 
-    protected $casts = [
-        'door_lock_config' => 'array',
-        'allowed_service_types' => 'array',
-        'enabled' => 'boolean',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'door_lock_config' => 'array',
+            'allowed_service_types' => 'array',
+            'enabled' => 'boolean',
+        ];
+    }
 
     /**
      * Relationship: Reader has many access logs

@@ -12,10 +12,13 @@ class Payment extends Model
 
     protected $fillable = ['reservation_id', 'amount', 'currency', 'paid_at'];
 
-    protected $casts = [
-        'amount' => 'decimal:2',
-        'paid_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'amount' => 'decimal:2',
+            'paid_at' => 'datetime',
+        ];
+    }
 
     public function reservation(): BelongsTo
     {

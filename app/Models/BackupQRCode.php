@@ -30,10 +30,13 @@ class BackupQRCode extends Model
         'used_by_reader',
     ];
 
-    protected $casts = [
-        'qr_data' => 'array',
-        'used_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'qr_data' => 'array',
+            'used_at' => 'datetime',
+        ];
+    }
 
     /**
      * Relationship: Backup QR belongs to Reservation

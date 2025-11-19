@@ -30,19 +30,25 @@ class Reservation extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id','room_id','start_at','end_at','status','access_token','token_valid_from','token_expires_at','used_at','qr_code','qr_generated_at','qr_sent_at','price'];  
+    
     /**
-     * @var array<string,string>
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
      */
-    protected $casts = [
-        'start_at' => 'datetime',
-        'end_at' => 'datetime',
-        'token_valid_from' => 'datetime',
-        'token_expires_at' => 'datetime',
-        'used_at' => 'datetime',
-        'qr_generated_at' => 'datetime',
-        'qr_sent_at' => 'datetime',
-        'price' => 'decimal:2',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'start_at' => 'datetime',
+            'end_at' => 'datetime',
+            'token_valid_from' => 'datetime',
+            'token_expires_at' => 'datetime',
+            'used_at' => 'datetime',
+            'qr_generated_at' => 'datetime',
+            'qr_sent_at' => 'datetime',
+            'price' => 'decimal:2',
+        ];
+    }
 
     protected static function booted() {  
         static::creating(function ($res) {  

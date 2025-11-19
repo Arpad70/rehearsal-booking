@@ -26,12 +26,15 @@ class Equipment extends Model
         'maintenance_notes',
     ];
 
-    protected $casts = [
-        'purchase_date' => 'date',
-        'warranty_expiry' => 'date',
-        'is_critical' => 'boolean',
-        'quantity_available' => 'decimal:2',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'purchase_date' => 'date',
+            'warranty_expiry' => 'date',
+            'is_critical' => 'boolean',
+            'quantity_available' => 'decimal:2',
+        ];
+    }
 
     /**
      * Equipment belongs to many rooms

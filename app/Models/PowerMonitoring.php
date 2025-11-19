@@ -55,23 +55,26 @@ class PowerMonitoring extends Model
         'raw_data',
     ];
 
-    protected $casts = [
-        'channel' => 'integer',
-        'voltage' => 'float',
-        'current' => 'float',
-        'power' => 'float',
-        'power_factor' => 'float',
-        'energy_total' => 'float',
-        'energy_today' => 'float',
-        'energy_month' => 'float',
-        'is_on' => 'boolean',
-        'last_switched_at' => 'datetime',
-        'temperature' => 'float',
-        'temperature_limit' => 'float',
-        'raw_data' => 'array',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'channel' => 'integer',
+            'voltage' => 'float',
+            'current' => 'float',
+            'power' => 'float',
+            'power_factor' => 'float',
+            'energy_total' => 'float',
+            'energy_today' => 'float',
+            'energy_month' => 'float',
+            'is_on' => 'boolean',
+            'last_switched_at' => 'datetime',
+            'temperature' => 'float',
+            'temperature_limit' => 'float',
+            'raw_data' => 'array',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+        ];
+    }
 
     /**
      * Device relationship

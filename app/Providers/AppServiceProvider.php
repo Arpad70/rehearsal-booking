@@ -8,14 +8,6 @@ use Illuminate\Support\Facades\Vite;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * @var array<class-string, class-string>
-     */
-    protected $policies = [  
-        \App\Models\Room::class => \App\Policies\RoomPolicy::class,  
-        \App\Models\Reservation::class => \App\Policies\ReservationPolicy::class,  
-    ];  
-    
-    /**
      * Register any application services.
      */
     public function register(): void

@@ -31,10 +31,13 @@ class RoomReader extends Model
         'door_lock_config',
     ];
 
-    protected $casts = [
-        'door_lock_config' => 'array',
-        'enabled' => 'boolean',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'door_lock_config' => 'array',
+            'enabled' => 'boolean',
+        ];
+    }
 
     /**
      * Relationship: Reader belongs to a Room
