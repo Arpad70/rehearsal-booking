@@ -1,49 +1,45 @@
-@component('mail::message')
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Potvrzení rezervace - {{ $room->name }}</title>
+	</head>
+	<body>
+		<h1>Potvrzení rezervace - {{ $room->name }}</h1>
 
-# Potvrzení rezervace - {{ $room->name }}
+		<p>Dobrý den {{ $user->first_name }},</p>
 
-Dobrý den {{ $user->first_name }},
+		<p>Vaše rezervace byla <strong>úspěšně potvrzena</strong>. Níže najdete všechny důležité informace pro přístup do místnosti.</p>
 
-Vaše rezervace byla **úspěšně potvrzena**. Níže najdete všechny důležité informace pro přístup do místnosti.
+		<h2>Informace o místnosti</h2>
+		<ul>
+			<li><strong>Místnost:</strong> {{ $room->name }}</li>
+			<li><strong>Datum:</strong> {{ $reservation->start_at->format('j. n. Y') }}</li>
+			<li><strong>Čas začátku:</strong> {{ $reservation->start_at->format('H:i') }}</li>
+			<li><strong>Čas konce:</strong> {{ $reservation->end_at->format('H:i') }}</li>
+			<li><strong>Doba přístupu:</strong> {{ $accessWindow['earliest_access'] }} až {{ $accessWindow['latest_access'] }}</li>
+		</ul>
 
-@component('mail::panel')
+		<h2>QR kód pro přístup</h2>
+		<p>Níže je QR kód, který můžete naskenovat na čtečce u místnosti. QR kód je platný <strong>15 minut před vaší rezervací</strong> až do <strong>konce rezervace</strong>.</p>
 
-## Informace o místnosti
-**Místnost:** {{ $room->name }}  
-**Datum:** {{ $reservation->start_at->format('j. n. Y') }}  
-**Čas začátku:** {{ $reservation->start_at->format('H:i') }}  
-**Čas konce:** {{ $reservation->end_at->format('H:i') }}
+		<p>[QR kód je připojen jako obrázek]</p>
 
-**Doba přístupu:** {{ $accessWindow['earliest_access'] }} až {{ $accessWindow['latest_access'] }}
+		<h2>Instrukce pro přístup</h2>
+		<ol>
+			<li>Přijďte k dveřím místnosti {{ $room->name }}</li>
+			<li>Naskenujte QR kód na čtečce (nebo zadejte přístupový kód)</li>
+			<li>Dveře se odemknou na <strong>5 sekund</strong></li>
+			<li>Vstupte do místnosti</li>
+		</ol>
 
-@endcomponent
+		<h2>Bezpečnostní poznámky</h2>
+		<ul>
+			<li>QR kód je osobní a není přenositelný</li>
+			<li>Pokud máte problémy s přístupem, kontaktujte správce</li>
+			<li>QR kód je platný pouze během období rezervace + 15 minut před</li>
+		</ul>
 
-## QR kód pro přístup
-
-Níže je QR kód, který můžete naskenovat na čtečce u místnosti. 
-QR kód je platný **15 minut před vaší rezervací** až do **konce rezervace**.
-
-```
-[QR kód je připojen jako obrázek]
-```
-
-**Tip:** QR kód si můžete stáhnout nebo jej fotografií v tomto emailu naskenovat přímo ze svého telefonu.
-
-## Instrukce pro přístup
-
-1. Přijďte k dveřím místnosti {{ $room->name }}
-2. Naskenujte QR kód na čtečce (nebo zadejte přístupový kód)
-3. Dveře se odemknou na **5 sekund**
-4. Vstupte do místnosti
-
-## Bezpečnostní poznámky
-
-- QR kód je osobní a není přenositelný
-- Pokud máte problémy s přístupem, kontaktujte správce
-- QR kód je platný pouze během období rezervace + 15 minut před
-
-@component('mail::footer')
-Pokud máte jakékoli dotazy, prosím kontaktujte podporu.
-@endcomponent
-
-@endcomponent
+		<p>Pokud máte jakékoli dotazy, prosím kontaktujte podporu.</p>
+	</body>
+</html>
