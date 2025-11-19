@@ -103,19 +103,21 @@ class BackupQRCode extends Model
     public static function exportAsZip(): string
     {
         $zip = new \ZipArchive();
-        $zipPath = storage_path("app/backup_qr_codes_" . date('Y-m-d_H-i-s') . '.zip');
+        $timestamp = date('Y-m-d_H-i-s');
+        $filename = "backup_qr_codes_{$timestamp}.zip";
+        $zipPath = storage_path("app/{$filename}");
 
         if ($zip->open($zipPath, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) === true) {
             $backups = self::with('reservation')->get();
 
             foreach ($backups as $backup) {
-                $filename = "backup_qr_{$backup->id}_{$backup->sequence_number}.png";
-                $zip->addFromString($filename, $backup->qr_code);
+                $qrFilename = "backup_qr_{$backup->id}_{$backup->sequence_number}.png";
+                $zip->addFromString($qrFilename, $backup->qr_code);
             }
 
             $zip->close();
         }
 
-        return "backup_qr_codes_" . date('Y-m-d_H-i-s') . '.zip';
+        return $filename;
     }
 }
