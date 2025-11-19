@@ -10,6 +10,9 @@ use App\Filament\Resources\RoomReaderResource;
 use App\Filament\Resources\GlobalReaderResource;
 use App\Filament\Resources\ServiceAccessResource;
 use App\Filament\Resources\ReaderAlertResource;
+use App\Filament\Resources\PowerMonitoringResource;
+use App\Filament\Widgets\PowerMonitoringStats;
+use App\Filament\Widgets\PowerConsumptionChart;
 use Illuminate\Support\ServiceProvider;
 
 class FilamentServiceProvider extends ServiceProvider
@@ -29,6 +32,7 @@ class FilamentServiceProvider extends ServiceProvider
                     GlobalReaderResource::class,
                     ServiceAccessResource::class,
                     ReaderAlertResource::class,
+                    PowerMonitoringResource::class,
                 ])
                 ->navigation(function (): array {
                     return [

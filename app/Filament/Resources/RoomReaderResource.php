@@ -11,7 +11,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
@@ -83,7 +82,6 @@ class RoomReaderResource extends Resource
 
                         Forms\Components\KeyValue::make('door_lock_config')
                             ->label('Lock Configuration (JSON)')
-                            ->addButtonLabel('Add Configuration')
                             ->keyPlaceholder('Key (e.g., relay_pin, duration)')
                             ->valuePlaceholder('Value'),
                     ]),

@@ -44,8 +44,9 @@ class ReaderStatsResource extends Resource
                     ->copyable()
                     ->searchable(),
 
-                Tables\Columns\BadgeColumn::make('door_lock_type')
+                Tables\Columns\TextColumn::make('door_lock_type')
                     ->label('Typ zámku')
+                    ->badge()
                     ->colors([
                         'blue' => 'relay',
                         'purple' => 'api',

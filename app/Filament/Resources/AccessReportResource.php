@@ -77,11 +77,11 @@ class AccessReportResource extends Resource
                             ->disabled()
                             ->columnSpanFull(),
 
-                        Forms\Components\DateTimeField::make('validated_at')
+                        Forms\Components\DateTimePicker::make('validated_at')
                             ->label('Čas ověření')
                             ->disabled(),
 
-                        Forms\Components\DateTimeField::make('created_at')
+                        Forms\Components\DateTimePicker::make('created_at')
                             ->label('Čas záznamu')
                             ->disabled(),
                     ])
@@ -104,8 +104,9 @@ class AccessReportResource extends Resource
                     ->searchable()
                     ->toggleable(),
 
-                Tables\Columns\BadgeColumn::make('access_type')
+                Tables\Columns\TextColumn::make('access_type')
                     ->label('Typ')
+                    ->badge()
                     ->colors([
                         'blue' => 'reservation',
                         'gray' => 'service',
@@ -117,8 +118,9 @@ class AccessReportResource extends Resource
                     })
                     ->toggleable(),
 
-                Tables\Columns\BadgeColumn::make('access_granted')
+                Tables\Columns\TextColumn::make('access_granted')
                     ->label('Výsledek')
+                    ->badge()
                     ->colors([
                         'success' => true,
                         'danger' => false,
@@ -131,8 +133,9 @@ class AccessReportResource extends Resource
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
-                Tables\Columns\BadgeColumn::make('reader_type')
+                Tables\Columns\TextColumn::make('reader_type')
                     ->label('Čtečka')
+                    ->badge()
                     ->colors([
                         'blue' => 'room',
                         'gray' => 'global',

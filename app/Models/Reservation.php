@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Database\Factories\ReservationFactory;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property int $id
@@ -28,7 +29,7 @@ use Database\Factories\ReservationFactory;
 class Reservation extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id','room_id','start_at','end_at','status','access_token','token_valid_from','token_expires_at','used_at','qr_code','qr_generated_at','qr_sent_at'];  
+    protected $fillable = ['user_id','room_id','start_at','end_at','status','access_token','token_valid_from','token_expires_at','used_at','qr_code','qr_generated_at','qr_sent_at','price'];  
     /**
      * @var array<string,string>
      */
@@ -40,6 +41,7 @@ class Reservation extends Model
         'used_at' => 'datetime',
         'qr_generated_at' => 'datetime',
         'qr_sent_at' => 'datetime',
+        'price' => 'decimal:2',
     ];
 
     protected static function booted() {  
@@ -55,7 +57,7 @@ class Reservation extends Model
                 'created',
                 self::class,
                 $res->id,
-                auth()->id(),
+                Auth::id(),
                 null,
                 $res->getAttributes()
             );
@@ -73,7 +75,7 @@ class Reservation extends Model
                     'updated',
                     self::class,
                     $res->id,
-                    auth()->id(),
+                    Auth::id(),
                     $oldValues,
                     $newValues
                 );
@@ -86,7 +88,7 @@ class Reservation extends Model
                 'deleted',
                 self::class,
                 $res->id,
-                auth()->id(),
+                Auth::id(),
                 $res->getAttributes(),
                 null
             );
@@ -96,6 +98,11 @@ class Reservation extends Model
     public function room(): BelongsTo {  
         return $this->belongsTo(Room::class);  
     }  
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(\App\Models\Payment::class);
+    }
 
     public function user(): BelongsTo {  
         return $this->belongsTo(\App\Models\User::class);  

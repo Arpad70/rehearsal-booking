@@ -17,12 +17,13 @@ class SendReservationQRCodeEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public int $tries = 3;
+    public int $maxExceptions = 1;
+
     public function __construct(
         public Reservation $reservation,
     ) {
         $this->onQueue('emails');
-        $this->tries = 3;
-        $this->maxExceptions = 1;
     }
 
     public function handle(QRCodeService $qrService): void
