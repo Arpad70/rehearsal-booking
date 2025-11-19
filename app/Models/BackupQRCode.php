@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int|null $id
+ * @property int|null $reservation_id
+ * @property string|null $qr_code
+ * @property array|string|null $qr_data
+ * @property int|null $sequence_number
+ * @property string|null $status
+ */
 class BackupQRCode extends Model
 {
     use HasFactory;

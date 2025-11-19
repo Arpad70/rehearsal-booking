@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int|null $id
+ * @property int|null $room_id
+ * @property string|null $reader_name
+ * @property string|null $reader_ip
+ * @property int|null $reader_port
+ * @property string|null $reader_token
+ * @property bool|null $enabled
+ * @property array|null $door_lock_config
+ */
 class RoomReader extends Model
 {
     use HasFactory;

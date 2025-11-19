@@ -31,6 +31,9 @@ class ExportAccessLogsAction extends Action
                 return;
             }
 
+            /** @var \Illuminate\Support\Collection $logs */
+            /** @var \App\Models\AccessLog $log */
+
             // Header
             fputcsv($handle, [
                 'Čas',
