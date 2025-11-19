@@ -7,6 +7,9 @@ use App\Models\RoomReader;
 use App\Models\GlobalReader;
 use App\Models\ReaderAlert;
 use App\Models\ServiceAccess;
+use App\Models\Reservation;
+use App\Models\User;
+use App\Models\Payment;
 use Filament\Pages\Page;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Filament\Support\Enums\IconPosition;
@@ -57,6 +60,22 @@ class AdminDashboard extends Page implements HasTable
         // Aktivní upozornění
         $activeAlerts = ReaderAlert::where('resolved', false)->count();
 
+        // Měsíční statistiky
+        $monthStart = now()->startOfMonth();
+
+        // Real revenue: sum of payments + sum of reservations without payments (avoid double counting)
+        $paymentsSum = Payment::where('created_at', '>=', $monthStart)->sum('amount');
+
+        $reservationsWithoutPaymentsSum = Reservation::where('created_at', '>=', $monthStart)
+            ->where('status', '!=', 'cancelled')
+            ->whereDoesntHave('payments')
+            ->sum('price');
+
+        $monthlyRevenue = (float) $paymentsSum + (float) $reservationsWithoutPaymentsSum;
+
+        // New users this month
+        $newUsersThisMonth = User::where('created_at', '>=', $monthStart)->count();
+
         return [
             Stat::make('Přístupy dnes', $todayAccess)
                 ->description('Celkový počet přístupů dnes')
@@ -83,6 +102,8 @@ class AdminDashboard extends Page implements HasTable
                 ->description('Vyžaduje řešení')
                 ->descriptionIcon('heroicon-m-bell-alert', IconPosition::Before)
                 ->color($activeAlerts > 0 ? 'danger' : 'success'),
+
+            // Business metrics moved/removed from QR Reader dashboard
 
             Stat::make('Servisní přístupy', ServiceAccess::where('enabled', true)->count())
                 ->description('Aktivní servisní účty')
@@ -149,5 +170,17 @@ class AdminDashboard extends Page implements HasTable
             ->defaultSort('created_at', 'desc')
             ->paginated([10, 25, 50])
             ->striped();
+    }
+
+    /**
+     * Define number of widget columns for the dashboard so stats layout
+     * places the two business widgets side-by-side after Active Alerts.
+     */
+    public function getColumns(): int | string | array
+    {
+        // Use 3 columns on large screens so two stats appear side-by-side
+        // Use 2 columns so MonthlyRevenue and NewUsersThisMonth
+        // appear side-by-side in a single row above the charts.
+        return 2;
     }
 }

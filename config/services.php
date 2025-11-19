@@ -41,4 +41,9 @@ return [
         'timeout' => 10,
         'retries' => 3,
     ],
+    'reservations' => [
+        // Default price (in CZK) used to estimate revenue when there's no payments table.
+        // You can override with RESERVATION_PRICE in .env
+        'default_price' => env('RESERVATION_PRICE', 0),
+    ],
 ];

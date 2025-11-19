@@ -13,6 +13,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Filters\SelectFilter;
+use App\Models\Device;
 use Illuminate\Database\Eloquent\Builder;
 
 class PowerMonitoringResource extends Resource
@@ -36,7 +37,11 @@ class PowerMonitoringResource extends Resource
                 Forms\Components\Section::make('Device & Channel')
                     ->schema([
                         Forms\Components\Select::make('device_id')
-                            ->relationship('device', 'name')
+                            ->options(fn () => Device::orderBy('id')
+                                ->get()
+                                ->mapWithKeys(fn ($d) => [ $d->id => $d->meta['name'] ?? $d->ip ?? ('Device ' . $d->id) ])
+                                ->toArray()
+                            )
                             ->required()
                             ->disabled(),
                         Forms\Components\TextInput::make('channel')
@@ -189,7 +194,11 @@ class PowerMonitoringResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('device_id')
-                    ->relationship('device', 'name'),
+                    ->options(fn () => Device::orderBy('id')
+                        ->get()
+                        ->mapWithKeys(fn ($d) => [ $d->id => $d->meta['name'] ?? $d->ip ?? ('Device ' . $d->id) ])
+                        ->toArray()
+                    ),
                 
                 SelectFilter::make('room_id')
                     ->relationship('room', 'name'),

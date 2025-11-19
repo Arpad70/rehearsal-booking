@@ -12,6 +12,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// (Route /nastenka was removed — nástěnka controller/page deleted)
+
 Route::get('/dashboard', function () {
     /** @var \App\Models\User $user */
     $user = auth()->user();
