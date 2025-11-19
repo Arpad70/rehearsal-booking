@@ -9,6 +9,7 @@ use Filament\Actions;
 use Filament\Support\Enums\ActionSize;
 use Illuminate\Support\Facades\Storage;
 use Filament\Notifications\Notification;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ListBackupQRCodes extends ListRecords
 {
@@ -45,7 +46,7 @@ class ListBackupQRCodes extends ListRecords
                             ->success()
                             ->title('Soubor je připraven k stažení')
                             ->send();
-                        return redirect()->download(storage_path("app/{$file}"));
+                        return response()->download(storage_path("app/{$file}"));
                     } catch (\Exception $e) {
                         Notification::make()
                             ->danger()
