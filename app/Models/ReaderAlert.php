@@ -46,6 +46,18 @@ class ReaderAlert extends Model
     }
 
     /**
+     * Get the parent alertable model (RoomReader or GlobalReader)
+     */
+    public function alertable()
+    {
+        if ($this->reader_type === 'room_reader') {
+            return $this->roomReader;
+        }
+        
+        return $this->globalReader;
+    }
+
+    /**
      * Mark as resolved
      */
     public function markResolved(?string $notes = null): void

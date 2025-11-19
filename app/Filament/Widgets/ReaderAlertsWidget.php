@@ -19,7 +19,7 @@ class ReaderAlertsWidget extends BaseWidget
         return $table
             ->query(
                 ReaderAlert::unresolved()
-                    ->with('alertable')
+                    ->with(['roomReader', 'globalReader'])
                     ->orderBy('severity', 'desc')
                     ->orderBy('created_at', 'desc')
                     ->limit(10)
@@ -51,11 +51,17 @@ class ReaderAlertsWidget extends BaseWidget
                         default => $state,
                     }),
 
-                TextColumn::make('alertable')
+                TextColumn::make('reader_name')
                     ->label('Zařízení')
-                    ->getStateUsing(fn(ReaderAlert $record) => 
-                        $record->alertable?->reader_name ?? 'N/A'
-                    ),
+                    ->getStateUsing(function (ReaderAlert $record) {
+                        if ($record->reader_type === 'room_reader' && $record->roomReader) {
+                            return $record->roomReader->reader_name;
+                        }
+                        if ($record->reader_type === 'global_reader' && $record->globalReader) {
+                            return $record->globalReader->reader_name;
+                        }
+                        return 'N/A';
+                    }),
 
                 TextColumn::make('message')
                     ->label('Zpráva')
