@@ -5,6 +5,8 @@ namespace App\Filament\Widgets;
 use App\Models\ReaderAlert;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Actions\Action;
 use Filament\Widgets\TableWidget as BaseWidget;
 
 class ReaderAlertsWidget extends BaseWidget
@@ -17,13 +19,15 @@ class ReaderAlertsWidget extends BaseWidget
         return $table
             ->query(
                 ReaderAlert::unresolved()
+                    ->with('alertable')
                     ->orderBy('severity', 'desc')
                     ->orderBy('created_at', 'desc')
                     ->limit(10)
             )
             ->columns([
-                Tables\Columns\BadgeColumn::make('severity')
+                TextColumn::make('severity')
                     ->label('Závažnost')
+                    ->badge()
                     ->colors([
                         'danger' => 'critical',
                         'warning' => 'warning',
@@ -36,7 +40,7 @@ class ReaderAlertsWidget extends BaseWidget
                         default => $state,
                     }),
 
-                Tables\Columns\TextColumn::make('alert_type')
+                TextColumn::make('alert_type')
                     ->label('Typ')
                     ->formatStateUsing(fn($state) => match($state) {
                         'offline' => 'Offline',
@@ -47,30 +51,30 @@ class ReaderAlertsWidget extends BaseWidget
                         default => $state,
                     }),
 
-                Tables\Columns\TextColumn::make('alertable')
+                TextColumn::make('alertable')
                     ->label('Zařízení')
                     ->getStateUsing(fn(ReaderAlert $record) => 
                         $record->alertable?->reader_name ?? 'N/A'
                     ),
 
-                Tables\Columns\TextColumn::make('message')
+                TextColumn::make('message')
                     ->label('Zpráva')
                     ->limit(50),
 
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label('Čas')
                     ->dateTime('H:i')
                     ->sortable(),
             ])
             ->actions([
-                Tables\Actions\Action::make('acknowledge')
+                Action::make('acknowledge')
                     ->label('Potvrdit')
                     ->icon('heroicon-o-check-circle')
                     ->color('success')
                     ->visible(fn(ReaderAlert $record) => !$record->acknowledged)
                     ->action(fn(ReaderAlert $record) => $record->acknowledge()),
 
-                Tables\Actions\Action::make('resolve')
+                Action::make('resolve')
                     ->label('Vyřešit')
                     ->icon('heroicon-o-x-mark')
                     ->color('danger')

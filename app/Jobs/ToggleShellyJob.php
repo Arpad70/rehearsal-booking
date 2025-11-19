@@ -7,10 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Room;
+use App\Services\ShellyGen2Service;
 use Throwable;
 
 class ToggleShellyJob implements ShouldQueue
@@ -34,21 +34,39 @@ class ToggleShellyJob implements ShouldQueue
     public function handle(): void
     {
         try {
-            if (! $this->validateRoom()) {
+            if (!$this->validateRoom()) {
                 return;
             }
 
-            if ($this->attemptGatewayToggle()) {
+            $device = $this->room->devices()->where('type', 'shelly')->first();
+
+            if (!$device) {
+                Log::warning('ToggleShellyJob: Room has no Shelly device', ['room_id' => $this->room->id]);
                 return;
             }
 
-            if ($this->attemptDirectToggle()) {
-                return;
+            $shellyService = new ShellyGen2Service();
+
+            // Check if device is reachable
+            if (!$shellyService->isReachable($device)) {
+                throw new \Exception('Shelly device is not reachable at ' . $device->ip);
             }
 
-            $this->logFailure('all attempts failed');
+            // Get channel from device metadata
+            $channel = $device->meta['channel'] ?? 0;
+
+            // Toggle the relay
+            if ($shellyService->toggle($device, $channel)) {
+                Log::info('ToggleShellyJob: Successfully toggled relay', [
+                    'room_id' => $this->room->id,
+                    'device_ip' => $device->ip,
+                    'channel' => $channel,
+                ]);
+            } else {
+                throw new \Exception('Failed to toggle relay');
+            }
         } catch (Throwable $e) {
-            Log::error('ToggleShellyJob error: '.$e->getMessage(), ['room_id' => $this->room->id]);
+            Log::error('ToggleShellyJob error: ' . $e->getMessage(), ['room_id' => $this->room->id]);
             throw $e;
         }
     }
@@ -59,7 +77,7 @@ class ToggleShellyJob implements ShouldQueue
     public function failed(Throwable $exception): void
     {
         $roomId = $this->room?->id;
-        $message = "ToggleShellyJob failed for room_id={$roomId}: ". $exception->getMessage();
+        $message = "ToggleShellyJob failed for room_id={$roomId}: " . $exception->getMessage();
         Log::error($message, ['exception' => $exception]);
 
         // Optional: notify admin email (configure SHELLY_FAILURE_NOTIFY_EMAIL in env)
@@ -70,93 +88,20 @@ class ToggleShellyJob implements ShouldQueue
                     $m->to($notify)->subject('Shelly job failure');
                 });
             } catch (Throwable $mailEx) {
-                Log::error('Failed to send Shelly failure notification: '.$mailEx->getMessage());
+                Log::error('Failed to send Shelly failure notification: ' . $mailEx->getMessage());
             }
         }
     }
 
     /**
-     * Validate that room and Shelly IP are present.
+     * Validate that room exists.
      */
     private function validateRoom(): bool
     {
-        if (! $this->room || ! $this->room->shelly_ip) {
-            Log::warning('ToggleShellyJob: missing room or shelly_ip', ['room_id' => $this->room?->id]);
+        if (!$this->room) {
+            Log::warning('ToggleShellyJob: missing room', ['room_id' => $this->room?->id]);
             return false;
         }
         return true;
-    }
-
-    /**
-     * Attempt to toggle device via central gateway (preferred method).
-     */
-    private function attemptGatewayToggle(): bool
-    {
-        /** @var ?string */
-        $gateway = config('services.shelly.gateway_url');
-        if (! $gateway) {
-            return false;
-        }
-
-        try {
-            Http::timeout(5)->post($gateway, [
-                'action' => 'toggle',
-                'room_id' => $this->room->id,
-                'shelly_ip' => $this->room->shelly_ip,
-            ]);
-            Log::info('ToggleShellyJob: sent toggle to gateway', ['room_id' => $this->room->id]);
-            return true;
-        } catch (Throwable $e) {
-            Log::debug('ToggleShellyJob: gateway attempt failed', ['error' => $e->getMessage()]);
-            return false;
-        }
-    }
-
-    /**
-     * Attempt to toggle device directly as fallback (best-effort).
-     */
-    private function attemptDirectToggle(): bool
-    {
-        $ip = $this->room->shelly_ip;
-
-        // Common Shelly RPC endpoints (may vary by device/firmware)
-        $urls = [
-            "http://{$ip}/rpc/Switch.Toggle",
-            "http://{$ip}/relay/0/toggle",
-            "http://{$ip}/relay/0",
-        ];
-
-        foreach ($urls as $url) {
-            if ($this->tryToggleUrl($url)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Try toggling a single URL endpoint.
-     */
-    private function tryToggleUrl(string $url): bool
-    {
-        try {
-            $response = Http::timeout(5)->get($url);
-            if ($response->successful()) {
-                Log::info('ToggleShellyJob: toggled device', ['room_id' => $this->room->id, 'url' => $url]);
-                return true;
-            }
-        } catch (Throwable $e) {
-            Log::debug('ToggleShellyJob: URL attempt failed', ['url' => $url, 'error' => $e->getMessage()]);
-        }
-        return false;
-    }
-
-    /**
-     * Log a failure and prepare for potential retry.
-     */
-    private function logFailure(string $reason): void
-    {
-        Log::warning('ToggleShellyJob: '.$reason, ['room_id' => $this->room->id]);
     }
 }

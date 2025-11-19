@@ -40,6 +40,8 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
+            // Use project favicon for Filament admin panel (use root-relative URL to avoid external host mismatches)
+            ->favicon('/favicon.ico')
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

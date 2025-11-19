@@ -1,0 +1,1066 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\Device\\:\\:findOrFail\\(\\)\\.$#"
+			count: 1
+			path: app/Console/Commands/CollectPowerMonitoringData.php
+
+		-
+			message: "#^Part \\$deviceId \\(non\\-empty\\-array\\|non\\-falsy\\-string\\|true\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: app/Console/Commands/CollectPowerMonitoringData.php
+
+		-
+			message: "#^Binary operation \"\\.\" between 'File not found\\: ' and array\\|bool\\|string\\|null results in an error\\.$#"
+			count: 1
+			path: app/Console/Commands/ImportPayments.php
+
+		-
+			message: "#^Parameter \\#1 \\$filename of function file_exists expects string, array\\|bool\\|string\\|null given\\.$#"
+			count: 1
+			path: app/Console/Commands/ImportPayments.php
+
+		-
+			message: "#^Parameter \\#1 \\$filename of function fopen expects string, array\\|bool\\|string\\|null given\\.$#"
+			count: 1
+			path: app/Console/Commands/ImportPayments.php
+
+		-
+			message: "#^Parameter \\#1 \\$keys of function array_combine expects array\\<int\\|string\\>, array\\|false given\\.$#"
+			count: 1
+			path: app/Console/Commands/ImportPayments.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$access_granted\\.$#"
+			count: 1
+			path: app/Filament/Actions/ExportAccessLogsAction.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$access_type\\.$#"
+			count: 2
+			path: app/Filament/Actions/ExportAccessLogsAction.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$created_at\\.$#"
+			count: 1
+			path: app/Filament/Actions/ExportAccessLogsAction.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$ip_address\\.$#"
+			count: 1
+			path: app/Filament/Actions/ExportAccessLogsAction.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$reader_type\\.$#"
+			count: 2
+			path: app/Filament/Actions/ExportAccessLogsAction.php
+
+		-
+			message: "#^Using nullsafe property access \"\\?\\-\\>name\" on left side of \\?\\? is unnecessary\\. Use \\-\\> instead\\.$#"
+			count: 2
+			path: app/Filament/Actions/ExportAccessLogsAction.php
+
+		-
+			message: "#^Variable \\$log in PHPDoc tag @var does not exist\\.$#"
+			count: 1
+			path: app/Filament/Actions/ExportAccessLogsAction.php
+
+		-
+			message: "#^Variable \\$logs in PHPDoc tag @var does not exist\\.$#"
+			count: 1
+			path: app/Filament/Actions/ExportAccessLogsAction.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\AccessLog\\:\\:whereBetween\\(\\)\\.$#"
+			count: 1
+			path: app/Filament/Pages/AdminDashboard.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\AccessLog\\:\\:whereDate\\(\\)\\.$#"
+			count: 2
+			path: app/Filament/Pages/AdminDashboard.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\GlobalReader\\:\\:count\\(\\)\\.$#"
+			count: 1
+			path: app/Filament/Pages/AdminDashboard.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\RoomReader\\:\\:count\\(\\)\\.$#"
+			count: 1
+			path: app/Filament/Pages/AdminDashboard.php
+
+		-
+			message: "#^Method App\\\\Filament\\\\Pages\\\\AdminDashboard\\:\\:getColumns\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Filament/Pages/AdminDashboard.php
+
+		-
+			message: "#^Method App\\\\Filament\\\\Pages\\\\AdminDashboard\\:\\:getStats\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Filament/Pages/AdminDashboard.php
+
+		-
+			message: "#^Method App\\\\Filament\\\\Pages\\\\AdminDashboard\\:\\:getWidgets\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Filament/Pages/AdminDashboard.php
+
+		-
+			message: "#^Anonymous function should return Illuminate\\\\Database\\\\Eloquent\\\\Builder but returns Illuminate\\\\Database\\\\Query\\\\Builder\\.$#"
+			count: 2
+			path: app/Filament/Resources/AccessReportResource.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\AccessLog\\:\\:count\\(\\)\\.$#"
+			count: 1
+			path: app/Filament/Resources/AccessReportResource/Widgets/AccessReportStats.php
+
+		-
+			message: "#^Method App\\\\Filament\\\\Resources\\\\BackupQRCodeResource\\\\Pages\\\\ListBackupQRCodes\\:\\:getTableRecordsPerPageSelectOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Filament/Resources/BackupQRCodeResource/Pages/ListBackupQRCodes.php
+
+		-
+			message: "#^Call to an undefined method Filament\\\\Forms\\\\Components\\\\KeyValue\\:\\:disableAllToolbarButtons\\(\\)\\.$#"
+			count: 1
+			path: app/Filament/Resources/GlobalReaderResource.php
+
+		-
+			message: "#^Match expression does not handle remaining value\\: string$#"
+			count: 1
+			path: app/Filament/Resources/GlobalReaderResource.php
+
+		-
+			message: "#^Method Filament\\\\Notifications\\\\Notification\\:\\:success\\(\\) invoked with 1 parameter, 0 required\\.$#"
+			count: 1
+			path: app/Filament/Resources/GlobalReaderResource.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\Device\\:\\:orderBy\\(\\)\\.$#"
+			count: 2
+			path: app/Filament/Resources/PowerMonitoringResource.php
+
+		-
+			message: "#^Method App\\\\Filament\\\\Resources\\\\PowerMonitoringResource\\:\\:canDelete\\(\\) has parameter \\$record with no type specified\\.$#"
+			count: 1
+			path: app/Filament/Resources/PowerMonitoringResource.php
+
+		-
+			message: "#^Method App\\\\Filament\\\\Resources\\\\PowerMonitoringResource\\:\\:canEdit\\(\\) has parameter \\$record with no type specified\\.$#"
+			count: 1
+			path: app/Filament/Resources/PowerMonitoringResource.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Filament\\\\Resources\\\\PowerMonitoringResource\\\\Pages\\\\ListPowerMonitorings\\:\\:notify\\(\\)\\.$#"
+			count: 1
+			path: app/Filament/Resources/PowerMonitoringResource/Pages/ListPowerMonitorings.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\ReaderAlert\\:\\:\\$globalReader\\.$#"
+			count: 1
+			path: app/Filament/Resources/ReaderAlertResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\ReaderAlert\\:\\:\\$roomReader\\.$#"
+			count: 1
+			path: app/Filament/Resources/ReaderAlertResource.php
+
+		-
+			message: "#^Match expression does not handle remaining value\\: string$#"
+			count: 1
+			path: app/Filament/Resources/RoomReaderResource.php
+
+		-
+			message: "#^Method Filament\\\\Notifications\\\\Notification\\:\\:success\\(\\) invoked with 1 parameter, 0 required\\.$#"
+			count: 1
+			path: app/Filament/Resources/RoomReaderResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\Room\\:\\:\\$enabled\\.$#"
+			count: 7
+			path: app/Filament/Resources/RoomResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\ServiceAccess\\:\\:\\$user\\.$#"
+			count: 4
+			path: app/Filament/Resources/ServiceAccessResource.php
+
+		-
+			message: "#^Match expression does not handle remaining value\\: string$#"
+			count: 1
+			path: app/Filament/Resources/ServiceAccessResource.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\Reservation\\:\\:whereBetween\\(\\)\\.$#"
+			count: 1
+			path: app/Filament/Widgets/AccessStatsOverview.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\AccessLog\\:\\:selectRaw\\(\\)\\.$#"
+			count: 1
+			path: app/Filament/Widgets/AccessTrendChart.php
+
+		-
+			message: "#^Using nullsafe property access \"\\?\\-\\>successful\" on left side of \\?\\? is unnecessary\\. Use \\-\\> instead\\.$#"
+			count: 2
+			path: app/Filament/Widgets/AccessTrendChart.php
+
+		-
+			message: "#^Using nullsafe property access \"\\?\\-\\>total\" on left side of \\?\\? is unnecessary\\. Use \\-\\> instead\\.$#"
+			count: 1
+			path: app/Filament/Widgets/AccessTrendChart.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\Device\\:\\:whereIn\\(\\)\\.$#"
+			count: 1
+			path: app/Filament/Widgets/PowerConsumptionChart.php
+
+		-
+			message: "#^Method App\\\\Filament\\\\Widgets\\\\PowerConsumptionChart\\:\\:getOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Filament/Widgets/PowerConsumptionChart.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\ReaderAlert\\:\\:\\$acknowledged\\.$#"
+			count: 1
+			path: app/Filament/Widgets/ReaderAlertsWidget.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Models\\\\ReaderAlert\\:\\:acknowledge\\(\\)\\.$#"
+			count: 1
+			path: app/Filament/Widgets/ReaderAlertsWidget.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Models\\\\ReaderAlert\\:\\:resolve\\(\\)\\.$#"
+			count: 1
+			path: app/Filament/Widgets/ReaderAlertsWidget.php
+
+		-
+			message: "#^Using nullsafe property access \"\\?\\-\\>reader_name\" on left side of \\?\\? is unnecessary\\. Use \\-\\> instead\\.$#"
+			count: 1
+			path: app/Filament/Widgets/ReaderAlertsWidget.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\Room\\:\\:withCount\\(\\)\\.$#"
+			count: 1
+			path: app/Filament/Widgets/RoomUsageChart.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\Room\\:\\:\\$enabled\\.$#"
+			count: 4
+			path: app/Http/Controllers/Api/DeviceControlController.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\RoomReader\\:\\:\\$room\\.$#"
+			count: 4
+			path: app/Http/Controllers/Api/DeviceControlController.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\ServiceAccess\\:\\:\\$user\\.$#"
+			count: 1
+			path: app/Http/Controllers/Api/DeviceControlController.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\Device\\:\\:findOrFail\\(\\)\\.$#"
+			count: 8
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			message: "#^Parameter \\#2 \\$days of method App\\\\Services\\\\PowerMonitoringService\\:\\:getEnergyStats\\(\\) expects int, mixed given\\.$#"
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			message: "#^Parameter \\#2 \\$days of static method App\\\\Models\\\\PowerMonitoring\\:\\:getDailyEnergy\\(\\) expects int, mixed given\\.$#"
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			message: "#^Parameter \\#2 \\$hours of method App\\\\Services\\\\PowerMonitoringService\\:\\:getTemperatureStats\\(\\) expects int, mixed given\\.$#"
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			message: "#^Parameter \\#2 \\$limit of method App\\\\Services\\\\PowerMonitoringService\\:\\:getLatestData\\(\\) expects int, mixed given\\.$#"
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			message: "#^Parameter \\#3 \\$limit of method App\\\\Services\\\\PowerMonitoringService\\:\\:getChannelData\\(\\) expects int, mixed given\\.$#"
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\AccessLog\\:\\:logAttempt\\(\\)\\.$#"
+			count: 5
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\Room\\:\\:findOrFail\\(\\)\\.$#"
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			message: "#^Cannot access offset 'rid' on mixed\\.$#"
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			message: "#^Cannot access property \\$email on Illuminate\\\\Contracts\\\\Auth\\\\Authenticatable\\|null\\.$#"
+			count: 1
+			path: app/Http/Controllers/ReservationController.php
+
+		-
+			message: "#^Cannot access property \\$end_at on mixed\\.$#"
+			count: 1
+			path: app/Http/Controllers/ReservationController.php
+
+		-
+			message: "#^Cannot access property \\$id on mixed\\.$#"
+			count: 1
+			path: app/Http/Controllers/ReservationController.php
+
+		-
+			message: "#^Cannot access property \\$start_at on mixed\\.$#"
+			count: 1
+			path: app/Http/Controllers/ReservationController.php
+
+		-
+			message: "#^Parameter \\#1 \\$reservation of class App\\\\Mail\\\\ReservationCreatedMail constructor expects App\\\\Models\\\\Reservation, mixed given\\.$#"
+			count: 1
+			path: app/Http/Controllers/ReservationController.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\Room\\:\\:orderBy\\(\\)\\.$#"
+			count: 1
+			path: app/Http/Controllers/RoomController.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 2
+			path: app/Http/Middleware/ThrottleAccessValidation.php
+
+		-
+			message: "#^Parameter \\#2 \\$string of function explode expects string, mixed given\\.$#"
+			count: 1
+			path: app/Http/Middleware/ThrottleAccessValidation.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Requests\\\\CreateReservationRequest\\:\\:\\$start_at\\.$#"
+			count: 1
+			path: app/Http/Requests/CreateReservationRequest.php
+
+		-
+			message: "#^Part \\$minDuration \\(mixed\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: app/Http/Requests/CreateReservationRequest.php
+
+		-
+			message: "#^Parameter \\#1 \\$qrData of method App\\\\Services\\\\QRCodeService\\:\\:generateQRImageFromData\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: app/Jobs/SendServiceAccessCodeEmail.php
+
+		-
+			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$ip\\.$#"
+			count: 2
+			path: app/Jobs/ToggleShellyJob.php
+
+		-
+			message: "#^Parameter \\#1 \\$device of method App\\\\Services\\\\ShellyGen2Service\\:\\:isReachable\\(\\) expects App\\\\Models\\\\Device, Illuminate\\\\Database\\\\Eloquent\\\\Model given\\.$#"
+			count: 1
+			path: app/Jobs/ToggleShellyJob.php
+
+		-
+			message: "#^Parameter \\#1 \\$device of method App\\\\Services\\\\ShellyGen2Service\\:\\:toggle\\(\\) expects App\\\\Models\\\\Device, Illuminate\\\\Database\\\\Eloquent\\\\Model given\\.$#"
+			count: 1
+			path: app/Jobs/ToggleShellyJob.php
+
+		-
+			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$ip\\.$#"
+			count: 2
+			path: app/Jobs/TurnOffShellyJob.php
+
+		-
+			message: "#^Parameter \\#1 \\$device of method App\\\\Services\\\\ShellyGen2Service\\:\\:isReachable\\(\\) expects App\\\\Models\\\\Device, Illuminate\\\\Database\\\\Eloquent\\\\Model given\\.$#"
+			count: 1
+			path: app/Jobs/TurnOffShellyJob.php
+
+		-
+			message: "#^Parameter \\#1 \\$device of method App\\\\Services\\\\ShellyGen2Service\\:\\:turnOff\\(\\) expects App\\\\Models\\\\Device, Illuminate\\\\Database\\\\Eloquent\\\\Model given\\.$#"
+			count: 1
+			path: app/Jobs/TurnOffShellyJob.php
+
+		-
+			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$ip\\.$#"
+			count: 2
+			path: app/Jobs/TurnOnShellyJob.php
+
+		-
+			message: "#^Parameter \\#1 \\$device of method App\\\\Services\\\\ShellyGen2Service\\:\\:isReachable\\(\\) expects App\\\\Models\\\\Device, Illuminate\\\\Database\\\\Eloquent\\\\Model given\\.$#"
+			count: 1
+			path: app/Jobs/TurnOnShellyJob.php
+
+		-
+			message: "#^Parameter \\#1 \\$device of method App\\\\Services\\\\ShellyGen2Service\\:\\:turnOn\\(\\) expects App\\\\Models\\\\Device, Illuminate\\\\Database\\\\Eloquent\\\\Model given\\.$#"
+			count: 1
+			path: app/Jobs/TurnOnShellyJob.php
+
+		-
+			message: "#^Property Illuminate\\\\Mail\\\\Mailables\\\\Content\\:\\:\\$text \\(string\\|null\\) does not accept Closure\\.$#"
+			count: 1
+			path: app/Mail/ReservationCreatedMail.php
+
+		-
+			message: "#^Method App\\\\Mail\\\\ReservationQRCodeMail\\:\\:attachments\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Mail/ReservationQRCodeMail.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\ServiceAccess\\:\\:\\$user\\.$#"
+			count: 1
+			path: app/Mail/ServiceAccessCodeMail.php
+
+		-
+			message: "#^Method App\\\\Mail\\\\ServiceAccessCodeMail\\:\\:attachments\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Mail/ServiceAccessCodeMail.php
+
+		-
+			message: "#^Property App\\\\Models\\\\AccessLog\\:\\:\\$casts type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/AccessLog.php
+
+		-
+			message: "#^Class App\\\\Models\\\\AuditLog has PHPDoc tag @property for property \\$new_values with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/AuditLog.php
+
+		-
+			message: "#^Class App\\\\Models\\\\AuditLog has PHPDoc tag @property for property \\$old_values with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/AuditLog.php
+
+		-
+			message: "#^Method App\\\\Models\\\\AuditLog\\:\\:logAction\\(\\) has parameter \\$newValues with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/AuditLog.php
+
+		-
+			message: "#^Method App\\\\Models\\\\AuditLog\\:\\:logAction\\(\\) has parameter \\$oldValues with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/AuditLog.php
+
+		-
+			message: "#^Property App\\\\Models\\\\AuditLog\\:\\:\\$casts type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/AuditLog.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\BackupQRCode\\:\\:\\$reservation\\.$#"
+			count: 1
+			path: app/Models/BackupQRCode.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\Reservation\\:\\:whereDoesntHave\\(\\)\\.$#"
+			count: 1
+			path: app/Models/BackupQRCode.php
+
+		-
+			message: "#^Class App\\\\Models\\\\BackupQRCode has PHPDoc tag @property for property \\$qr_data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/BackupQRCode.php
+
+		-
+			message: "#^Method App\\\\Models\\\\BackupQRCode\\:\\:getDecodedData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/BackupQRCode.php
+
+		-
+			message: "#^Method App\\\\Models\\\\BackupQRCode\\:\\:getDecodedData\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: app/Models/BackupQRCode.php
+
+		-
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|null given\\.$#"
+			count: 1
+			path: app/Models/BackupQRCode.php
+
+		-
+			message: "#^Property App\\\\Models\\\\BackupQRCode\\:\\:\\$casts type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/BackupQRCode.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: app/Models/Device.php
+
+		-
+			message: "#^Method App\\\\Models\\\\Equipment\\:\\:getCategories\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/Equipment.php
+
+		-
+			message: "#^Method App\\\\Models\\\\Equipment\\:\\:getStatusOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/Equipment.php
+
+		-
+			message: "#^Property App\\\\Models\\\\Equipment\\:\\:\\$casts type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/Equipment.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\GlobalReader\\:\\:\\$access_minutes_after\\.$#"
+			count: 1
+			path: app/Models/GlobalReader.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\GlobalReader\\:\\:\\$access_minutes_before\\.$#"
+			count: 1
+			path: app/Models/GlobalReader.php
+
+		-
+			message: "#^Class App\\\\Models\\\\GlobalReader has PHPDoc tag @property for property \\$allowed_service_types with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/GlobalReader.php
+
+		-
+			message: "#^Class App\\\\Models\\\\GlobalReader has PHPDoc tag @property for property \\$door_lock_config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/GlobalReader.php
+
+		-
+			message: "#^Method App\\\\Models\\\\GlobalReader\\:\\:getAccessBoundaries\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/GlobalReader.php
+
+		-
+			message: "#^Method App\\\\Models\\\\GlobalReader\\:\\:getLockConfig\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/GlobalReader.php
+
+		-
+			message: "#^Method App\\\\Models\\\\GlobalReader\\:\\:testConnection\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/GlobalReader.php
+
+		-
+			message: "#^Property App\\\\Models\\\\GlobalReader\\:\\:\\$casts type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/GlobalReader.php
+
+		-
+			message: "#^Property App\\\\Models\\\\Payment\\:\\:\\$casts type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/Payment.php
+
+		-
+			message: "#^Class App\\\\Models\\\\PowerMonitoring has PHPDoc tag @property for property \\$raw_data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/PowerMonitoring.php
+
+		-
+			message: "#^Method App\\\\Models\\\\PowerMonitoring\\:\\:getByChannel\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Models/PowerMonitoring.php
+
+		-
+			message: "#^Method App\\\\Models\\\\PowerMonitoring\\:\\:getDailyEnergy\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Models/PowerMonitoring.php
+
+		-
+			message: "#^Method App\\\\Models\\\\PowerMonitoring\\:\\:getLatestByDevice\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Models/PowerMonitoring.php
+
+		-
+			message: "#^Property App\\\\Models\\\\PowerMonitoring\\:\\:\\$casts type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/PowerMonitoring.php
+
+		-
+			message: "#^Method App\\\\Models\\\\ReaderAlert\\:\\:critical\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Models/ReaderAlert.php
+
+		-
+			message: "#^Method App\\\\Models\\\\ReaderAlert\\:\\:unresolved\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Models/ReaderAlert.php
+
+		-
+			message: "#^Property App\\\\Models\\\\ReaderAlert\\:\\:\\$casts type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/ReaderAlert.php
+
+		-
+			message: "#^Method App\\\\Models\\\\Reservation\\:\\:getQRAccessWindow\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/Reservation.php
+
+		-
+			message: "#^Parameter \\#1 \\$qrData of method App\\\\Services\\\\QRCodeService\\:\\:generateQRImageFromData\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: app/Models/Reservation.php
+
+		-
+			message: "#^Parameter \\#4 \\$userId of static method App\\\\Models\\\\AuditLog\\:\\:logAction\\(\\) expects int\\|null, int\\|string\\|null given\\.$#"
+			count: 3
+			path: app/Models/Reservation.php
+
+		-
+			message: "#^Property App\\\\Models\\\\Room\\:\\:\\$casts type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/Room.php
+
+		-
+			message: "#^Class App\\\\Models\\\\RoomReader has PHPDoc tag @property for property \\$door_lock_config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/RoomReader.php
+
+		-
+			message: "#^Method App\\\\Models\\\\RoomReader\\:\\:getLockConfig\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/RoomReader.php
+
+		-
+			message: "#^Method App\\\\Models\\\\RoomReader\\:\\:testConnection\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/RoomReader.php
+
+		-
+			message: "#^Property App\\\\Models\\\\RoomReader\\:\\:\\$casts type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/RoomReader.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\Room\\:\\:whereIn\\(\\)\\.$#"
+			count: 1
+			path: app/Models/ServiceAccess.php
+
+		-
+			message: "#^Class App\\\\Models\\\\ServiceAccess has PHPDoc tag @property for property \\$allowed_rooms with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/ServiceAccess.php
+
+		-
+			message: "#^Method App\\\\Models\\\\ServiceAccess\\:\\:getAllowedRoomsWithNames\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/ServiceAccess.php
+
+		-
+			message: "#^Method App\\\\Models\\\\ServiceAccess\\:\\:getRemainingTime\\(\\) should return int\\|null but returns float\\|null\\.$#"
+			count: 1
+			path: app/Models/ServiceAccess.php
+
+		-
+			message: "#^Property App\\\\Models\\\\ServiceAccess\\:\\:\\$casts type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Models/ServiceAccess.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\User\\:\\:\\$role\\.$#"
+			count: 2
+			path: app/Models/User.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\User\\:\\:\\$id\\.$#"
+			count: 4
+			path: app/Policies/ReservationPolicy.php
+
+		-
+			message: "#^Right side of \\|\\| is always true\\.$#"
+			count: 1
+			path: app/Policies/RoomPolicy.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\GlobalReader\\:\\:\\$door_lock_type\\.$#"
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\RoomReader\\:\\:\\$door_lock_type\\.$#"
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Cannot access offset 'success' on mixed\\.$#"
+			count: 2
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\DoorLockService\\:\\:testConnection\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\DoorLockService\\:\\:unlockGlobalReader\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\DoorLockService\\:\\:unlockRoom\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\DoorLockService\\:\\:unlockViaAPI\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\DoorLockService\\:\\:unlockViaAPI\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\DoorLockService\\:\\:unlockViaAPIGlobal\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\DoorLockService\\:\\:unlockViaAPIGlobal\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\DoorLockService\\:\\:unlockViaRelay\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\DoorLockService\\:\\:unlockViaRelayGlobal\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\DoorLockService\\:\\:unlockViaWebhook\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\DoorLockService\\:\\:unlockViaWebhook\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\DoorLockService\\:\\:unlockViaWebhookGlobal\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\DoorLockService\\:\\:unlockViaWebhookGlobal\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
+			count: 2
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function strlen expects string, string\\|false given\\.$#"
+			count: 4
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Parameter \\#2 \\$data of function hash_hmac expects string, string\\|false given\\.$#"
+			count: 2
+			path: app/Services/DoorLockService.php
+
+		-
+			message: "#^Cannot access offset 'name' on mixed\\.$#"
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			message: "#^Cannot access offset int on mixed\\.$#"
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\PowerMonitoringService\\:\\:getChannelData\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\PowerMonitoringService\\:\\:getEnergyStats\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\PowerMonitoringService\\:\\:getLatestData\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\PowerMonitoringService\\:\\:getTemperatureStats\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\PowerMonitoringService\\:\\:storeChannelData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			message: "#^Using nullsafe property access \"\\?\\-\\>energy_month\" on left side of \\?\\? is unnecessary\\. Use \\-\\> instead\\.$#"
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			message: "#^Using nullsafe property access \"\\?\\-\\>energy_today\" on left side of \\?\\? is unnecessary\\. Use \\-\\> instead\\.$#"
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			message: "#^Using nullsafe property access \"\\?\\-\\>energy_total\" on left side of \\?\\? is unnecessary\\. Use \\-\\> instead\\.$#"
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			message: "#^Argument of an invalid type array\\<int, string\\>\\|false supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			message: "#^Cannot access offset 'rid' on mixed\\.$#"
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			message: "#^Cannot access offset 'room' on mixed\\.$#"
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\QRCodeService\\:\\:generateForReservation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\QRCodeService\\:\\:generateQRImage\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\QRCodeService\\:\\:getAccessWindow\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\QRCodeService\\:\\:validateQRData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			message: "#^Parameter \\#1 \\$qrData of method App\\\\Services\\\\QRCodeService\\:\\:generateQRImage\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\ReaderMonitoringService\\:\\:createAlert\\(\\) has parameter \\$metadata with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/ReaderMonitoringService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\ReaderMonitoringService\\:\\:createAlert\\(\\) has parameter \\$reader with no type specified\\.$#"
+			count: 1
+			path: app/Services/ReaderMonitoringService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\ReaderMonitoringService\\:\\:getFailureRate\\(\\) has parameter \\$reader with no type specified\\.$#"
+			count: 1
+			path: app/Services/ReaderMonitoringService.php
+
+		-
+			message: "#^Method App\\\\Services\\\\ReaderMonitoringService\\:\\:getLastAccessTime\\(\\) has parameter \\$reader with no type specified\\.$#"
+			count: 1
+			path: app/Services/ReaderMonitoringService.php
+
+		-
+			message: "#^Cannot access offset 'aenergy' on mixed\\.$#"
+			count: 2
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Cannot access offset 'current' on mixed\\.$#"
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Cannot access offset 'error' on mixed\\.$#"
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Cannot access offset 'on' on mixed\\.$#"
+			count: 3
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Cannot access offset 'output' on mixed\\.$#"
+			count: 3
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Cannot access offset 'power' on mixed\\.$#"
+			count: 2
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Cannot access offset 'voltage' on mixed\\.$#"
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Cannot access offset 'was_on' on mixed\\.$#"
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Method App\\\\Services\\\\ShellyGen2Service\\:\\:getAllSwitches\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Method App\\\\Services\\\\ShellyGen2Service\\:\\:getInfo\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Method App\\\\Services\\\\ShellyGen2Service\\:\\:getInfo\\(\\) should return array\\|null but returns mixed\\.$#"
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Method App\\\\Services\\\\ShellyGen2Service\\:\\:getPowerData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Property App\\\\Services\\\\ShellyGen2Service\\:\\:\\$authToken \\(string\\|null\\) does not accept mixed\\.$#"
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Property App\\\\Services\\\\ShellyGen2Service\\:\\:\\$authToken is never read, only written\\.$#"
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Property App\\\\Services\\\\ShellyGen2Service\\:\\:\\$baseUrl \\(string\\) does not accept mixed\\.$#"
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Property App\\\\Services\\\\ShellyGen2Service\\:\\:\\$baseUrl is never read, only written\\.$#"
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\Reservation\\:\\:inRandomOrder\\(\\)\\.$#"
+			count: 1
+			path: database/factories/PaymentFactory.php
+
+		-
+			message: "#^Class Database\\\\Factories\\\\PaymentFactory extends generic class Illuminate\\\\Database\\\\Eloquent\\\\Factories\\\\Factory but does not specify its types\\: TModel$#"
+			count: 1
+			path: database/factories/PaymentFactory.php
+
+		-
+			message: "#^Using nullsafe property access \"\\?\\-\\>price\" on left side of \\?\\? is unnecessary\\. Use \\-\\> instead\\.$#"
+			count: 1
+			path: database/factories/PaymentFactory.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Schema\\\\IndexDefinition\\:\\:comment\\(\\)\\.$#"
+			count: 1
+			path: database/migrations/2025_01_01_000005_create_room_readers_table.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Schema\\\\Blueprint\\:\\:dropForeignKey\\(\\)\\.$#"
+			count: 1
+			path: database/migrations/2025_01_01_000007_add_room_relationship_to_devices.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Schema\\\\Blueprint\\:\\:dropForeignKey\\(\\)\\.$#"
+			count: 1
+			path: database/migrations/2025_01_01_000009_enhance_access_logs_for_qr_system.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\User\\:\\:\\$id\\.$#"
+			count: 1
+			path: database/seeders/AccessLogSeeder.php
+
+		-
+			message: "#^Cannot access property \\$id on App\\\\Models\\\\Reservation\\|null\\.$#"
+			count: 1
+			path: database/seeders/AccessLogSeeder.php
+
+		-
+			message: "#^Cannot access property \\$id on App\\\\Models\\\\User\\|null\\.$#"
+			count: 2
+			path: database/seeders/AccessLogSeeder.php
+
+		-
+			message: "#^Cannot access property \\$room_id on App\\\\Models\\\\Reservation\\|null\\.$#"
+			count: 1
+			path: database/seeders/AccessLogSeeder.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\User\\:\\:\\$id\\.$#"
+			count: 5
+			path: database/seeders/AuditLogSeeder.php
+
+		-
+			message: "#^Using nullsafe property access \"\\?\\-\\>id\" on left side of \\?\\? is unnecessary\\. Use \\-\\> instead\\.$#"
+			count: 1
+			path: database/seeders/AuditLogSeeder.php
+
+		-
+			message: "#^Cannot access property \\$id on App\\\\Models\\\\Reservation\\|null\\.$#"
+			count: 2
+			path: database/seeders/BackupQRCodeSeeder.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\Device\\:\\:firstOrCreate\\(\\)\\.$#"
+			count: 4
+			path: database/seeders/DeviceSeeder.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\Room\\:\\:firstOrCreate\\(\\)\\.$#"
+			count: 2
+			path: database/seeders/DeviceSeeder.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\Reservation\\:\\:\\$price\\.$#"
+			count: 1
+			path: database/seeders/PaymentsSeeder.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Models\\\\Room\\:\\:\\$reservation_default_price\\.$#"
+			count: 1
+			path: database/seeders/PaymentsSeeder.php
+
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\Reservation\\:\\:inRandomOrder\\(\\)\\.$#"
+			count: 1
+			path: database/seeders/PaymentsSeeder.php
+
+		-
+			message: "#^Cannot access property \\$id on App\\\\Models\\\\GlobalReader\\|null\\.$#"
+			count: 1
+			path: database/seeders/ReaderAlertSeeder.php
+
+		-
+			message: "#^Cannot access property \\$id on App\\\\Models\\\\RoomReader\\|null\\.$#"
+			count: 1
+			path: database/seeders/ReaderAlertSeeder.php
+
+		-
+			message: "#^Cannot call method withoutMiddleware\\(\\) on array\\|Illuminate\\\\Routing\\\\Route\\.$#"
+			count: 1
+			path: routes/api/v1.php

@@ -14,7 +14,7 @@ class RoomUsageChart extends ChartWidget
     protected function getData(): array
     {
         $rooms = Room::withCount([
-                'reservations' => fn($query) => $query->where('start_at', '>=', now()->subDays(30)->toDateString())
+                'reservations' => fn($query) => $query->where('start_at', '>=', now()->subDays(30))
             ])
             ->orderByDesc('reservations_count')
             ->limit(10)

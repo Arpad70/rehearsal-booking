@@ -90,9 +90,10 @@ class EquipmentRelationManager extends RelationManager
                     ->label('Nainstalováno')
                     ->boolean(),
 
-                Tables\Columns\BadgeColumn::make('pivot.status')
+                Tables\Columns\TextColumn::make('pivot.status')
                     ->label('Stav')
                     ->formatStateUsing(fn($state) => Equipment::getStatusOptions()[$state] ?? $state)
+                    ->badge()
                     ->colors([
                         'success' => 'operational',
                         'warning' => 'needs_repair',
