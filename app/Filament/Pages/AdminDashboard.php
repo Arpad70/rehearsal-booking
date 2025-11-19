@@ -33,8 +33,14 @@ class AdminDashboard extends Page implements HasTable
     public function getWidgets(): array
     {
         return [
+            \App\Filament\Widgets\ReaderAlertsWidget::class,
+            \App\Filament\Widgets\AccessStatsOverview::class,
+            \App\Filament\Widgets\MonthlyRevenue::class,
+            \App\Filament\Widgets\NewUsersThisMonth::class,
             \App\Filament\Widgets\PowerMonitoringStats::class,
             \App\Filament\Widgets\PowerConsumptionChart::class,
+            \App\Filament\Widgets\RoomUsageChart::class,
+            \App\Filament\Widgets\AccessTrendChart::class,
         ];
     }
 
