@@ -17,15 +17,11 @@ class QRCodeService
     /**
      * Generate QR code for reservation
      */
-    public function generateForReservation(Reservation $reservation): array
+    public function generateForReservation(Reservation $reservation): ?string
     {
         // Check if already generated
         if ($reservation->qr_code && $reservation->qr_generated_at) {
-            return [
-                'success' => true,
-                'qr_code' => $reservation->qr_code,
-                'message' => 'QR code already generated',
-            ];
+            return $reservation->qr_code;
         }
 
         // Prepare QR data - compact JSON with essential info
@@ -42,10 +38,7 @@ class QRCodeService
         $qrPath = $this->generateQRImage($qrData, $reservation->id);
 
         if (!$qrPath) {
-            return [
-                'success' => false,
-                'message' => 'Failed to generate QR code image',
-            ];
+            return null;
         }
 
         // Update reservation
@@ -54,11 +47,7 @@ class QRCodeService
             'qr_generated_at' => now(),
         ]);
 
-        return [
-            'success' => true,
-            'qr_code' => $qrPath,
-            'message' => 'QR code generated successfully',
-        ];
+        return $qrPath;
     }
 
     /**
