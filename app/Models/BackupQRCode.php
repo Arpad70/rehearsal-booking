@@ -102,13 +102,19 @@ class BackupQRCode extends Model
      */
     public static function exportAsZip(): string
     {
+        $backups = self::with('reservation')->get();
+        
+        if ($backups->isEmpty()) {
+            throw new \Exception('Nejsou k dispozici žádné QR kódy k exportu. Nejprve vygenerujte zálohy.');
+        }
+
         $zip = new \ZipArchive();
         $timestamp = date('Y-m-d_H-i-s');
         $filename = "backup_qr_codes_{$timestamp}.zip";
         $zipPath = storage_path("app/{$filename}");
 
         if ($zip->open($zipPath, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) === true) {
-            $backups = self::with('reservation')->get();
+            $addedCount = 0;
 
             foreach ($backups as $backup) {
                 if (!$backup->qr_code) {
@@ -120,10 +126,16 @@ class BackupQRCode extends Model
                 if (file_exists($filePath)) {
                     $qrFilename = "backup_qr_{$backup->id}_{$backup->sequence_number}.png";
                     $zip->addFile($filePath, $qrFilename);
+                    $addedCount++;
                 }
             }
 
             $zip->close();
+
+            if ($addedCount === 0) {
+                unlink($zipPath);
+                throw new \Exception('Žádné QR kódy nebyly přidány do archivu. Zkontrolujte, zda soubory existují.');
+            }
         }
 
         return $filename;
