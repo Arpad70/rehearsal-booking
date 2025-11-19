@@ -68,8 +68,14 @@ class Reservation extends Model
             $oldValues = $res->getOriginal();
             $newValues = $res->getAttributes();
             
-            // Only log if something actually changed
-            $changes = array_diff_assoc($newValues, $oldValues);
+            // Only log if something actually changed. Use JSON compare to handle nested arrays safely.
+            $changes = [];
+            foreach ($newValues as $k => $v) {
+                $old = $oldValues[$k] ?? null;
+                if (json_encode($v) !== json_encode($old)) {
+                    $changes[$k] = $v;
+                }
+            }
             if (!empty($changes)) {
                 AuditLog::logAction(
                     'updated',
