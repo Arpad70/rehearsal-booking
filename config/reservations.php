@@ -11,7 +11,7 @@ return [
     */
 
     // Minimum duration for a reservation in minutes
-    'min_duration_minutes' => 15,
+    'min_duration_minutes' => 60,
 
     // How many minutes before reservation start should token become valid
     'token_valid_before_minutes' => 5,

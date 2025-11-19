@@ -59,7 +59,6 @@ class ReservationController extends BaseController
     {  
         /** @var array{room_id: int, start_at: string, end_at: string} */
         $data = $req->validated();
-        \Illuminate\Support\Facades\Log::info('ReservationController::store called', ['data' => $data, 'user' => Auth::user()?->email]);
         
         try {
             $reservation = DB::transaction(function () use ($data) {
@@ -97,11 +96,7 @@ class ReservationController extends BaseController
                 return $reservation;
             });
 
-            \Illuminate\Support\Facades\Log::info('ReservationController: reservation created in store', ['reservation_id' => $reservation->id]);
-
-            \Illuminate\Support\Facades\Log::info('ReservationController: sending ReservationCreatedMail', ['user' => Auth::user()->email, 'reservation_id' => $reservation->id]);
-            Mail::to(Auth::user()->email)->send(new ReservationCreatedMail($reservation));  
-            \Illuminate\Support\Facades\Log::info('ReservationController: sent ReservationCreatedMail', ['user' => Auth::user()->email, 'reservation_id' => $reservation->id]);
+            Mail::to(Auth::user()->email)->send(new ReservationCreatedMail($reservation));
 
             // Dispatch jobs using the Dispatchable trait so PHPStan can infer types
             TurnOnShellyJob::dispatch($reservation)->delay(
@@ -117,7 +112,6 @@ class ReservationController extends BaseController
             
             return redirect()->route('reservations.show', $reservation->id);
         } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Log::error('ReservationController::store failed', ['exception' => $e->getMessage()]);
             return back()->withErrors(['slot' => $e->getMessage()])->withInput();
         }
     }  

@@ -35,7 +35,8 @@ class CreateReservationRequest extends FormRequest
                     // Calculate minutes between start and end
                     $startTime = \Carbon\Carbon::parse($this->start_at);
                     $endTime = \Carbon\Carbon::parse($value);
-                    $diffMinutes = $endTime->diffInMinutes($startTime);
+                    // Use signed diff to ensure proper calculation (negative if end is before start)
+                    $diffMinutes = $startTime->diffInMinutes($endTime, false);
                     
                     if ($diffMinutes < $minDuration) {
                         $fail("Minimální délka rezervace je $minDuration minut.");
