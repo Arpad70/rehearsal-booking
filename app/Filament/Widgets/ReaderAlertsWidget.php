@@ -5,7 +5,6 @@ namespace App\Filament\Widgets;
 use App\Models\ReaderAlert;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\Action;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -26,8 +25,9 @@ class ReaderAlertsWidget extends BaseWidget
                     ->limit(10)
             )
             ->columns([
-                BadgeColumn::make('severity')
+                TextColumn::make('severity')
                     ->label('Závažnost')
+                    ->badge()
                     ->colors([
                         'danger' => 'critical',
                         'warning' => 'warning',

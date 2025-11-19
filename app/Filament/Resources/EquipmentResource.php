@@ -10,7 +10,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BadgeColumn;
 
 class EquipmentResource extends Resource
 {
@@ -120,9 +119,10 @@ class EquipmentResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                BadgeColumn::make('category')
+                TextColumn::make('category')
                     ->label('Kategorie')
                     ->formatStateUsing(fn(string $state): string => Equipment::getCategories()[$state] ?? $state)
+                    ->badge()
                     ->color(fn(string $state): string => match ($state) {
                         'audio' => 'info',
                         'video' => 'warning',

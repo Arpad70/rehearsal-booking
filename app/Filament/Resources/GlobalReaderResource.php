@@ -11,7 +11,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
@@ -134,8 +133,9 @@ class GlobalReaderResource extends Resource
                     ->sortable()
                     ->weight('bold'),
 
-                BadgeColumn::make('access_type')
+                TextColumn::make('access_type')
                     ->label('Type')
+                    ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'entrance' => 'success',
                         'service' => 'warning',

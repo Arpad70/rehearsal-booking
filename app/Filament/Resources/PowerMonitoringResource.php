@@ -10,7 +10,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Filters\SelectFilter;
 use App\Models\Device;
@@ -177,7 +176,8 @@ class PowerMonitoringResource extends Resource
                     ->sortable()
                     ->alignment('center'),
                 
-                BadgeColumn::make('status')
+                TextColumn::make('status')
+                    ->badge()
                     ->formatStateUsing(fn($state) => ucfirst($state))
                     ->colors([
                         'success' => 'normal',
