@@ -43,6 +43,16 @@ class AuditLog extends Model
         ?array $oldValues = null,
         ?array $newValues = null,
     ): self {
+        $ip = request()->ip();
+        if (!is_string($ip) && $ip !== null) {
+            $ip = json_encode($ip);
+        }
+
+        $ua = request()->userAgent();
+        if (!is_string($ua) && $ua !== null) {
+            $ua = json_encode($ua);
+        }
+
         return static::create([
             'action' => $action,
             'model_type' => $modelType,
@@ -50,8 +60,8 @@ class AuditLog extends Model
             'user_id' => $userId,
             'old_values' => $oldValues,
             'new_values' => $newValues,
-            'ip_address' => request()->ip(),
-            'user_agent' => request()->userAgent(),
+            'ip_address' => $ip,
+            'user_agent' => $ua,
         ]);
     }
 }
