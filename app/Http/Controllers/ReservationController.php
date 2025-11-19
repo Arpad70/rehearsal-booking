@@ -14,6 +14,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends BaseController 
 {
@@ -32,7 +33,7 @@ class ReservationController extends BaseController
     public function index(): \Illuminate\View\View 
     {  
         /** @var \App\Models\User $user */
-        $user = auth()->user();
+        $user = Auth::user();
         $reservations = $user->reservations()->with('room')->orderBy('start_at')->get();  
         return view('reservations.index', compact('reservations'));  
     }  
@@ -74,7 +75,7 @@ class ReservationController extends BaseController
                 }  
 
                 /** @var \App\Models\User $user */
-                $user = auth()->user();
+                $user = Auth::user();
                 
                 $reservation = Reservation::create([  
                     'user_id' => $user->getKey(),  
@@ -95,7 +96,7 @@ class ReservationController extends BaseController
                 return $reservation;
             });
 
-            Mail::to(auth()->user()->email)->send(new ReservationCreatedMail($reservation));  
+            Mail::to(Auth::user()->email)->send(new ReservationCreatedMail($reservation));  
 
             // Dispatch jobs using the Dispatchable trait so PHPStan can infer types
             TurnOnShellyJob::dispatch($reservation)->delay(

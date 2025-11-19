@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;  
 use App\Http\Controllers\DeviceController;  
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -16,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     /** @var \App\Models\User $user */
-    $user = auth()->user();
+    $user = Auth::user();
     $reservations = $user->reservations()
         ->with('room')
         ->where('end_at', '>', now())

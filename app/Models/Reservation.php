@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Database\Factories\ReservationFactory;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property int $id
@@ -56,7 +57,7 @@ class Reservation extends Model
                 'created',
                 self::class,
                 $res->id,
-                auth()->id(),
+                Auth::id(),
                 null,
                 $res->getAttributes()
             );
@@ -74,7 +75,7 @@ class Reservation extends Model
                     'updated',
                     self::class,
                     $res->id,
-                    auth()->id(),
+                    Auth::id(),
                     $oldValues,
                     $newValues
                 );
@@ -87,7 +88,7 @@ class Reservation extends Model
                 'deleted',
                 self::class,
                 $res->id,
-                auth()->id(),
+                Auth::id(),
                 $res->getAttributes(),
                 null
             );
