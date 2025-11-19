@@ -111,8 +111,16 @@ class BackupQRCode extends Model
             $backups = self::with('reservation')->get();
 
             foreach ($backups as $backup) {
-                $qrFilename = "backup_qr_{$backup->id}_{$backup->sequence_number}.png";
-                $zip->addFromString($qrFilename, $backup->qr_code);
+                if (!$backup->qr_code) {
+                    continue;
+                }
+
+                // Read QR code file content
+                $filePath = public_path($backup->qr_code);
+                if (file_exists($filePath)) {
+                    $qrFilename = "backup_qr_{$backup->id}_{$backup->sequence_number}.png";
+                    $zip->addFile($filePath, $qrFilename);
+                }
             }
 
             $zip->close();
