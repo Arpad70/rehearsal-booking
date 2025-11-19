@@ -17,6 +17,7 @@ class ReservationMailIntegrationTest extends TestCase
     public function test_reservation_mail_sent_with_qr_attachment()
     {
         Mail::fake();
+        \Illuminate\Support\Facades\Log::info('Test: Mail facade root', ['class' => is_object(Mail::getFacadeRoot()) ? get_class(Mail::getFacadeRoot()) : null]);
 
         $user = User::factory()->create();
         $room = Room::factory()->create();
@@ -32,9 +33,22 @@ class ReservationMailIntegrationTest extends TestCase
             'end_at' => $end,
         ]);
 
+        \Illuminate\Support\Facades\Log::info('Test: response status', ['status' => $response->status()]);
+        \Illuminate\Support\Facades\Log::info('Test: session errors', ['errors' => $response->original?->getSession()?->get('errors')?->all() ?? null]);
         $response->assertRedirect();
 
-        Mail::assertSent(ReservationCreatedMail::class, function ($mail) use ($user) {
+            // Debug: inspect MailFake internal mailables array
+            try {
+                $fake = Mail::getFacadeRoot();
+                $ref = new \ReflectionClass($fake);
+                $prop = $ref->getProperty('mailables');
+                $prop->setAccessible(true);
+                \Illuminate\Support\Facades\Log::info('Test: internal mailables count', ['count' => count($prop->getValue($fake))]);
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::error('Test: failed to inspect MailFake', ['err' => $e->getMessage()]);
+            }
+
+            Mail::assertSent(ReservationCreatedMail::class, function ($mail) use ($user) {
             // Ensure mail is addressed to the correct user
             $this->assertTrue($mail->hasTo($user->email));
 

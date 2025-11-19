@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;  
 use App\Models\Reservation;  
 use App\Models\AccessLog;  
+use Illuminate\Support\Facades\Log;
 
 class AccessController extends Controller 
 {  
@@ -30,6 +31,7 @@ class AccessController extends Controller
                 'result' => 'invalid_token_format',
                 'ip' => $r->ip()
             ]);  
+            Log::info('Access validation failed: invalid_token_format', ['token' => $token, 'room' => $roomId]);
             return response()->json(['allowed' => false, 'reason' => 'invalid_token'], 403);  
         }
 
@@ -47,6 +49,7 @@ class AccessController extends Controller
                 'result' => 'invalid_token',
                 'ip' => $r->ip()
             ]);  
+            Log::info('Access validation failed: reservation not found', ['token' => $token, 'room' => $roomId]);
             return response()->json(['allowed' => false, 'reason' => 'invalid_token'], 403);  
         }  
 
@@ -59,6 +62,8 @@ class AccessController extends Controller
                 'result' => 'expired_or_outside_window',
                 'ip' => $r->ip()
             ]);  
+            $details = ['reservation_id' => $reservation->id, 'now' => now()->toDateTimeString(), 'valid_from' => $reservation->token_valid_from?->toDateTimeString(), 'expires_at' => $reservation->token_expires_at?->toDateTimeString()];
+            Log::info('Access validation failed: token not valid (expired or outside window)', $details);
             return response()->json(['allowed' => false, 'reason' => 'expired_or_outside_window'], 403);  
         }  
 

@@ -38,13 +38,18 @@ class SendReservationQRCodeEmail implements ShouldQueue
                 ]);
             }
 
-            // Odeslat email
-            Mail::send(
-                new ReservationQRCodeMail(
-                    $this->reservation,
-                    $this->reservation->qr_code,
-                )
-            );
+            // Odeslat email pouze pokud máme příjemce
+            $recipient = $this->reservation->user->email ?? $this->reservation->email ?? null;
+            if ($recipient) {
+                Mail::to($recipient)->send(
+                    new ReservationQRCodeMail(
+                        $this->reservation,
+                        $this->reservation->qr_code,
+                    )
+                );
+            } else {
+                Log::warning("No email recipient for reservation {$this->reservation->id}, skipping send");
+            }
 
             // Zaznamenat čas odeslání
             $this->reservation->update(['qr_sent_at' => now()]);
