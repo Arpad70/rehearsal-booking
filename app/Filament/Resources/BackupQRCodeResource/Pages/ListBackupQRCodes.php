@@ -54,8 +54,6 @@ class ListBackupQRCodes extends ListRecords
                             ->send();
                     }
                 }),
-
-            Actions\CreateAction::make(),
         ];
     }
 
