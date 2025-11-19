@@ -1,84 +1,82 @@
-<?php  
-namespace App\Jobs;  
-use Illuminate\Bus\Queueable;  
-use Illuminate\Contracts\Queue\ShouldQueue;  
-use Illuminate\Queue\InteractsWithQueue;  
-use Illuminate\Queue\SerializesModels;  
-use Illuminate\Foundation\Bus\Dispatchable;  
-use Illuminate\Support\Facades\Http;  
-use Illuminate\Support\Facades\Log;  
-use Illuminate\Support\Facades\Mail;  
-use App\Models\Reservation;  
-use Throwable;  
+<?php
+namespace App\Jobs;
 
-class TurnOnShellyJob implements ShouldQueue {  
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;  
-    
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Reservation;
+use App\Services\ShellyGen2Service;
+use Throwable;
+
+class TurnOnShellyJob implements ShouldQueue
+{
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
     public int $tries = 3;
     public int $backoff = 60;
-    
-    public function __construct(public Reservation $reservation) {}  
-    
-    public function handle(): void {  
+
+    public function __construct(public Reservation $reservation) {}
+
+    public function handle(): void
+    {
         $reservation = $this->reservation;
-        $room = $reservation->room;  
-        
+        $room = $reservation->room;
+
         if (!$room) {
             Log::warning('TurnOnShellyJob: Reservation has no associated room', [
                 'reservation_id' => $reservation->id,
                 'room_id' => $reservation->room_id,
             ]);
-            return;  
+            return;
         }
-        
-        if (!$room->shelly_ip) {
-            Log::warning('TurnOnShellyJob: Room has no Shelly IP configured', [
+
+        // Get device associated with room
+        $device = $room->devices()->where('type', 'shelly')->first();
+
+        if (!$device) {
+            Log::warning('TurnOnShellyJob: Room has no Shelly device configured', [
                 'reservation_id' => $reservation->id,
                 'room_id' => $room->id,
             ]);
-            return;  
+            return;
         }
-        
-        /** @var ?string */
-        $gateway = config('services.shelly.gateway_url');  
-        
-        if (!$gateway) {
-            Log::warning('TurnOnShellyJob: No Shelly gateway URL configured', [
-                'reservation_id' => $reservation->id,
-            ]);
-            return;  
-        }
-        
-        try {  
-            $response = Http::timeout(5)->post($gateway, [  
-                'action' => 'turn_on',  
-                'room_id' => $room->id,  
-                'reservation_id' => $reservation->id,  
-            ]);  
-            
-            if ($response->successful()) {
-                Log::info('TurnOnShellyJob: Successfully sent turn_on request', [
+
+        try {
+            $shellyService = new ShellyGen2Service();
+
+            // Check if device is reachable
+            if (!$shellyService->isReachable($device)) {
+                throw new \Exception('Shelly device is not reachable at ' . $device->ip);
+            }
+
+            // Get channel from device metadata
+            $channel = $device->meta['channel'] ?? 0;
+
+            // Turn on the relay
+            if ($shellyService->turnOn($device, $channel)) {
+                Log::info('TurnOnShellyJob: Successfully turned on relay', [
                     'reservation_id' => $reservation->id,
                     'room_id' => $room->id,
+                    'device_ip' => $device->ip,
+                    'channel' => $channel,
                 ]);
             } else {
-                Log::warning('TurnOnShellyJob: Gateway returned error status', [
-                    'reservation_id' => $reservation->id,
-                    'room_id' => $room->id,
-                    'status' => $response->status(),
-                ]);
-                throw new \Exception('Gateway returned status ' . $response->status());
+                throw new \Exception('Failed to turn on relay');
             }
-        } catch (Throwable $e) {  
+        } catch (Throwable $e) {
             Log::error('TurnOnShellyJob error: ' . $e->getMessage(), [
                 'reservation_id' => $reservation->id,
                 'room_id' => $room->id,
                 'exception' => $e,
             ]);
             throw $e;
-        }  
+        }
     }
-    
+
     public function failed(Throwable $exception): void
     {
         $reservationId = $this->reservation->id;

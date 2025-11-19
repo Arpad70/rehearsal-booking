@@ -35,7 +35,10 @@ return [
         ],
     ],
 
-    'shelly' => [  
-        'gateway_url' => env('SHELLY_GATEWAY_URL', null),  
-    ],  
+    'shelly' => [
+        'gateway_url' => env('SHELLY_GATEWAY_URL'),
+        'auth_token' => env('SHELLY_AUTH_TOKEN'),
+        'timeout' => 10,
+        'retries' => 3,
+    ],
 ];
