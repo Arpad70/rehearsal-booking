@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -37,5 +38,12 @@ class Room extends Model
     public function readers(): HasMany
     {
         return $this->hasMany(RoomReader::class);
+    }
+
+    public function equipment(): BelongsToMany
+    {
+        return $this->belongsToMany(Equipment::class, 'room_equipment')
+            ->withPivot('quantity', 'installed', 'condition_notes', 'last_inspection', 'status')
+            ->withTimestamps();
     }
 }
