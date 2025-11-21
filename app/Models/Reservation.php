@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Auth;
 class Reservation extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id','room_id','start_at','end_at','status','access_token','token_valid_from','token_expires_at','used_at','qr_code','qr_generated_at','qr_sent_at','price'];  
+    protected $fillable = ['user_id','room_id','start_at','end_at','status','access_token','token_valid_from','token_expires_at','used_at','qr_code','qr_generated_at','qr_sent_at','price','guest_name','guest_email','guest_phone'];  
     
     /**
      * Get the attributes that should be cast.

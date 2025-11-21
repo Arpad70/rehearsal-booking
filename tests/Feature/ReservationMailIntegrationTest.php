@@ -9,6 +9,7 @@ use App\Mail\ReservationCreatedMail;
 use App\Models\User;
 use App\Models\Room;
 use Carbon\Carbon;
+use PHPUnit\Framework\Attributes\Test;
 
 class ReservationMailIntegrationTest extends TestCase
 {

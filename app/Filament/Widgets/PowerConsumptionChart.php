@@ -11,9 +11,16 @@ class PowerConsumptionChart extends ChartWidget
 {
     protected static ?string $heading = 'Current Power Consumption';
     
-    protected static ?int $sort = 4;
+    protected static ?int $sort = 1;
 
-    protected int | string | array $columnSpan = 6;
+    protected int | string | array $columnSpan = [
+        'default' => 'full',
+        'sm' => 2,
+        'md' => 2,
+        'lg' => 2,
+        'xl' => 3,
+        '2xl' => 3,
+    ];
 
     public function getDescription(): ?string
     {

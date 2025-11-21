@@ -1,0 +1,96 @@
+name: Deploy to Railway
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+env:
+  # Device Integration Configuration
+  QR_READER_BASE_PORT: 9101
+  KEYPAD_BASE_PORT: 9401
+  CAMERA_BASE_PORT: 9201
+  SHELLY_BASE_PORT: 9501
+  MIXER_BASE_PORT: 9301
+  
+  # Power Monitoring
+  ELECTRICITY_PRICE_PER_KWH: 5.5
+  
+  # Access Control
+  ACCESS_CONTROL_TIME_BUFFER_MINUTES: 15
+  ACCESS_CONTROL_AUTO_UNLOCK_DURATION: 5000
+  
+  # Camera Configuration
+  CAMERA_RTSP_ENABLED: true
+  CAMERA_AUTO_START_RECORDING: true
+  CAMERA_MOTION_DETECTION_ENABLED: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_mysql, mbstring, exif, pcntl, bcmath, gd, zip, redis
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Build frontend assets
+        run: npm run build
+
+      # Note: Before using this workflow, add these secrets in GitHub repository settings:
+      # - RAILWAY_TOKEN: Get from Railway.app account settings
+      # - RAILWAY_SERVICE_ID: Get from Railway project service settings
+      # - SIMULATOR_HOST: Simulator network host (e.g., simulator-network-gateway or public IP)
+      - name: Deploy to Railway
+        uses: bervProject/railway-deploy@main
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          SIMULATOR_HOST: ${{ secrets.SIMULATOR_HOST }}
+        with:
+          service: ${{ secrets.RAILWAY_SERVICE_ID }}
+          
+      - name: Run post-deployment commands
+        run: |
+          echo "🚀 Running post-deployment optimization..."
+          railway run php artisan migrate --force || echo "⚠️  Migrations may have already run"
+          railway run php artisan config:cache
+          railway run php artisan route:cache
+          railway run php artisan view:cache
+          railway run php artisan filament:optimize
+          railway run php artisan queue:restart || true
+          
+      - name: Deployment summary
+        if: success()
+        run: |
+          echo "✅ Deployment successful to Railway"
+          echo ""
+          echo "📡 Device Integration Configured:"
+          echo "  - QR Readers: ports ${QR_READER_BASE_PORT}-$((${QR_READER_BASE_PORT} + 9))"
+          echo "  - Keypads: ports ${KEYPAD_BASE_PORT}-$((${KEYPAD_BASE_PORT} + 9))"
+          echo "  - Cameras: ports ${CAMERA_BASE_PORT}-$((${CAMERA_BASE_PORT} + 9))"
+          echo "  - Shelly: ports ${SHELLY_BASE_PORT}-$((${SHELLY_BASE_PORT} + 5))"
+          echo "  - Mixers: ports ${MIXER_BASE_PORT}-$((${MIXER_BASE_PORT} + 1))"
+          echo ""
+          echo "⚡ Power Monitoring: ${ELECTRICITY_PRICE_PER_KWH} Kč/kWh"
+          echo "🔐 Access Control: ${ACCESS_CONTROL_TIME_BUFFER_MINUTES} min buffer"
+          
+      - name: Deployment failed
+        if: failure()
+        run: echo "❌ Deployment failed - check Railway logs"

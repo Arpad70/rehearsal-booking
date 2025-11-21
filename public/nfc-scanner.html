@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>NFC Scanner - Zkušebny</title>
+    <link rel="manifest" href="/nfc-manifest.json">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .scan-button {
+            width: 100%;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .scan-button:active {
+            transform: scale(0.98);
+        }
+
+        .scan-button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .status {
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .status.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 4px solid #10b981;
+        }
+
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-left: 4px solid #ef4444;
+        }
+
+        .status.warning {
+            background: #fef3c7;
+            color: #92400e;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .equipment-info {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .equipment-info h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #1f2937;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .info-value {
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .history {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .history-item .time {
+            color: #6b7280;
+            font-size: 11px;
+        }
+
+        .history-item .tag {
+            color: #1f2937;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .offline-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ef4444;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .nfc-icon {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <svg class="nfc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9v6m6-6v6m6-6v6M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/>
+                </svg>
+                NFC Scanner
+            </h1>
+            <p>Přiložte NFC tag k zadní straně telefonu</p>
+        </div>
+
+        <div class="card">
+            <button id="scanBtn" class="scan-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
+                </svg>
+                Spustit skenování
+            </button>
+
+            <div id="status" class="status"></div>
+
+            <div id="equipmentInfo" class="equipment-info">
+                <h3>📦 Informace o vybavení</h3>
+                <div id="equipmentDetails"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="margin-bottom: 15px;">📋 Historie skenování</h3>
+            <div id="history" class="history">
+                <p style="text-align: center; color: #9ca3af; padding: 20px;">
+                    Zatím žádné skeny
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="offlineIndicator" class="offline-indicator">
+        📡 Offline režim
+    </div>
+
+    <script>
+        const API_BASE = '/api/v1/rfid';
+        let isScanning = false;
+        let scanHistory = JSON.parse(localStorage.getItem('nfc_scan_history') || '[]');
+
+        const scanBtn = document.getElementById('scanBtn');
+        const statusDiv = document.getElementById('status');
+        const equipmentInfo = document.getElementById('equipmentInfo');
+        const equipmentDetails = document.getElementById('equipmentDetails');
+        const historyDiv = document.getElementById('history');
+        const offlineIndicator = document.getElementById('offlineIndicator');
+
+        // Kontrola podpory Web NFC
+        if (!('NDEFReader' in window)) {
+            showStatus('error', '⚠️ Web NFC není podporováno v tomto prohlížeči. Použijte Chrome na Androidu.');
+            scanBtn.disabled = true;
+        }
+
+        // Načtení historie při startu
+        renderHistory();
+
+        // Online/Offline detekce
+        window.addEventListener('online', () => {
+            offlineIndicator.style.display = 'none';
+        });
+
+        window.addEventListener('offline', () => {
+            offlineIndicator.style.display = 'block';
+        });
+
+        scanBtn.addEventListener('click', async () => {
+            if (isScanning) {
+                stopScanning();
+                return;
+            }
+
+            try {
+                isScanning = true;
+                scanBtn.innerHTML = '<div class="spinner"></div> Skenování aktivní...';
+                scanBtn.style.background = '#10b981';
+                showStatus('info', '📱 Přiložte NFC tag k zadní straně telefonu');
+
+                const ndef = new NDEFReader();
+                await ndef.scan();
+
+                ndef.addEventListener('reading', async ({ message, serialNumber }) => {
+                    const tagId = serialNumber || extractTagId(message);
+                    
+                    if (tagId) {
+                        await handleNFCTag(tagId);
+                    } else {
+                        showStatus('warning', '⚠️ Nepodařilo se načíst ID tagu');
+                    }
+                });
+
+                ndef.addEventListener('readingerror', () => {
+                    showStatus('error', '❌ Chyba čtení NFC tagu. Zkuste znovu.');
+                });
+
+            } catch (error) {
+                console.error('NFC Error:', error);
+                showStatus('error', `❌ Chyba: ${error.message}`);
+                stopScanning();
+            }
+        });
+
+        function extractTagId(message) {
+            for (const record of message.records) {
+                if (record.recordType === 'text') {
+                    const textDecoder = new TextDecoder(record.encoding || 'utf-8');
+                    return textDecoder.decode(record.data);
+                }
+            }
+            return null;
+        }
+
+        async function handleNFCTag(tagId) {
+            showStatus('info', `🔍 Načítám informace o tagu: ${tagId}`);
+            
+            // Přidání do historie
+            addToHistory(tagId);
+
+            try {
+                const response = await fetch(`${API_BASE}/read`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        tag_id: tagId,
+                        tag_type: 'nfc'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.equipment) {
+                    showEquipmentInfo(data.equipment, tagId);
+                    showStatus('success', `✅ Vybavení nalezeno: ${data.equipment.name}`);
+                    
+                    // Vibrace pro feedback
+                    if (navigator.vibrate) {
+                        navigator.vibrate(200);
+                    }
+                } else {
+                    showStatus('warning', `⚠️ Tag ${tagId} není přiřazen žádnému vybavení`);
+                    equipmentInfo.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('API Error:', error);
+                
+                // Offline režim
+                if (!navigator.onLine) {
+                    showStatus('warning', `📡 Offline: Tag ${tagId} uložen do fronty`);
+                    saveOfflineTag(tagId);
+                } else {
+                    showStatus('error', `❌ Chyba komunikace s API: ${error.message}`);
+                }
+            }
+        }
+
+        function showEquipmentInfo(equipment, tagId) {
+            equipmentDetails.innerHTML = `
+                <div class="info-row">
+                    <span class="info-label">Název:</span>
+                    <span class="info-value">${equipment.name}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Kategorie:</span>
+                    <span class="info-value">${equipment.category?.name || 'N/A'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Stav:</span>
+                    <span class="info-value">${getStatusLabel(equipment.status)}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">NFC Tag:</span>
+                    <span class="info-value">${tagId}</span>
+                </div>
+                ${equipment.model ? `
+                <div class="info-row">
+                    <span class="info-label">Model:</span>
+                    <span class="info-value">${equipment.model}</span>
+                </div>
+                ` : ''}
+                ${equipment.location ? `
+                <div class="info-row">
+                    <span class="info-label">Umístění:</span>
+                    <span class="info-value">${equipment.location}</span>
+                </div>
+                ` : ''}
+            `;
+            equipmentInfo.style.display = 'block';
+        }
+
+        function getStatusLabel(status) {
+            const labels = {
+                'available': '✅ Dostupné',
+                'in_use': '🔵 Používané',
+                'maintenance': '🛠️ Údržba',
+                'repair': '🔧 V opravě',
+                'retired': '❌ Vyřazeno'
+            };
+            return labels[status] || status;
+        }
+
+        function addToHistory(tagId) {
+            const entry = {
+                tagId,
+                timestamp: new Date().toISOString(),
+                time: new Date().toLocaleTimeString('cs-CZ')
+            };
+            
+            scanHistory.unshift(entry);
+            
+            // Omezit historii na 20 záznamů
+            if (scanHistory.length > 20) {
+                scanHistory = scanHistory.slice(0, 20);
+            }
+            
+            localStorage.setItem('nfc_scan_history', JSON.stringify(scanHistory));
+            renderHistory();
+        }
+
+        function renderHistory() {
+            if (scanHistory.length === 0) {
+                historyDiv.innerHTML = '<p style="text-align: center; color: #9ca3af; padding: 20px;">Zatím žádné skeny</p>';
+                return;
+            }
+
+            historyDiv.innerHTML = scanHistory.map(entry => `
+                <div class="history-item">
+                    <div class="time">🕐 ${entry.time}</div>
+                    <div class="tag">📱 ${entry.tagId}</div>
+                </div>
+            `).join('');
+        }
+
+        function saveOfflineTag(tagId) {
+            const offlineQueue = JSON.parse(localStorage.getItem('nfc_offline_queue') || '[]');
+            offlineQueue.push({
+                tagId,
+                timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('nfc_offline_queue', JSON.stringify(offlineQueue));
+        }
+
+        function stopScanning() {
+            isScanning = false;
+            scanBtn.innerHTML = `
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
+                </svg>
+                Spustit skenování
+            `;
+            scanBtn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        }
+
+        function showStatus(type, message) {
+            statusDiv.className = `status ${type}`;
+            statusDiv.textContent = message;
+            statusDiv.style.display = 'block';
+        }
+
+        // Service Worker pro offline režim
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/nfc-sw.js').catch(err => {
+                console.log('Service Worker registration failed:', err);
+            });
+        }
+    </script>
+</body>
+</html>

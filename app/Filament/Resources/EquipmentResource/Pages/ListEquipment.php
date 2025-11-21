@@ -3,7 +3,10 @@
 namespace App\Filament\Resources\EquipmentResource\Pages;
 
 use App\Filament\Resources\EquipmentResource;
+use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class ListEquipment extends ListRecords
 {
@@ -12,7 +15,13 @@ class ListEquipment extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            \Filament\Actions\CreateAction::make(),
+            Actions\CreateAction::make(),
         ];
+    }
+
+    public function table(Table $table): Table
+    {
+        return parent::table($table)
+            ->modifyQueryUsing(fn (Builder $query) => $query->with('category'));
     }
 }

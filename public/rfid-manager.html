@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFID Manager - Zkušebny</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-8 text-gray-800">🔖 RFID Manager</h1>
+
+        <!-- Status panel -->
+        <div id="status-panel" class="mb-6 p-4 rounded-lg hidden">
+            <p id="status-message" class="font-semibold"></p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mb-6 border-b border-gray-200">
+            <nav class="flex space-x-4">
+                <button onclick="showTab('read')" id="tab-read" class="tab-button py-2 px-4 border-b-2 border-blue-500 text-blue-600 font-semibold">
+                    📖 Číst Tag
+                </button>
+                <button onclick="showTab('write')" id="tab-write" class="tab-button py-2 px-4 text-gray-600 hover:text-gray-800">
+                    ✍️ Zapsat Tag
+                </button>
+                <button onclick="showTab('checkout')" id="tab-checkout" class="tab-button py-2 px-4 text-gray-600 hover:text-gray-800">
+                    📤 Výpůjčka
+                </button>
+                <button onclick="showTab('history')" id="tab-history" class="tab-button py-2 px-4 text-gray-600 hover:text-gray-800">
+                    📊 Historie
+                </button>
+            </nav>
+        </div>
+
+        <!-- Read Tab -->
+        <div id="tab-read-content" class="tab-content">
+            <div class="bg-white rounded-lg shadow-lg p-6 max-w-2xl">
+                <h2 class="text-2xl font-bold mb-4">Přečíst RFID Tag</h2>
+                <p class="text-gray-600 mb-4">Přiložte RFID tag k USB čtečce nebo zadejte kód ručně</p>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">RFID Tag:</label>
+                    <input type="text" id="read-rfid-input" 
+                           placeholder="RFID-SM58-001" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                           autofocus>
+                    <p class="text-sm text-gray-500 mt-2">💡 USB čtečka automaticky vyplní pole při přiložení tagu</p>
+                </div>
+
+                <button onclick="readRFID()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition">
+                    🔍 Vyhledat vybavení
+                </button>
+
+                <div id="read-result" class="mt-6 hidden">
+                    <!-- Results will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Write Tab -->
+        <div id="tab-write-content" class="tab-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 max-w-2xl">
+                <h2 class="text-2xl font-bold mb-4">Zapsat RFID Tag</h2>
+                <p class="text-gray-600 mb-4">Přiřaďte RFID tag k existujícímu nebo novému vybavení</p>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">RFID Tag: *</label>
+                        <input type="text" id="write-rfid-input" 
+                               placeholder="RFID-NEW-001" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <button onclick="checkAvailability()" class="mt-2 text-sm text-blue-600 hover:text-blue-800">
+                            Zkontrolovat dostupnost
+                        </button>
+                        <div id="availability-result" class="mt-2 text-sm"></div>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Existující vybavení (ID):</label>
+                        <input type="number" id="equipment-id-input" 
+                               placeholder="např. 5" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <p class="text-sm text-gray-500 mt-1">Nechte prázdné pro vytvoření nového vybavení</p>
+                    </div>
+
+                    <div id="new-equipment-fields">
+                        <h3 class="font-semibold text-gray-700 mb-2">Nové vybavení:</h3>
+                        
+                        <div class="mb-3">
+                            <label class="block text-gray-700 mb-2">Název: *</label>
+                            <input type="text" id="equipment-name-input" 
+                                   placeholder="Shure SM58" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="block text-gray-700 mb-2">Popis:</label>
+                            <textarea id="equipment-description-input" 
+                                      placeholder="Dynamický mikrofon pro živé vystoupení" 
+                                      class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                                      rows="2"></textarea>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mb-3">
+                            <div>
+                                <label class="block text-gray-700 mb-2">Model:</label>
+                                <input type="text" id="equipment-model-input" 
+                                       placeholder="SM58-LC" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Sériové číslo:</label>
+                                <input type="text" id="equipment-serial-input" 
+                                       placeholder="SN123456" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 mb-2">Umístění:</label>
+                            <input type="text" id="equipment-location-input" 
+                                   placeholder="Zkušebna 1" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="writeRFID()" class="w-full mt-6 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition">
+                    💾 Uložit RFID Tag
+                </button>
+
+                <div id="write-result" class="mt-6 hidden"></div>
+            </div>
+        </div>
+
+        <!-- Checkout Tab -->
+        <div id="tab-checkout-content" class="tab-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 max-w-2xl">
+                <h2 class="text-2xl font-bold mb-4">Výpůjčka / Vrácení</h2>
+                
+                <div class="mb-4 flex space-x-4">
+                    <button onclick="setCheckoutMode('out')" id="mode-out" class="flex-1 bg-orange-600 text-white py-3 px-6 rounded-lg font-semibold">
+                        📤 Výpůjčka
+                    </button>
+                    <button onclick="setCheckoutMode('in')" id="mode-in" class="flex-1 bg-gray-300 text-gray-700 py-3 px-6 rounded-lg font-semibold">
+                        📥 Vrácení
+                    </button>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">RFID Tag:</label>
+                        <input type="text" id="checkout-rfid-input" 
+                               placeholder="RFID-SM58-001" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 text-lg">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">User ID:</label>
+                        <input type="number" id="checkout-user-input" 
+                               value="2" 
+                               placeholder="2" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                        <p class="text-sm text-gray-500 mt-1">ID uživatele, který si vypůjčuje/vrací</p>
+                    </div>
+
+                    <div id="room-field">
+                        <label class="block text-gray-700 font-semibold mb-2">Room ID (volitelné):</label>
+                        <input type="number" id="checkout-room-input" 
+                               placeholder="1" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                    </div>
+                </div>
+
+                <button onclick="processCheckout()" id="checkout-button" class="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg transition">
+                    📤 Zapůjčit vybavení
+                </button>
+
+                <div id="checkout-result" class="mt-6 hidden"></div>
+            </div>
+        </div>
+
+        <!-- History Tab -->
+        <div id="tab-history-content" class="tab-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold mb-4">Historie skenování</h2>
+                <div id="history-list" class="space-y-2">
+                    <p class="text-gray-500">Zatím žádná historie</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = '/api/v1/rfid';
+        let checkoutMode = 'out';
+        let scanHistory = [];
+
+        // Tab switching
+        function showTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-button').forEach(el => {
+                el.classList.remove('border-blue-500', 'text-blue-600');
+                el.classList.add('text-gray-600');
+            });
+            
+            document.getElementById(`tab-${tab}-content`).classList.remove('hidden');
+            document.getElementById(`tab-${tab}`).classList.add('border-blue-500', 'text-blue-600');
+        }
+
+        // Status messages
+        function showStatus(message, type = 'info') {
+            const panel = document.getElementById('status-panel');
+            const messageEl = document.getElementById('status-message');
+            
+            panel.classList.remove('hidden', 'bg-blue-100', 'bg-green-100', 'bg-red-100', 'bg-yellow-100');
+            panel.classList.add(`bg-${type === 'success' ? 'green' : type === 'error' ? 'red' : type === 'warning' ? 'yellow' : 'blue'}-100`);
+            
+            messageEl.textContent = message;
+            
+            setTimeout(() => panel.classList.add('hidden'), 5000);
+        }
+
+        // Read RFID
+        async function readRFID() {
+            const rfidTag = document.getElementById('read-rfid-input').value.trim();
+            
+            if (!rfidTag) {
+                showStatus('Zadejte RFID tag', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/read`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ rfid_tag: rfidTag })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayReadResult(data.equipment);
+                    addToHistory('read', rfidTag, data.equipment.name);
+                    showStatus('Vybavení nalezeno!', 'success');
+                } else {
+                    showStatus(data.error || 'Vybavení nenalezeno', 'error');
+                    document.getElementById('read-result').innerHTML = `
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                            <p class="font-bold">❌ Nenalezeno</p>
+                            <p>${data.error}</p>
+                            <p class="text-sm mt-2">${data.suggestion || ''}</p>
+                        </div>
+                    `;
+                    document.getElementById('read-result').classList.remove('hidden');
+                }
+            } catch (error) {
+                showStatus('Chyba připojení k API', 'error');
+                console.error(error);
+            }
+        }
+
+        function displayReadResult(equipment) {
+            const resultDiv = document.getElementById('read-result');
+            resultDiv.innerHTML = `
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <h3 class="text-xl font-bold text-green-800 mb-3">✅ ${equipment.name}</h3>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div><span class="font-semibold">ID:</span> ${equipment.id}</div>
+                        <div><span class="font-semibold">Status:</span> ${equipment.status}</div>
+                        <div><span class="font-semibold">Kategorie:</span> ${equipment.category ? equipment.category.icon + ' ' + equipment.category.name : '-'}</div>
+                        <div><span class="font-semibold">Model:</span> ${equipment.model || '-'}</div>
+                        <div><span class="font-semibold">Sériové číslo:</span> ${equipment.serial_number || '-'}</div>
+                        <div><span class="font-semibold">Umístění:</span> ${equipment.location || '-'}</div>
+                        <div><span class="font-semibold">Dostupnost:</span> ${equipment.quantity_available}</div>
+                        <div><span class="font-semibold">Kritické:</span> ${equipment.is_critical ? '⚠️ Ano' : 'Ne'}</div>
+                    </div>
+                    ${equipment.description ? `<p class="mt-3 text-gray-700">${equipment.description}</p>` : ''}
+                </div>
+            `;
+            resultDiv.classList.remove('hidden');
+        }
+
+        // Check availability
+        async function checkAvailability() {
+            const rfidTag = document.getElementById('write-rfid-input').value.trim();
+            
+            if (!rfidTag) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/check-availability`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ rfid_tag: rfidTag })
+                });
+
+                const data = await response.json();
+                const resultDiv = document.getElementById('availability-result');
+                
+                if (data.available) {
+                    resultDiv.innerHTML = '<span class="text-green-600">✅ Tag je dostupný</span>';
+                } else {
+                    resultDiv.innerHTML = `<span class="text-red-600">❌ Tag už je použitý: ${data.used_by.name}</span>`;
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        // Write RFID - requires authentication
+        async function writeRFID() {
+            const rfidTag = document.getElementById('write-rfid-input').value.trim();
+            const equipmentId = document.getElementById('equipment-id-input').value;
+            const equipmentName = document.getElementById('equipment-name-input').value.trim();
+            
+            if (!rfidTag) {
+                showStatus('Zadejte RFID tag', 'error');
+                return;
+            }
+
+            if (!equipmentId && !equipmentName) {
+                showStatus('Zadejte ID existujícího vybavení nebo název nového', 'error');
+                return;
+            }
+
+            const payload = {
+                rfid_tag: rfidTag,
+                equipment_id: equipmentId || undefined,
+                equipment_name: equipmentName || undefined,
+                description: document.getElementById('equipment-description-input').value,
+                model: document.getElementById('equipment-model-input').value,
+                serial_number: document.getElementById('equipment-serial-input').value,
+                location: document.getElementById('equipment-location-input').value,
+            };
+
+            // Note: This endpoint requires authentication
+            showStatus('⚠️ Tento endpoint vyžaduje autentizaci (Sanctum token)', 'warning');
+            
+            try {
+                const response = await fetch(`${API_BASE}/write`, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        // Add token here: 'Authorization': 'Bearer YOUR_TOKEN'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    showStatus(data.message, 'success');
+                    document.getElementById('write-result').innerHTML = `
+                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
+                            <p class="font-bold">✅ ${data.message}</p>
+                            <p>Vybavení: ${data.equipment.name}</p>
+                            <p>RFID: ${data.equipment.rfid_tag}</p>
+                        </div>
+                    `;
+                    document.getElementById('write-result').classList.remove('hidden');
+                } else {
+                    showStatus(data.error || 'Chyba při zápisu', 'error');
+                }
+            } catch (error) {
+                showStatus('Chyba: ' + error.message, 'error');
+                console.error(error);
+            }
+        }
+
+        // Checkout mode
+        function setCheckoutMode(mode) {
+            checkoutMode = mode;
+            
+            document.getElementById('mode-out').classList.remove('bg-orange-600', 'text-white', 'bg-gray-300', 'text-gray-700');
+            document.getElementById('mode-in').classList.remove('bg-orange-600', 'text-white', 'bg-gray-300', 'text-gray-700');
+            
+            if (mode === 'out') {
+                document.getElementById('mode-out').classList.add('bg-orange-600', 'text-white');
+                document.getElementById('mode-in').classList.add('bg-gray-300', 'text-gray-700');
+                document.getElementById('checkout-button').innerHTML = '📤 Zapůjčit vybavení';
+                document.getElementById('room-field').classList.remove('hidden');
+            } else {
+                document.getElementById('mode-in').classList.add('bg-orange-600', 'text-white');
+                document.getElementById('mode-out').classList.add('bg-gray-300', 'text-gray-700');
+                document.getElementById('checkout-button').innerHTML = '📥 Vrátit vybavení';
+                document.getElementById('room-field').classList.add('hidden');
+            }
+        }
+
+        // Process checkout/checkin - requires authentication
+        async function processCheckout() {
+            const rfidTag = document.getElementById('checkout-rfid-input').value.trim();
+            const userId = document.getElementById('checkout-user-input').value;
+            const roomId = document.getElementById('checkout-room-input').value;
+            
+            if (!rfidTag || !userId) {
+                showStatus('Vyplňte RFID tag a User ID', 'error');
+                return;
+            }
+
+            const endpoint = checkoutMode === 'out' ? 'checkout' : 'checkin';
+            const payload = {
+                rfid_tag: rfidTag,
+                user_id: parseInt(userId),
+            };
+
+            if (checkoutMode === 'out' && roomId) {
+                payload.room_id = parseInt(roomId);
+            }
+
+            showStatus('⚠️ Tento endpoint vyžaduje autentizaci (Sanctum token)', 'warning');
+
+            try {
+                const response = await fetch(`${API_BASE}/${endpoint}`, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        // Add token here: 'Authorization': 'Bearer YOUR_TOKEN'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    showStatus(`Vybavení ${checkoutMode === 'out' ? 'zapůjčeno' : 'vráceno'}!`, 'success');
+                    addToHistory(checkoutMode === 'out' ? 'checkout' : 'checkin', rfidTag, data.equipment.name);
+                    
+                    document.getElementById('checkout-result').innerHTML = `
+                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
+                            <p class="font-bold">✅ ${checkoutMode === 'out' ? 'Zapůjčeno' : 'Vráceno'}</p>
+                            <p>Vybavení: ${data.equipment.name}</p>
+                        </div>
+                    `;
+                    document.getElementById('checkout-result').classList.remove('hidden');
+                } else {
+                    showStatus(data.error || 'Chyba', 'error');
+                }
+            } catch (error) {
+                showStatus('Chyba: ' + error.message, 'error');
+                console.error(error);
+            }
+        }
+
+        // History
+        function addToHistory(action, rfidTag, equipmentName) {
+            scanHistory.unshift({
+                action,
+                rfidTag,
+                equipmentName,
+                timestamp: new Date().toLocaleString('cs-CZ')
+            });
+
+            updateHistoryDisplay();
+        }
+
+        function updateHistoryDisplay() {
+            const historyDiv = document.getElementById('history-list');
+            
+            if (scanHistory.length === 0) {
+                historyDiv.innerHTML = '<p class="text-gray-500">Zatím žádná historie</p>';
+                return;
+            }
+
+            historyDiv.innerHTML = scanHistory.map(item => `
+                <div class="border-l-4 ${getActionColor(item.action)} bg-white p-3 rounded shadow-sm">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="font-semibold">${getActionIcon(item.action)} ${item.equipmentName}</span>
+                            <p class="text-sm text-gray-600">${item.rfidTag}</p>
+                        </div>
+                        <span class="text-xs text-gray-500">${item.timestamp}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getActionColor(action) {
+            const colors = {
+                'read': 'border-blue-500',
+                'checkout': 'border-orange-500',
+                'checkin': 'border-green-500'
+            };
+            return colors[action] || 'border-gray-500';
+        }
+
+        function getActionIcon(action) {
+            const icons = {
+                'read': '📖',
+                'checkout': '📤',
+                'checkin': '📥'
+            };
+            return icons[action] || '📋';
+        }
+
+        // Auto-focus on RFID input for USB readers
+        document.getElementById('read-rfid-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                readRFID();
+            }
+        });
+
+        document.getElementById('checkout-rfid-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                processCheckout();
+            }
+        });
+
+        // Load history from localStorage
+        window.addEventListener('load', function() {
+            const saved = localStorage.getItem('rfidHistory');
+            if (saved) {
+                scanHistory = JSON.parse(saved);
+                updateHistoryDisplay();
+            }
+        });
+
+        // Save history to localStorage
+        window.addEventListener('beforeunload', function() {
+            localStorage.setItem('rfidHistory', JSON.stringify(scanHistory.slice(0, 50)));
+        });
+    </script>
+</body>
+</html>

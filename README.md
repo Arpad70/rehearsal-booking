@@ -9,20 +9,59 @@
 
 ## Rehearsal Space Reservation System
 
-A Laravel-based management system for scheduling and controlling access to rehearsal spaces. Features automatic device control (Shelly smart devices), real-time availability checking, comprehensive audit logging, and a REST API.
+A Laravel-based management system for scheduling and controlling access to rehearsal spaces. Features **IoT device integration** (QR readers, RFID keypads, IP cameras, power monitoring, digital mixers), real-time availability checking, comprehensive audit logging, and a REST API.
 
 **Key Features:**
 - 📅 Room booking with conflict detection
-- 🔐 Token-based access control
-- 💡 Smart device integration (Shelly relay control)
-- 📊 Comprehensive audit logging
-- 📱 REST API with rate limiting
+- 🔐 Multi-factor access control (QR, RFID+PIN)
+- 💡 Smart device integration (Shelly power monitoring, lights control)
+- 📹 IP camera monitoring with motion detection
+- 🎚️ Digital mixer scene management (Soundcraft Ui24R)
+- 🔧 Equipment tracking with RFID tags
+- 📊 Comprehensive audit logging & power analytics
+- 📱 REST API with webhook support for devices
 - 🖥️ Filament admin panel
 - 🔄 Automated cleanup jobs
 
 ---
 
-## 🎫 QR Reader System (NEW!)
+## 🚀 Device Integration (NEW!)
+
+Complete IoT ecosystem with 5 types of hardware devices integrated via Docker simulators.
+
+**Supported Devices:**
+- 🎫 **QR Readers** (Entry E QR R1) - Automatic access authorization
+- 🔐 **RFID Keypads** (RFID 7612) - Card + PIN authentication
+- 📹 **IP Cameras** (EVOLVEO POE8 SMART) - 8MP recording with analytics
+- ⚡ **Power Monitoring** (Shelly Pro EM) - Real-time energy tracking
+- 🎚️ **Digital Mixers** (Soundcraft Ui24R) - Band scene management
+
+**Features:**
+- ✅ Automatic door unlock on valid reservation
+- ✅ Automatic lights on/off via Shelly relay
+- ✅ Recording start/stop on camera
+- ✅ Power consumption monitoring (kWh + cost calculation)
+- ✅ Mixer show file upload for bands
+- ✅ WebSocket real-time events
+- ✅ Access denied logging & alerts
+
+**Quick Setup:**
+```bash
+# Run migrations for device integration
+php artisan migrate
+
+# Start queue worker for webhook processing
+php artisan queue:work --queue=webhooks,emails
+```
+
+**Documentation:**
+- 📘 **[Device Integration Guide](./docs/DEVICE_INTEGRATION.md)** - Complete setup & API reference ⭐ NEW!
+- 📗 [Implementation Summary](./docs/IMPLEMENTATION_SUMMARY.md) - Technical details ⭐ NEW!
+- 📙 [Joomla vs Laravel Analysis](./docs/JOOMLA_VS_LARAVEL_ANALYSIS.md) - Architecture comparison
+
+---
+
+## 🎫 QR Reader System
 
 Complete QR code access control system with automatic email delivery, multi-protocol door support, and comprehensive monitoring.
 
@@ -36,20 +75,12 @@ Complete QR code access control system with automatic email delivery, multi-prot
 - 📈 Detailed access reporting
 - 🔄 Backup QR codes for redundancy
 
-**Quick Setup:**
-```bash
-php artisan migrate
-php artisan queue:work --queue=emails
-```
-
-Then visit `/admin` → QR Reader to add your first reader.
-
 **Documentation:**
-- 📘 [Quick Reference](./QUICK_REFERENCE.md) - 5-minute overview
-- 📗 [Complete Guide](./COMPLETE_DOCUMENTATION.md) - Full documentation
-- 📙 [Implementation Guide](./QR_IMPLEMENTATION_GUIDE.md) - Setup & API
-- 📕 **[Admin Backend Guide](./ADMIN_BACKEND_GUIDE.md)** - Detailed admin UI walkthrough ⭐ NEW!
-- 📕 [Phase Summary](./PHASE_SUMMARY.md) - Technical details
+- 📘 [Quick Reference](./docs/QUICK_REFERENCE.md) - 5-minute overview
+- 📗 [Complete Guide](./docs/COMPLETE_DOCUMENTATION.md) - Full documentation
+- 📙 [Implementation Guide](./docs/QR_IMPLEMENTATION_GUIDE.md) - Setup & API
+- 📕 **[Admin Backend Guide](./docs/ADMIN_BACKEND_GUIDE.md)** - Detailed admin UI walkthrough
+- 📕 [Phase Summary](./docs/PHASE_SUMMARY.md) - Technical details
 
 ---
 

@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\EquipmentResource\Pages;
 
 use App\Filament\Resources\EquipmentResource;
-use Filament\Resources\Pages\EditRecord;
 use Filament\Actions;
+use Filament\Resources\Pages\EditRecord;
 
 class EditEquipment extends EditRecord
 {
@@ -14,6 +14,8 @@ class EditEquipment extends EditRecord
     {
         return [
             Actions\DeleteAction::make(),
+            Actions\ForceDeleteAction::make(),
+            Actions\RestoreAction::make(),
         ];
     }
 }

@@ -1,4 +1,5 @@
 import './bootstrap';
+import './rfid-scanner';
 
 import Alpine from 'alpinejs';
 

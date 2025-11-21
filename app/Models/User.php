@@ -25,6 +25,8 @@ class User extends Authenticatable
         'password',
         'role',
         'is_active',
+        'receive_critical_notifications',
+        'is_admin',
     ];
 
     /**
@@ -47,6 +49,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'receive_critical_notifications' => 'boolean',
+            'is_admin' => 'boolean',
         ];
     }
 

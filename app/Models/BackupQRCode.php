@@ -144,7 +144,9 @@ class BackupQRCode extends Model
             $zip->close();
 
             if ($addedCount === 0) {
-                unlink($zipPath);
+                if (file_exists($zipPath)) {
+                    unlink($zipPath);
+                }
                 throw new \Exception('Žádné QR kódy nebyly přidány do archivu. Zkontrolujte, zda soubory existují.');
             }
         }

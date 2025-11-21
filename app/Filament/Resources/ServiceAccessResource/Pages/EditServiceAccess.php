@@ -97,9 +97,9 @@ class EditServiceAccess extends EditRecord
                             ->live()
                             ->helperText('Pokud vypnete, můžete vybrat konkrétní místnosti'),
 
-                        CheckboxList::make('room_ids')
+                        CheckboxList::make('allowed_rooms')
                             ->label('Vybrané místnosti')
-                            ->relationship('rooms', 'name')
+                            ->options(\App\Models\Room::pluck('name', 'id'))
                             ->visible(fn ($get) => !$get('all_rooms'))
                             ->helperText('Fyzické místnosti, ke kterým je přístup povolen'),
                     ])

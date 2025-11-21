@@ -14,8 +14,12 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    public function create(): View|RedirectResponse
     {
+        // If accessing /login directly, redirect to landing page
+        if (request()->wantsJson() || !request()->hasHeader('Referer')) {
+            return redirect()->route('landing');
+        }
         return view('auth.login');
     }
 
@@ -28,7 +32,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Redirect back to landing page instead of dashboard
+        return redirect()->intended(route('landing', absolute: false));
     }
 
     /**

@@ -104,6 +104,49 @@ class ReservationResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ])
+            ->headerActions([
+                Tables\Actions\Action::make('export')
+                    ->label('Exportovat do Excel')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->color('success')
+                    ->form([
+                        Forms\Components\DatePicker::make('date_from')
+                            ->label('Od data')
+                            ->default(now()->subMonth()),
+                        
+                        Forms\Components\DatePicker::make('date_to')
+                            ->label('Do data')
+                            ->default(now()),
+                        
+                        Forms\Components\Select::make('room_id')
+                            ->label('Místnost')
+                            ->relationship('room', 'name')
+                            ->placeholder('Všechny')
+                            ->preload(),
+                        
+                        Forms\Components\Select::make('user_id')
+                            ->label('Uživatel')
+                            ->relationship('user', 'name')
+                            ->placeholder('Všichni')
+                            ->preload(),
+                        
+                        Forms\Components\Select::make('status')
+                            ->label('Status')
+                            ->options([
+                                'pending' => 'Čekající',
+                                'active' => 'Aktivní',
+                                'completed' => 'Dokončeno',
+                                'cancelled' => 'Zrušeno',
+                            ])
+                            ->placeholder('Všechny'),
+                    ])
+                    ->action(function (array $data) {
+                        return response()->download(
+                            (new \App\Exports\ReservationsExport($data))->store('reservations_export.xlsx', 'local', \Maatwebsite\Excel\Excel::XLSX),
+                            'rezervace_' . now()->format('Y-m-d_His') . '.xlsx'
+                        );
+                    }),
             ]);
     }
 

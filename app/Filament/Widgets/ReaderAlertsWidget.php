@@ -13,9 +13,16 @@ class ReaderAlertsWidget extends BaseWidget
 {
     protected static ?string $heading = 'Aktivní upozornění čteček';
     
-    protected static ?int $sort = 1;
+    protected static ?int $sort = 3;
 
-    protected int | string | array $columnSpan = 'full';
+    protected int | string | array $columnSpan = [
+        'default' => 'full',
+        'sm' => 1,
+        'md' => 1,
+        'lg' => 2,
+        'xl' => 3,
+        '2xl' => 3,
+    ];
 
     public function table(Table $table): Table
     {

@@ -13,7 +13,7 @@ class AccessStatsOverview extends BaseWidget
 {
     protected static ?int $sort = 2;
     
-    protected int | string | array $columnSpan = 3;
+    protected int | string | array $columnSpan = 'full';
 
     protected function getStats(): array
     {

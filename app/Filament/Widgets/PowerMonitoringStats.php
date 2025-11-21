@@ -36,26 +36,26 @@ class PowerMonitoringStats extends BaseWidget
             ->sum('energy_today') ?? 0;
 
         return [
-            Stat::make('Total Power', number_format($totalPower, 0) . ' W')
-                ->description('All devices combined')
+            Stat::make('Celkový příkon', number_format($totalPower, 0, ',', ' ') . ' W')
+                ->description('Všechna zařízení dohromady')
                 ->descriptionIcon('heroicon-m-bolt')
                 ->color('success')
                 ->icon('heroicon-o-bolt'),
 
-            Stat::make('Average Power', number_format($avgPower, 0) . ' W')
-                ->description('Per device average')
+            Stat::make('Průměrný příkon', number_format($avgPower, 0, ',', ' ') . ' W')
+                ->description('Průměr na zařízení')
                 ->descriptionIcon('heroicon-m-chart-bar')
                 ->color('info')
                 ->icon('heroicon-o-chart-bar'),
 
-            Stat::make('Today\'s Energy', number_format($todayEnergy / 1000, 2) . ' kWh')
-                ->description('Daily consumption')
+            Stat::make('Dnešní spotřeba', number_format($todayEnergy / 1000, 2, ',', ' ') . ' kWh')
+                ->description('Celková denní spotřeba')
                 ->descriptionIcon('heroicon-m-calculator')
                 ->color('success')
                 ->icon('heroicon-o-calculator'),
 
-            Stat::make('Active Alerts', (string) $alertsCount)
-                ->description('Devices with issues')
+            Stat::make('Aktivní upozornění', (string) $alertsCount)
+                ->description('Zařízení s problémy')
                 ->descriptionIcon('heroicon-m-exclamation-triangle')
                 ->color($alertsCount > 0 ? 'danger' : 'success')
                 ->icon('heroicon-o-exclamation-triangle'),

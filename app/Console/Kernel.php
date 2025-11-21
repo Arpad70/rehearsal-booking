@@ -25,6 +25,13 @@ class Kernel extends ConsoleKernel
             ->everyFiveMinutes()
             ->name('collect-power-data')
             ->withoutOverlapping();
+
+        // Health check all IoT devices every minute
+        $schedule->command('devices:health-check')
+            ->everyMinute()
+            ->name('device-health-check')
+            ->withoutOverlapping()
+            ->runInBackground();
     }
 
     /**

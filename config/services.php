@@ -28,6 +28,25 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'stripe' => [
+        'secret' => env('STRIPE_SECRET'),
+        'public' => env('STRIPE_PUBLIC_KEY'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+    ],
+
+    'comgate' => [
+        'merchant_id' => env('COMGATE_MERCHANT_ID'),
+        'secret' => env('COMGATE_SECRET'),
+        'test_mode' => env('COMGATE_TEST_MODE', true),
+    ],
+
+    'gopay' => [
+        'goid' => env('GOPAY_GOID'),
+        'client_id' => env('GOPAY_CLIENT_ID'),
+        'client_secret' => env('GOPAY_CLIENT_SECRET'),
+        'test_mode' => env('GOPAY_TEST_MODE', true),
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 use App\Models\Room;
 use Carbon\Carbon;
+use PHPUnit\Framework\Attributes\Test;
 
 class ReservationMailRealMailerTest extends TestCase
 {

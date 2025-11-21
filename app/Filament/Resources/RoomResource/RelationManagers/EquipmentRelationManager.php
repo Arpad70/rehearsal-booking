@@ -69,18 +69,18 @@ class EquipmentRelationManager extends RelationManager
                     ->searchable()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('category')
+                Tables\Columns\TextColumn::make('category.name')
                     ->label('Kategorie')
-                    ->formatStateUsing(fn(string $state): string => Equipment::getCategories()[$state] ?? $state)
+                    ->formatStateUsing(function ($state, $record) {
+                        if (!$record || !$record->relationLoaded('category') || !$record->category) {
+                            return $state ?? '-';
+                        }
+                        return ($record->category->icon ?? '') . ' ' . ($state ?? $record->category->name ?? '-');
+                    })
                     ->badge()
-                    ->color(fn(string $state): string => match ($state) {
-                        'audio' => 'info',
-                        'video' => 'warning',
-                        'furniture' => 'gray',
-                        'climate' => 'success',
-                        'lighting' => 'warning',
-                        default => 'gray',
-                    }),
+                    ->color(fn($record) => $record->category ? 'primary' : 'gray')
+                    ->sortable()
+                    ->searchable(),
 
                 Tables\Columns\TextColumn::make('pivot.quantity')
                     ->label('Počet')
@@ -126,8 +126,15 @@ class EquipmentRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\AttachAction::make()
                     ->label('Přidat vybavení')
+                    ->preloadRecordSelect()
+                    ->recordSelectOptionsQuery(fn ($query) => $query->orderBy('name'))
+                    ->recordSelectSearchColumns(['name', 'category', 'model'])
                     ->form(fn(Tables\Actions\AttachAction $action): array => [
-                        $action->getRecordSelect(),
+                        $action->getRecordSelect()
+                            ->label('Vybavení')
+                            ->placeholder('Vyberte vybavení...')
+                            ->searchable()
+                            ->required(),
                         Forms\Components\TextInput::make('quantity')
                             ->label('Počet kusů')
                             ->numeric()
@@ -141,7 +148,15 @@ class EquipmentRelationManager extends RelationManager
                             ->label('Stav')
                             ->options(Equipment::getStatusOptions())
                             ->default('operational')
-                            ->required(),
+                            ->required()
+                            ->native(false),
+                        Forms\Components\DateTimePicker::make('last_inspection')
+                            ->label('Poslední kontrola')
+                            ->native(false),
+                        Forms\Components\Textarea::make('condition_notes')
+                            ->label('Poznámky k stavu')
+                            ->placeholder('Popište stav vybavení...')
+                            ->rows(3),
                     ]),
             ]);
     }

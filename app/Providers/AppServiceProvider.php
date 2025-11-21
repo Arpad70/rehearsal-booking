@@ -28,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         // Register model observers
         \App\Models\Reservation::observe(\App\Observers\ReservationObserver::class);
         \App\Models\ServiceAccess::observe(\App\Observers\ServiceAccessObserver::class);
+        \App\Models\Equipment::observe(\App\Observers\EquipmentObserver::class);
 
         // Register custom rate limiters
         RateLimiter::for('qr-reader', function (Request $request) {

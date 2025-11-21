@@ -11,9 +11,16 @@ class AccessTrendChart extends ChartWidget
 {
     protected static ?string $heading = 'Trend přístupů (posledních 7 dní)';
     
-    protected static ?int $sort = 2;
+    protected static ?int $sort = 3;
 
-    protected int | string | array $columnSpan = 3;
+    protected int | string | array $columnSpan = [
+        'default' => 'full',
+        'sm' => 2,
+        'md' => 2,
+        'lg' => 2,
+        'xl' => 3,
+        '2xl' => 3,
+    ];
 
     protected function getData(): array
     {

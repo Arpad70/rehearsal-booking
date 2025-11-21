@@ -10,9 +10,16 @@ class RoomUsageChart extends ChartWidget
 {
     protected static ?string $heading = 'Využití místností (posledních 30 dní)';
     
-    protected static ?int $sort = 4;
+    protected static ?int $sort = 5;
 
-    protected int | string | array $columnSpan = 6;
+    protected int | string | array $columnSpan = [
+        'default' => 'full',
+        'sm' => 2,
+        'md' => 2,
+        'lg' => 2,
+        'xl' => 3,
+        '2xl' => 3,
+    ];
 
     protected function getData(): array
     {
