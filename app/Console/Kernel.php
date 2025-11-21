@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Jobs\ArchiveAccessLogsJob;
+use App\Jobs\CollectPowerMonitoringDataJob;
 
 class Kernel extends ConsoleKernel
 {
@@ -19,8 +20,18 @@ class Kernel extends ConsoleKernel
             ->name('archive-access-logs')
             ->withoutOverlapping();
 
-        // Optional: you can also add other scheduled tasks here
-        // $schedule->command('inspire')->hourly();
+        // Collect power monitoring data from Shelly devices every 5 minutes
+        $schedule->job(new CollectPowerMonitoringDataJob())
+            ->everyFiveMinutes()
+            ->name('collect-power-data')
+            ->withoutOverlapping();
+
+        // Health check all IoT devices every minute
+        $schedule->command('devices:health-check')
+            ->everyMinute()
+            ->name('device-health-check')
+            ->withoutOverlapping()
+            ->runInBackground();
     }
 
     /**

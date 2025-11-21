@@ -1,0 +1,9 @@
+[build]
+builder = "DOCKERFILE"
+
+[deploy]
+startCommand = "supervisord -c /etc/supervisor/supervisord.conf"
+healthcheckPath = "/"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10

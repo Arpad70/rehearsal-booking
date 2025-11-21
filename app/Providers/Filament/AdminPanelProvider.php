@@ -37,9 +37,15 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
+                \App\Filament\Widgets\EquipmentStatsOverview::class,
+                \App\Filament\Widgets\EquipmentByCategory::class,
+                \App\Filament\Widgets\EquipmentTrendsChart::class,
+                \App\Filament\Widgets\RecentActivityWidget::class,
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
+            // Use project favicon for Filament admin panel (use root-relative URL to avoid external host mismatches)
+            ->favicon('/favicon.ico')
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

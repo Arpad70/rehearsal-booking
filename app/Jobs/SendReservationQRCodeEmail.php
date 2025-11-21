@@ -17,12 +17,13 @@ class SendReservationQRCodeEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public int $tries = 3;
+    public int $maxExceptions = 1;
+
     public function __construct(
         public Reservation $reservation,
     ) {
         $this->onQueue('emails');
-        $this->tries = 3;
-        $this->maxExceptions = 1;
     }
 
     public function handle(QRCodeService $qrService): void
@@ -37,13 +38,18 @@ class SendReservationQRCodeEmail implements ShouldQueue
                 ]);
             }
 
-            // Odeslat email
-            Mail::send(
-                new ReservationQRCodeMail(
-                    $this->reservation,
-                    $this->reservation->qr_code,
-                )
-            );
+            // Odeslat email pouze pokud máme příjemce
+            $recipient = $this->reservation->user->email ?? $this->reservation->email ?? null;
+            if ($recipient) {
+                Mail::to($recipient)->send(
+                    new ReservationQRCodeMail(
+                        $this->reservation,
+                        $this->reservation->qr_code,
+                    )
+                );
+            } else {
+                Log::warning("No email recipient for reservation {$this->reservation->id}, skipping send");
+            }
 
             // Zaznamenat čas odeslání
             $this->reservation->update(['qr_sent_at' => now()]);

@@ -38,8 +38,9 @@ class BackupQRCodeResource extends Resource
                     ->badge()
                     ->color('gray'),
 
-                Tables\Columns\BadgeColumn::make('status')
+                Tables\Columns\TextColumn::make('status')
                     ->label('Status')
+                    ->badge()
                     ->colors([
                         'success' => 'active',
                         'warning' => 'used',

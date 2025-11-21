@@ -6,6 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int|null $id
+ * @property int|null $reservation_id
+ * @property int|null $room_id
+ * @property int|null $user_id
+ * @property bool|null $access_granted
+ * @property string|null $access_type
+ * @property string|null $reader_type
+ * @property string|null $ip_address
+ * @property \Illuminate\Support\Carbon|null $validated_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \App\Models\User|null $user
+ * @property \App\Models\Room|null $room
+ */
 class AccessLog extends Model
 {
     use HasFactory;
@@ -29,12 +43,15 @@ class AccessLog extends Model
         'validated_at',
     ];
 
-    protected $casts = [
-        'access_granted' => 'boolean',
-        'validated_at' => 'datetime',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'access_granted' => 'boolean',
+            'validated_at' => 'datetime',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+        ];
+    }
 
     /**
      * Relationship: Log belongs to User

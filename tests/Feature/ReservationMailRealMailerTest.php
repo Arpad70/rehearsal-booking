@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 use App\Models\Room;
 use Carbon\Carbon;
+use PHPUnit\Framework\Attributes\Test;
 
 class ReservationMailRealMailerTest extends TestCase
 {
@@ -29,7 +30,7 @@ class ReservationMailRealMailerTest extends TestCase
         $this->actingAs($user);
 
         $start = Carbon::now()->addMinutes(10)->format('Y-m-d H:i');
-        $end = Carbon::now()->addMinutes(70)->format('Y-m-d H:i');
+        $end = Carbon::now()->addMinutes(100)->format('Y-m-d H:i'); // 90 minutes duration (> 60 min minimum)
 
         $response = $this->post(route('reservations.store'), [
             'room_id' => $room->id,

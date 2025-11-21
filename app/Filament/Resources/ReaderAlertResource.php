@@ -14,7 +14,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Filters\SelectFilter;
 
@@ -115,8 +114,9 @@ class ReaderAlertResource extends Resource
                     })
                     ->searchable(),
 
-                BadgeColumn::make('severity')
+                TextColumn::make('severity')
                     ->label('Závažnost')
+                    ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'critical' => 'danger',
                         'high' => 'warning',

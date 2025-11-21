@@ -9,12 +9,22 @@ use Illuminate\Support\Facades\DB;
 class RoomUsageChart extends ChartWidget
 {
     protected static ?string $heading = 'Využití místností (posledních 30 dní)';
-    protected static ?int $sort = 3;
+    
+    protected static ?int $sort = 5;
+
+    protected int | string | array $columnSpan = [
+        'default' => 'full',
+        'sm' => 2,
+        'md' => 2,
+        'lg' => 2,
+        'xl' => 3,
+        '2xl' => 3,
+    ];
 
     protected function getData(): array
     {
         $rooms = Room::withCount([
-                'reservations' => fn($query) => $query->where('start_at', '>=', now()->subDays(30)->toDateString())
+                'reservations' => fn($query) => $query->where('start_at', '>=', now()->subDays(30))
             ])
             ->orderByDesc('reservations_count')
             ->limit(10)

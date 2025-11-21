@@ -6,6 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int|null $id
+ * @property int|null $user_id
+ * @property string|null $access_type
+ * @property string|null $access_code
+ * @property array|null $allowed_rooms
+ * @property bool|null $unlimited_access
+ * @property bool|null $enabled
+ * @property bool|null $revoked
+ * @property \Illuminate\Support\Carbon|null $valid_from
+ * @property \Illuminate\Support\Carbon|null $valid_until
+ */
 class ServiceAccess extends Model
 {
     use HasFactory;
@@ -26,14 +38,17 @@ class ServiceAccess extends Model
         'revoke_reason',
     ];
 
-    protected $casts = [
-        'allowed_rooms' => 'array',
-        'unlimited_access' => 'boolean',
-        'enabled' => 'boolean',
-        'revoked' => 'boolean',
-        'valid_from' => 'datetime',
-        'valid_until' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'allowed_rooms' => 'array',
+            'unlimited_access' => 'boolean',
+            'enabled' => 'boolean',
+            'revoked' => 'boolean',
+            'valid_from' => 'datetime',
+            'valid_until' => 'datetime',
+        ];
+    }
 
     /**
      * Relationship: Access belongs to User

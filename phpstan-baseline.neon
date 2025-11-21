@@ -1,0 +1,1729 @@
+parameters:
+	ignoreErrors:
+		-
+			rawMessage: 'Parameter #1 $keys of function array_combine expects array<int|string>, list<string|null>|false given.'
+			identifier: argument.type
+			count: 1
+			path: app/Console/Commands/ImportPayments.php
+
+		-
+			rawMessage: Cannot access property $name on mixed.
+			identifier: property.nonObject
+			count: 1
+			path: app/Filament/Actions/ExportAccessLogsAction.php
+
+		-
+			rawMessage: 'Parameter #2 $fields of function fputcsv expects array<int|string, bool|float|int|string|null>, array<int, mixed> given.'
+			identifier: argument.type
+			count: 1
+			path: app/Filament/Actions/ExportAccessLogsAction.php
+
+		-
+			rawMessage: Using nullsafe property access "?->name" on left side of ?? is unnecessary. Use -> instead.
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Filament/Actions/ExportAccessLogsAction.php
+
+		-
+			rawMessage: Variable $log in PHPDoc tag @var does not exist.
+			identifier: varTag.variableNotFound
+			count: 1
+			path: app/Filament/Actions/ExportAccessLogsAction.php
+
+		-
+			rawMessage: Variable $logs in PHPDoc tag @var does not exist.
+			identifier: varTag.variableNotFound
+			count: 1
+			path: app/Filament/Actions/ExportAccessLogsAction.php
+
+		-
+			rawMessage: 'Method App\Filament\Pages\AdminDashboard::getColumns() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Filament/Pages/AdminDashboard.php
+
+		-
+			rawMessage: 'Method App\Filament\Pages\AdminDashboard::getStats() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Filament/Pages/AdminDashboard.php
+
+		-
+			rawMessage: 'Method App\Filament\Pages\AdminDashboard::getWidgets() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Filament/Pages/AdminDashboard.php
+
+		-
+			rawMessage: 'Parameter #3 $value of method Illuminate\Database\Eloquent\Builder<Illuminate\Database\Eloquent\Model>::whereDate() expects DateTimeInterface|string|null, mixed given.'
+			identifier: argument.type
+			count: 2
+			path: app/Filament/Resources/AccessReportResource.php
+
+		-
+			rawMessage: Anonymous function should return string but returns mixed.
+			identifier: return.type
+			count: 1
+			path: app/Filament/Resources/EquipmentResource.php
+
+		-
+			rawMessage: 'Parameter #1 $options of method Filament\Forms\Components\Select::options() expects array<array<string>|string>|Closure|Illuminate\Contracts\Support\Arrayable|string|null, array given.'
+			identifier: argument.type
+			count: 1
+			path: app/Filament/Resources/EquipmentResource.php
+
+		-
+			rawMessage: 'Parameter #1 $options of method Filament\Tables\Filters\SelectFilter::options() expects array<array<string>|string>|class-string|Closure|Illuminate\Contracts\Support\Arrayable|null, array given.'
+			identifier: argument.type
+			count: 1
+			path: app/Filament/Resources/EquipmentResource.php
+
+		-
+			rawMessage: 'Method App\Filament\Resources\EquipmentResource\Pages\CreateEquipment::getRedirectUrl() should return string but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: app/Filament/Resources/EquipmentResource/Pages/CreateEquipment.php
+
+		-
+			rawMessage: Binary operation "." between '✅ ' and mixed results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Filament/Resources/GlobalReaderResource.php
+
+		-
+			rawMessage: Binary operation "." between '❌ ' and mixed results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Filament/Resources/GlobalReaderResource.php
+
+		-
+			rawMessage: 'Call to an undefined method Filament\Forms\Components\KeyValue::disableAllToolbarButtons().'
+			identifier: method.notFound
+			count: 1
+			path: app/Filament/Resources/GlobalReaderResource.php
+
+		-
+			rawMessage: 'Match expression does not handle remaining value: string'
+			identifier: match.unhandled
+			count: 1
+			path: app/Filament/Resources/GlobalReaderResource.php
+
+		-
+			rawMessage: 'Method Filament\Notifications\Notification::success() invoked with 1 parameter, 0 required.'
+			identifier: arguments.count
+			count: 1
+			path: app/Filament/Resources/GlobalReaderResource.php
+
+		-
+			rawMessage: 'Parameter #1 $components of method Filament\Forms\Components\Component::schema() expects array<Filament\Forms\Components\Component>|Closure, array{Filament\Forms\Components\Select, mixed} given.'
+			identifier: argument.type
+			count: 1
+			path: app/Filament/Resources/GlobalReaderResource.php
+
+		-
+			rawMessage: Binary operation "." between 'Dveře odemčeny na ' and mixed results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Filament/Resources/GlobalReaderResource/Pages/EditGlobalReader.php
+
+		-
+			rawMessage: 'Parameter #1 $title of method Filament\Notifications\Notification::title() expects Closure|string|null, mixed given.'
+			identifier: argument.type
+			count: 3
+			path: app/Filament/Resources/GlobalReaderResource/Pages/EditGlobalReader.php
+
+		-
+			rawMessage: Trying to invoke mixed but it's not a callable.
+			identifier: callable.nonCallable
+			count: 3
+			path: app/Filament/Resources/GlobalReaderResource/Pages/EditGlobalReader.php
+
+		-
+			rawMessage: Binary operation "." between mixed and '°C' results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Filament/Resources/PowerMonitoringResource.php
+
+		-
+			rawMessage: Binary operation "/" between mixed and 1000 results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Filament/Resources/PowerMonitoringResource.php
+
+		-
+			rawMessage: 'Method App\Filament\Resources\PowerMonitoringResource::canDelete() has parameter $record with no type specified.'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Filament/Resources/PowerMonitoringResource.php
+
+		-
+			rawMessage: 'Method App\Filament\Resources\PowerMonitoringResource::canEdit() has parameter $record with no type specified.'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Filament/Resources/PowerMonitoringResource.php
+
+		-
+			rawMessage: 'Parameter #1 $num of function number_format expects float, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Filament/Resources/PowerMonitoringResource.php
+
+		-
+			rawMessage: 'Parameter #1 $string of function ucfirst expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Filament/Resources/PowerMonitoringResource.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Filament\Resources\PowerMonitoringResource\Pages\ListPowerMonitorings::notify().'
+			identifier: method.notFound
+			count: 1
+			path: app/Filament/Resources/PowerMonitoringResource/Pages/ListPowerMonitorings.php
+
+		-
+			rawMessage: Access to an undefined property Illuminate\Database\Eloquent\Model::$reader_name.
+			identifier: property.notFound
+			count: 2
+			path: app/Filament/Resources/ReaderAlertResource.php
+
+		-
+			rawMessage: 'Part $readerName (mixed) of encapsed string cannot be cast to string.'
+			identifier: encapsedStringPart.nonString
+			count: 1
+			path: app/Filament/Resources/ReaderAlertResource.php
+
+		-
+			rawMessage: 'Parameter #1 $string of function ucfirst expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Filament/Resources/ReaderStatsResource.php
+
+		-
+			rawMessage: Binary operation "." between '✅ ' and mixed results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Filament/Resources/RoomReaderResource.php
+
+		-
+			rawMessage: Binary operation "." between '❌ ' and mixed results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Filament/Resources/RoomReaderResource.php
+
+		-
+			rawMessage: 'Match expression does not handle remaining value: string'
+			identifier: match.unhandled
+			count: 1
+			path: app/Filament/Resources/RoomReaderResource.php
+
+		-
+			rawMessage: 'Method Filament\Notifications\Notification::success() invoked with 1 parameter, 0 required.'
+			identifier: arguments.count
+			count: 1
+			path: app/Filament/Resources/RoomReaderResource.php
+
+		-
+			rawMessage: Binary operation "." between 'Dveře odemčeny na ' and mixed results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Filament/Resources/RoomReaderResource/Pages/EditRoomReader.php
+
+		-
+			rawMessage: 'Parameter #1 $title of method Filament\Notifications\Notification::title() expects Closure|string|null, mixed given.'
+			identifier: argument.type
+			count: 3
+			path: app/Filament/Resources/RoomReaderResource/Pages/EditRoomReader.php
+
+		-
+			rawMessage: Trying to invoke mixed but it's not a callable.
+			identifier: callable.nonCallable
+			count: 3
+			path: app/Filament/Resources/RoomReaderResource/Pages/EditRoomReader.php
+
+		-
+			rawMessage: 'Method App\Filament\Resources\RoomResource\Pages\CreateRoom::getRedirectUrl() should return string but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: app/Filament/Resources/RoomResource/Pages/CreateRoom.php
+
+		-
+			rawMessage: 'Method App\Filament\Resources\RoomResource\Pages\EditRoom::getRedirectUrl() should return string but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: app/Filament/Resources/RoomResource/Pages/EditRoom.php
+
+		-
+			rawMessage: Anonymous function should return string but returns mixed.
+			identifier: return.type
+			count: 1
+			path: app/Filament/Resources/RoomResource/RelationManagers/EquipmentRelationManager.php
+
+		-
+			rawMessage: 'Called ''pluck'' on Laravel collection, but could have been retrieved as a query.'
+			identifier: larastan.noUnnecessaryCollectionCall
+			count: 1
+			path: app/Filament/Resources/RoomResource/RelationManagers/EquipmentRelationManager.php
+
+		-
+			rawMessage: 'Parameter #1 $options of method Filament\Forms\Components\Select::options() expects array<array<string>|string>|Closure|Illuminate\Contracts\Support\Arrayable|string|null, array given.'
+			identifier: argument.type
+			count: 2
+			path: app/Filament/Resources/RoomResource/RelationManagers/EquipmentRelationManager.php
+
+		-
+			rawMessage: 'Parameter #1 $options of method Filament\Tables\Filters\SelectFilter::options() expects array<array<string>|string>|class-string|Closure|Illuminate\Contracts\Support\Arrayable|null, array given.'
+			identifier: argument.type
+			count: 1
+			path: app/Filament/Resources/RoomResource/RelationManagers/EquipmentRelationManager.php
+
+		-
+			rawMessage: Possibly invalid array key type mixed.
+			identifier: offsetAccess.invalidOffset
+			count: 1
+			path: app/Filament/Resources/RoomResource/RelationManagers/EquipmentRelationManager.php
+
+		-
+			rawMessage: Cannot access property $name on Illuminate\Database\Eloquent\Model|null.
+			identifier: property.nonObject
+			count: 4
+			path: app/Filament/Resources/ServiceAccessResource.php
+
+		-
+			rawMessage: 'Match expression does not handle remaining value: string'
+			identifier: match.unhandled
+			count: 1
+			path: app/Filament/Resources/ServiceAccessResource.php
+
+		-
+			rawMessage: 'Parameter #1 $reason of method App\Models\ServiceAccess::revoke() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Filament/Resources/ServiceAccessResource.php
+
+		-
+			rawMessage: 'Part $record->user->name (mixed) of encapsed string cannot be cast to string.'
+			identifier: encapsedStringPart.nonString
+			count: 4
+			path: app/Filament/Resources/ServiceAccessResource.php
+
+		-
+			rawMessage: Binary operation "." between 'QR kód byl odeslán…' and mixed results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Filament/Resources/ServiceAccessResource/Pages/EditServiceAccess.php
+
+		-
+			rawMessage: Trying to invoke mixed but it's not a callable.
+			identifier: callable.nonCallable
+			count: 1
+			path: app/Filament/Resources/ServiceAccessResource/Pages/EditServiceAccess.php
+
+		-
+			rawMessage: Binary operation "-" between mixed and mixed results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Filament/Widgets/AccessTrendChart.php
+
+		-
+			rawMessage: Using nullsafe property access "?->successful" on left side of ?? is unnecessary. Use -> instead.
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Filament/Widgets/AccessTrendChart.php
+
+		-
+			rawMessage: Using nullsafe property access "?->total" on left side of ?? is unnecessary. Use -> instead.
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Widgets/AccessTrendChart.php
+
+		-
+			rawMessage: 'Binary operation "/" between mixed and int<0, max> results in an error.'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Filament/Widgets/PowerMonitoringStats.php
+
+		-
+			rawMessage: 'Parameter #1 $num of function number_format expects float, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Filament/Widgets/PowerMonitoringStats.php
+
+		-
+			rawMessage: Access to an undefined property App\Models\ReaderAlert::$acknowledged.
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Widgets/ReaderAlertsWidget.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Models\ReaderAlert::acknowledge().'
+			identifier: method.notFound
+			count: 1
+			path: app/Filament/Widgets/ReaderAlertsWidget.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Models\ReaderAlert::resolve().'
+			identifier: method.notFound
+			count: 1
+			path: app/Filament/Widgets/ReaderAlertsWidget.php
+
+		-
+			rawMessage: Cannot access property $reader_name on mixed.
+			identifier: property.nonObject
+			count: 1
+			path: app/Filament/Widgets/ReaderAlertsWidget.php
+
+		-
+			rawMessage: 'Cannot call method limit() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: app/Filament/Widgets/ReaderAlertsWidget.php
+
+		-
+			rawMessage: 'Cannot call method orderBy() on mixed.'
+			identifier: method.nonObject
+			count: 2
+			path: app/Filament/Widgets/ReaderAlertsWidget.php
+
+		-
+			rawMessage: 'Cannot call method with() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: app/Filament/Widgets/ReaderAlertsWidget.php
+
+		-
+			rawMessage: 'Parameter #1 $query of method Filament\Tables\Table::query() expects Closure|Illuminate\Database\Eloquent\Builder|null, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Filament/Widgets/ReaderAlertsWidget.php
+
+		-
+			rawMessage: Using nullsafe property access "?->reader_name" on left side of ?? is unnecessary. Use -> instead.
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Widgets/ReaderAlertsWidget.php
+
+		-
+			rawMessage: 'Cannot call method where() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: app/Filament/Widgets/RoomUsageChart.php
+
+		-
+			rawMessage: Cannot access property $name on Illuminate\Database\Eloquent\Model|null.
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Controllers/Api/DeviceControlController.php
+
+		-
+			rawMessage: 'Part $roomReader->room->name (mixed) of encapsed string cannot be cast to string.'
+			identifier: encapsedStringPart.nonString
+			count: 1
+			path: app/Http/Controllers/Api/DeviceControlController.php
+
+		-
+			rawMessage: 'Part $serviceAccess->user->name (mixed) of encapsed string cannot be cast to string.'
+			identifier: encapsedStringPart.nonString
+			count: 1
+			path: app/Http/Controllers/Api/DeviceControlController.php
+
+		-
+			rawMessage: Cannot access property $avg_power_w on mixed.
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $channel on mixed.
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $channel_name on mixed.
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $created_at on mixed.
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $current on mixed.
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $date on mixed.
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $energy_month on mixed.
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $energy_today on mixed.
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $energy_total on mixed.
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $energy_wh on mixed.
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $id on mixed.
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $is_on on mixed.
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $power on mixed.
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $power_factor on mixed.
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $status on mixed.
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $status_message on mixed.
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $temperature on mixed.
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: Cannot access property $voltage on mixed.
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: 'Cannot call method count() on mixed.'
+			identifier: method.nonObject
+			count: 2
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: 'Cannot call method getConsumptionStatus() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: 'Cannot call method getFormattedEnergy() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: 'Cannot call method getFormattedPower() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: 'Cannot call method map() on mixed.'
+			identifier: method.nonObject
+			count: 3
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: 'Cannot call method toIso8601String() on mixed.'
+			identifier: method.nonObject
+			count: 2
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: 'Parameter #1 $num of function round expects float|int, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: 'Parameter #2 $days of method App\Services\PowerMonitoringService::getEnergyStats() expects int, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: 'Parameter #2 $days of static method App\Models\PowerMonitoring::getDailyEnergy() expects int, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: 'Parameter #2 $hours of method App\Services\PowerMonitoringService::getTemperatureStats() expects int, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: 'Parameter #2 $limit of method App\Services\PowerMonitoringService::getLatestData() expects int, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: 'Parameter #3 $limit of method App\Services\PowerMonitoringService::getChannelData() expects int, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/PowerMonitoringController.php
+
+		-
+			rawMessage: 'Access to an undefined property App\Models\Reservation|Illuminate\Database\Eloquent\Collection<int, App\Models\Reservation>::$end_at.'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: 'Access to an undefined property App\Models\Reservation|Illuminate\Database\Eloquent\Collection<int, App\Models\Reservation>::$id.'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: 'Access to an undefined property App\Models\Reservation|Illuminate\Database\Eloquent\Collection<int, App\Models\Reservation>::$room.'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: 'Access to an undefined property App\Models\Reservation|Illuminate\Database\Eloquent\Collection<int, App\Models\Reservation>::$start_at.'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: 'Access to an undefined property App\Models\Reservation|Illuminate\Database\Eloquent\Collection<int, App\Models\Reservation>::$user.'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: 'Access to an undefined property App\Models\Reservation|Illuminate\Database\Eloquent\Collection<int, App\Models\Reservation>::$user_id.'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Models\Room|Illuminate\Database\Eloquent\Collection<int, App\Models\Room>::readers().'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: 'Call to an undefined static method App\Models\AccessLog::logAttempt().'
+			identifier: staticMethod.notFound
+			count: 5
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: Cannot access offset 'qr_data' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: Cannot access offset 'reader_token' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: Cannot access offset 'rid' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: Cannot access offset 'room_id' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: 'Parameter #1 $json of function json_decode expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: 'Parameter #1 $qrData of method App\Services\QRCodeService::validateQRData() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: 'Parameter #1 $reader of method App\Services\DoorLockService::unlockRoom() expects App\Models\RoomReader, Illuminate\Database\Eloquent\Model given.'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: 'Parameter #2 $reservation of method App\Services\QRCodeService::validateQRData() expects App\Models\Reservation, App\Models\Reservation|Illuminate\Database\Eloquent\Collection<int, App\Models\Reservation> given.'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/QRAccessController.php
+
+		-
+			rawMessage: 'Parameter #1 $value of static method Illuminate\Support\Facades\Hash::make() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Auth/NewPasswordController.php
+
+		-
+			rawMessage: Cannot access offset 'password' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Http/Controllers/Auth/PasswordController.php
+
+		-
+			rawMessage: 'Parameter #1 $value of static method Illuminate\Support\Facades\Hash::make() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Auth/PasswordController.php
+
+		-
+			rawMessage: 'Parameter #1 $value of static method Illuminate\Support\Facades\Hash::make() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Auth/RegisteredUserController.php
+
+		-
+			rawMessage: Cannot access property $email on App\Models\User|null.
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ReservationController.php
+
+		-
+			rawMessage: 'Parameter #1 $value of method Carbon\Carbon::addMinutes() expects float|int, mixed given.'
+			identifier: argument.type
+			count: 2
+			path: app/Http/Controllers/ReservationController.php
+
+		-
+			rawMessage: 'Parameter #1 $value of method Carbon\Carbon::subMinutes() expects float|int, mixed given.'
+			identifier: argument.type
+			count: 2
+			path: app/Http/Controllers/ReservationController.php
+
+		-
+			rawMessage: 'Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''.'
+			identifier: larastan.noEnvCallsOutsideOfConfig
+			count: 1
+			path: app/Http/Middleware/ThrottleAccessValidation.php
+
+		-
+			rawMessage: Cannot cast mixed to int.
+			identifier: cast.int
+			count: 2
+			path: app/Http/Middleware/ThrottleAccessValidation.php
+
+		-
+			rawMessage: 'Parameter #2 $string of function explode expects string, bool|string given.'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Middleware/ThrottleAccessValidation.php
+
+		-
+			rawMessage: 'Parameter #1 $time of static method Carbon\Carbon::parse() expects Carbon\Month|Carbon\WeekDay|DateTimeInterface|float|int|string|null, mixed given.'
+			identifier: argument.type
+			count: 2
+			path: app/Http/Requests/CreateReservationRequest.php
+
+		-
+			rawMessage: 'Part $minDuration (mixed) of encapsed string cannot be cast to string.'
+			identifier: encapsedStringPart.nonString
+			count: 1
+			path: app/Http/Requests/CreateReservationRequest.php
+
+		-
+			rawMessage: Trying to invoke mixed but it's not a callable.
+			identifier: callable.nonCallable
+			count: 1
+			path: app/Http/Requests/CreateReservationRequest.php
+
+		-
+			rawMessage: 'Parameter #1 $qrData of method App\Services\QRCodeService::generateQRImageFromData() expects string, string|false given.'
+			identifier: argument.type
+			count: 1
+			path: app/Jobs/SendServiceAccessCodeEmail.php
+
+		-
+			rawMessage: Access to an undefined property Illuminate\Database\Eloquent\Model::$ip.
+			identifier: property.notFound
+			count: 2
+			path: app/Jobs/ToggleShellyJob.php
+
+		-
+			rawMessage: Binary operation "." between 'Shelly device is…' and mixed results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Jobs/ToggleShellyJob.php
+
+		-
+			rawMessage: 'Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''.'
+			identifier: larastan.noEnvCallsOutsideOfConfig
+			count: 1
+			path: app/Jobs/ToggleShellyJob.php
+
+		-
+			rawMessage: Cannot access offset 'channel' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Jobs/ToggleShellyJob.php
+
+		-
+			rawMessage: 'Cannot call method subject() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: app/Jobs/ToggleShellyJob.php
+
+		-
+			rawMessage: 'Cannot call method to() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: app/Jobs/ToggleShellyJob.php
+
+		-
+			rawMessage: 'Parameter #1 $device of method App\Services\ShellyGen2Service::isReachable() expects App\Models\Device, Illuminate\Database\Eloquent\Model given.'
+			identifier: argument.type
+			count: 1
+			path: app/Jobs/ToggleShellyJob.php
+
+		-
+			rawMessage: 'Parameter #1 $device of method App\Services\ShellyGen2Service::toggle() expects App\Models\Device, Illuminate\Database\Eloquent\Model given.'
+			identifier: argument.type
+			count: 1
+			path: app/Jobs/ToggleShellyJob.php
+
+		-
+			rawMessage: 'Parameter #2 $channel of method App\Services\ShellyGen2Service::toggle() expects int, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Jobs/ToggleShellyJob.php
+
+		-
+			rawMessage: Access to an undefined property Illuminate\Database\Eloquent\Model::$ip.
+			identifier: property.notFound
+			count: 2
+			path: app/Jobs/TurnOffShellyJob.php
+
+		-
+			rawMessage: Binary operation "." between 'Shelly device is…' and mixed results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Jobs/TurnOffShellyJob.php
+
+		-
+			rawMessage: 'Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''.'
+			identifier: larastan.noEnvCallsOutsideOfConfig
+			count: 1
+			path: app/Jobs/TurnOffShellyJob.php
+
+		-
+			rawMessage: Cannot access offset 'channel' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Jobs/TurnOffShellyJob.php
+
+		-
+			rawMessage: 'Cannot call method subject() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: app/Jobs/TurnOffShellyJob.php
+
+		-
+			rawMessage: 'Cannot call method to() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: app/Jobs/TurnOffShellyJob.php
+
+		-
+			rawMessage: 'Parameter #1 $device of method App\Services\ShellyGen2Service::isReachable() expects App\Models\Device, Illuminate\Database\Eloquent\Model given.'
+			identifier: argument.type
+			count: 1
+			path: app/Jobs/TurnOffShellyJob.php
+
+		-
+			rawMessage: 'Parameter #1 $device of method App\Services\ShellyGen2Service::turnOff() expects App\Models\Device, Illuminate\Database\Eloquent\Model given.'
+			identifier: argument.type
+			count: 1
+			path: app/Jobs/TurnOffShellyJob.php
+
+		-
+			rawMessage: 'Parameter #2 $channel of method App\Services\ShellyGen2Service::turnOff() expects int, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Jobs/TurnOffShellyJob.php
+
+		-
+			rawMessage: Access to an undefined property Illuminate\Database\Eloquent\Model::$ip.
+			identifier: property.notFound
+			count: 2
+			path: app/Jobs/TurnOnShellyJob.php
+
+		-
+			rawMessage: Binary operation "." between 'Shelly device is…' and mixed results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Jobs/TurnOnShellyJob.php
+
+		-
+			rawMessage: 'Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''.'
+			identifier: larastan.noEnvCallsOutsideOfConfig
+			count: 1
+			path: app/Jobs/TurnOnShellyJob.php
+
+		-
+			rawMessage: Cannot access offset 'channel' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Jobs/TurnOnShellyJob.php
+
+		-
+			rawMessage: 'Cannot call method subject() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: app/Jobs/TurnOnShellyJob.php
+
+		-
+			rawMessage: 'Cannot call method to() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: app/Jobs/TurnOnShellyJob.php
+
+		-
+			rawMessage: 'Parameter #1 $device of method App\Services\ShellyGen2Service::isReachable() expects App\Models\Device, Illuminate\Database\Eloquent\Model given.'
+			identifier: argument.type
+			count: 1
+			path: app/Jobs/TurnOnShellyJob.php
+
+		-
+			rawMessage: 'Parameter #1 $device of method App\Services\ShellyGen2Service::turnOn() expects App\Models\Device, Illuminate\Database\Eloquent\Model given.'
+			identifier: argument.type
+			count: 1
+			path: app/Jobs/TurnOnShellyJob.php
+
+		-
+			rawMessage: 'Parameter #2 $channel of method App\Services\ShellyGen2Service::turnOn() expects int, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Jobs/TurnOnShellyJob.php
+
+		-
+			rawMessage: Cannot cast SimpleSoftwareIO\QrCode\Illuminate\Support\HtmlString|string|null to string.
+			identifier: cast.string
+			count: 1
+			path: app/Mail/ReservationCreatedMail.php
+
+		-
+			rawMessage: 'Property Illuminate\Mail\Mailables\Content::$text (string|null) does not accept Closure.'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Mail/ReservationCreatedMail.php
+
+		-
+			rawMessage: 'Method App\Mail\ReservationQRCodeMail::attachments() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Mail/ReservationQRCodeMail.php
+
+		-
+			rawMessage: 'Method App\Mail\ServiceAccessCodeMail::attachments() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Mail/ServiceAccessCodeMail.php
+
+		-
+			rawMessage: Class App\Models\AuditLog has PHPDoc tag @property for property $new_values with no value type specified in iterable type array.
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/AuditLog.php
+
+		-
+			rawMessage: Class App\Models\AuditLog has PHPDoc tag @property for property $old_values with no value type specified in iterable type array.
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/AuditLog.php
+
+		-
+			rawMessage: 'Method App\Models\AuditLog::logAction() has parameter $newValues with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/AuditLog.php
+
+		-
+			rawMessage: 'Method App\Models\AuditLog::logAction() has parameter $oldValues with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/AuditLog.php
+
+		-
+			rawMessage: 'Cannot call method isQRValid() on Illuminate\Database\Eloquent\Model|null.'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/BackupQRCode.php
+
+		-
+			rawMessage: Class App\Models\BackupQRCode has PHPDoc tag @property for property $qr_data with no value type specified in iterable type array.
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/BackupQRCode.php
+
+		-
+			rawMessage: 'Method App\Models\BackupQRCode::getDecodedData() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/BackupQRCode.php
+
+		-
+			rawMessage: 'Method App\Models\BackupQRCode::getDecodedData() should return array but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: app/Models/BackupQRCode.php
+
+		-
+			rawMessage: 'Parameter #1 $json of function json_decode expects string, string|null given.'
+			identifier: argument.type
+			count: 1
+			path: app/Models/BackupQRCode.php
+
+		-
+			rawMessage: Cannot cast mixed to string.
+			identifier: cast.string
+			count: 1
+			path: app/Models/Device.php
+
+		-
+			rawMessage: 'Method App\Models\Equipment::getCategories() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/Equipment.php
+
+		-
+			rawMessage: 'Method App\Models\Equipment::getStatusOptions() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/Equipment.php
+
+		-
+			rawMessage: Class App\Models\GlobalReader has PHPDoc tag @property for property $allowed_service_types with no value type specified in iterable type array.
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/GlobalReader.php
+
+		-
+			rawMessage: Class App\Models\GlobalReader has PHPDoc tag @property for property $door_lock_config with no value type specified in iterable type array.
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/GlobalReader.php
+
+		-
+			rawMessage: 'Method App\Models\GlobalReader::getAccessBoundaries() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/GlobalReader.php
+
+		-
+			rawMessage: 'Method App\Models\GlobalReader::getLockConfig() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/GlobalReader.php
+
+		-
+			rawMessage: 'Method App\Models\GlobalReader::testConnection() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/GlobalReader.php
+
+		-
+			rawMessage: Class App\Models\PowerMonitoring has PHPDoc tag @property for property $raw_data with no value type specified in iterable type array.
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/PowerMonitoring.php
+
+		-
+			rawMessage: 'Method App\Models\PowerMonitoring::getByChannel() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/PowerMonitoring.php
+
+		-
+			rawMessage: 'Method App\Models\PowerMonitoring::getDailyEnergy() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/PowerMonitoring.php
+
+		-
+			rawMessage: 'Method App\Models\PowerMonitoring::getLatestByDevice() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/PowerMonitoring.php
+
+		-
+			rawMessage: 'Parameter #1 $num of function round expects float|int, float|int<min, -1>|int<1, max>|string given.'
+			identifier: argument.type
+			count: 1
+			path: app/Models/PowerMonitoring.php
+
+		-
+			rawMessage: 'Method App\Models\ReaderAlert::critical() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/ReaderAlert.php
+
+		-
+			rawMessage: 'Method App\Models\ReaderAlert::unresolved() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/ReaderAlert.php
+
+		-
+			rawMessage: Cannot access property $access_token on mixed.
+			identifier: property.nonObject
+			count: 2
+			path: app/Models/Reservation.php
+
+		-
+			rawMessage: Cannot access property $id on mixed.
+			identifier: property.nonObject
+			count: 3
+			path: app/Models/Reservation.php
+
+		-
+			rawMessage: 'Cannot call method getAttributes() on mixed.'
+			identifier: method.nonObject
+			count: 3
+			path: app/Models/Reservation.php
+
+		-
+			rawMessage: 'Cannot call method getOriginal() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/Reservation.php
+
+		-
+			rawMessage: 'Method App\Models\Reservation::getQRAccessWindow() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/Reservation.php
+
+		-
+			rawMessage: 'Parameter #1 $array of function array_diff_assoc expects array, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Models/Reservation.php
+
+		-
+			rawMessage: 'Parameter #1 $qrData of method App\Services\QRCodeService::generateQRImageFromData() expects string, string|false given.'
+			identifier: argument.type
+			count: 1
+			path: app/Models/Reservation.php
+
+		-
+			rawMessage: 'Parameter #2 ...$arrays of function array_diff_assoc expects array, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Models/Reservation.php
+
+		-
+			rawMessage: 'Parameter #3 $modelId of static method App\Models\AuditLog::logAction() expects int, mixed given.'
+			identifier: argument.type
+			count: 3
+			path: app/Models/Reservation.php
+
+		-
+			rawMessage: 'Parameter #4 $userId of static method App\Models\AuditLog::logAction() expects int|null, int|string|null given.'
+			identifier: argument.type
+			count: 3
+			path: app/Models/Reservation.php
+
+		-
+			rawMessage: 'Parameter #5 $oldValues of static method App\Models\AuditLog::logAction() expects array|null, mixed given.'
+			identifier: argument.type
+			count: 2
+			path: app/Models/Reservation.php
+
+		-
+			rawMessage: 'Parameter #6 $newValues of static method App\Models\AuditLog::logAction() expects array|null, mixed given.'
+			identifier: argument.type
+			count: 2
+			path: app/Models/Reservation.php
+
+		-
+			rawMessage: Class App\Models\RoomReader has PHPDoc tag @property for property $door_lock_config with no value type specified in iterable type array.
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/RoomReader.php
+
+		-
+			rawMessage: 'Method App\Models\RoomReader::getLockConfig() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/RoomReader.php
+
+		-
+			rawMessage: 'Method App\Models\RoomReader::testConnection() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/RoomReader.php
+
+		-
+			rawMessage: Class App\Models\ServiceAccess has PHPDoc tag @property for property $allowed_rooms with no value type specified in iterable type array.
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/ServiceAccess.php
+
+		-
+			rawMessage: 'Method App\Models\ServiceAccess::getAllowedRoomsWithNames() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/ServiceAccess.php
+
+		-
+			rawMessage: 'Method App\Models\ServiceAccess::getRemainingTime() should return int|null but returns float|null.'
+			identifier: return.type
+			count: 1
+			path: app/Models/ServiceAccess.php
+
+		-
+			rawMessage: Right side of || is always true.
+			identifier: booleanOr.rightAlwaysTrue
+			count: 1
+			path: app/Policies/RoomPolicy.php
+
+		-
+			rawMessage: Binary operation "." between 'Authorization:…' and mixed results in an error.
+			identifier: binaryOp.invalid
+			count: 2
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: Cannot access offset 'success' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Method App\Services\DoorLockService::testConnection() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Method App\Services\DoorLockService::unlockGlobalReader() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Method App\Services\DoorLockService::unlockRoom() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Method App\Services\DoorLockService::unlockViaAPI() has parameter $config with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Method App\Services\DoorLockService::unlockViaAPI() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Method App\Services\DoorLockService::unlockViaAPIGlobal() has parameter $config with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Method App\Services\DoorLockService::unlockViaAPIGlobal() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Method App\Services\DoorLockService::unlockViaRelay() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Method App\Services\DoorLockService::unlockViaRelayGlobal() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Method App\Services\DoorLockService::unlockViaWebhook() has parameter $config with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Method App\Services\DoorLockService::unlockViaWebhook() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Method App\Services\DoorLockService::unlockViaWebhookGlobal() has parameter $config with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Method App\Services\DoorLockService::unlockViaWebhookGlobal() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Parameter #1 $filename of function file_get_contents expects string, mixed given.'
+			identifier: argument.type
+			count: 4
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Parameter #1 $json of function json_decode expects string, string|false given.'
+			identifier: argument.type
+			count: 2
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Parameter #1 $string of function strlen expects string, string|false given.'
+			identifier: argument.type
+			count: 4
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Parameter #2 $data of function hash_hmac expects string, string|false given.'
+			identifier: argument.type
+			count: 2
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Parameter #3 $key of function hash_hmac expects string, mixed given.'
+			identifier: argument.type
+			count: 2
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Part $duration (mixed) of encapsed string cannot be cast to string.'
+			identifier: encapsedStringPart.nonString
+			count: 4
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: 'Part $relayPin (mixed) of encapsed string cannot be cast to string.'
+			identifier: encapsedStringPart.nonString
+			count: 2
+			path: app/Services/DoorLockService.php
+
+		-
+			rawMessage: Binary operation "*" between mixed and 0.8 results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			rawMessage: Binary operation "*" between mixed and 0.95 results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			rawMessage: Cannot access offset 'name' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			rawMessage: Cannot access offset int on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			rawMessage: 'Method App\Services\PowerMonitoringService::cleanupOldData() should return int but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			rawMessage: 'Method App\Services\PowerMonitoringService::getChannelData() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			rawMessage: 'Method App\Services\PowerMonitoringService::getEnergyStats() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			rawMessage: 'Method App\Services\PowerMonitoringService::getLatestData() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			rawMessage: 'Method App\Services\PowerMonitoringService::getTemperatureStats() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			rawMessage: 'Method App\Services\PowerMonitoringService::storeChannelData() has parameter $data with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			rawMessage: 'Parameter #1 $num of function round expects float|int, float|int|null given.'
+			identifier: argument.type
+			count: 2
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			rawMessage: 'Parameter #3 $data of method App\Services\PowerMonitoringService::storeChannelData() expects array, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			rawMessage: Using nullsafe property access "?->energy_month" on left side of ?? is unnecessary. Use -> instead.
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			rawMessage: Using nullsafe property access "?->energy_today" on left side of ?? is unnecessary. Use -> instead.
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			rawMessage: Using nullsafe property access "?->energy_total" on left side of ?? is unnecessary. Use -> instead.
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Services/PowerMonitoringService.php
+
+		-
+			rawMessage: 'Argument of an invalid type list<string>|false supplied for foreach, only iterables are supported.'
+			identifier: foreach.nonIterable
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			rawMessage: Cannot access offset 'rid' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			rawMessage: Cannot access offset 'room' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			rawMessage: 'Method App\Services\QRCodeService::generateForReservation() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			rawMessage: 'Method App\Services\QRCodeService::generateQRImage() never returns null so it can be removed from the return type.'
+			identifier: return.unusedType
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			rawMessage: 'Method App\Services\QRCodeService::getAccessWindow() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			rawMessage: 'Method App\Services\QRCodeService::validateQRData() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			rawMessage: 'Parameter #1 $qrData of method App\Services\QRCodeService::generateQRImage() expects string, string|false given.'
+			identifier: argument.type
+			count: 1
+			path: app/Services/QRCodeService.php
+
+		-
+			rawMessage: Cannot access property $id on mixed.
+			identifier: property.nonObject
+			count: 2
+			path: app/Services/ReaderMonitoringService.php
+
+		-
+			rawMessage: 'Method App\Services\ReaderMonitoringService::createAlert() has parameter $metadata with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ReaderMonitoringService.php
+
+		-
+			rawMessage: 'Method App\Services\ReaderMonitoringService::createAlert() has parameter $reader with no type specified.'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Services/ReaderMonitoringService.php
+
+		-
+			rawMessage: 'Method App\Services\ReaderMonitoringService::getFailureRate() has parameter $reader with no type specified.'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Services/ReaderMonitoringService.php
+
+		-
+			rawMessage: 'Method App\Services\ReaderMonitoringService::getLastAccessTime() has parameter $reader with no type specified.'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Services/ReaderMonitoringService.php
+
+		-
+			rawMessage: 'Parameter #1 $object of function get_class expects object, mixed given.'
+			identifier: argument.type
+			count: 2
+			path: app/Services/ReaderMonitoringService.php
+
+		-
+			rawMessage: 'Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''.'
+			identifier: larastan.noEnvCallsOutsideOfConfig
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: Cannot access offset 'aenergy' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: Cannot access offset 'current' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: Cannot access offset 'error' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: Cannot access offset 'on' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: Cannot access offset 'output' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: Cannot access offset 'power' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: Cannot access offset 'voltage' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: Cannot access offset 'was_on' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: 'Method App\Services\ShellyGen2Service::getAllSwitches() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: 'Method App\Services\ShellyGen2Service::getInfo() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: 'Method App\Services\ShellyGen2Service::getInfo() should return array|null but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: 'Method App\Services\ShellyGen2Service::getPowerData() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: 'Property App\Services\ShellyGen2Service::$authToken (string|null) does not accept mixed.'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: 'Property App\Services\ShellyGen2Service::$authToken is never read, only written.'
+			identifier: property.onlyWritten
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: 'Property App\Services\ShellyGen2Service::$baseUrl (string) does not accept mixed.'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: 'Property App\Services\ShellyGen2Service::$baseUrl is never read, only written.'
+			identifier: property.onlyWritten
+			count: 1
+			path: app/Services/ShellyGen2Service.php
+
+		-
+			rawMessage: 'Class Database\Factories\PaymentFactory extends generic class Illuminate\Database\Eloquent\Factories\Factory but does not specify its types: TModel'
+			identifier: missingType.generics
+			count: 1
+			path: database/factories/PaymentFactory.php
+
+		-
+			rawMessage: Using nullsafe property access "?->price" on left side of ?? is unnecessary. Use -> instead.
+			identifier: nullsafe.neverNull
+			count: 1
+			path: database/factories/PaymentFactory.php
+
+		-
+			rawMessage: 'Call to an undefined method Illuminate\Database\Schema\IndexDefinition::comment().'
+			identifier: method.notFound
+			count: 1
+			path: database/migrations/2025_01_01_000005_create_room_readers_table.php
+
+		-
+			rawMessage: 'Call to an undefined method Illuminate\Database\Schema\Blueprint::dropForeignKey().'
+			identifier: method.notFound
+			count: 1
+			path: database/migrations/2025_01_01_000007_add_room_relationship_to_devices.php
+
+		-
+			rawMessage: 'Call to an undefined method Illuminate\Database\Schema\Blueprint::dropForeignKey().'
+			identifier: method.notFound
+			count: 1
+			path: database/migrations/2025_01_01_000009_enhance_access_logs_for_qr_system.php
+
+		-
+			rawMessage: Cannot access property $id on App\Models\Reservation|null.
+			identifier: property.nonObject
+			count: 1
+			path: database/seeders/AccessLogSeeder.php
+
+		-
+			rawMessage: Cannot access property $id on App\Models\User|null.
+			identifier: property.nonObject
+			count: 2
+			path: database/seeders/AccessLogSeeder.php
+
+		-
+			rawMessage: Cannot access property $room_id on App\Models\Reservation|null.
+			identifier: property.nonObject
+			count: 1
+			path: database/seeders/AccessLogSeeder.php
+
+		-
+			rawMessage: Using nullsafe property access "?->id" on left side of ?? is unnecessary. Use -> instead.
+			identifier: nullsafe.neverNull
+			count: 1
+			path: database/seeders/AuditLogSeeder.php
+
+		-
+			rawMessage: Cannot access property $id on App\Models\Reservation|null.
+			identifier: property.nonObject
+			count: 2
+			path: database/seeders/BackupQRCodeSeeder.php
+
+		-
+			rawMessage: Cannot access property $id on App\Models\GlobalReader|null.
+			identifier: property.nonObject
+			count: 1
+			path: database/seeders/ReaderAlertSeeder.php
+
+		-
+			rawMessage: Cannot access property $id on App\Models\RoomReader|null.
+			identifier: property.nonObject
+			count: 1
+			path: database/seeders/ReaderAlertSeeder.php
+
+		-
+			rawMessage: Cannot access property $id on App\Models\User|null.
+			identifier: property.nonObject
+			count: 2
+			path: database/seeders/ReservationSeeder.php
+
+		-
+			rawMessage: Cannot access property $id on App\Models\Equipment|null.
+			identifier: property.nonObject
+			count: 12
+			path: database/seeders/RoomEquipmentSeeder.php
+
+		-
+			rawMessage: Cannot access property $id on App\Models\User|null.
+			identifier: property.nonObject
+			count: 3
+			path: database/seeders/ServiceAccessSeeder.php

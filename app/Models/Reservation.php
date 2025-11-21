@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Database\Factories\ReservationFactory;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property int $id
@@ -28,19 +29,26 @@ use Database\Factories\ReservationFactory;
 class Reservation extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id','room_id','start_at','end_at','status','access_token','token_valid_from','token_expires_at','used_at','qr_code','qr_generated_at','qr_sent_at'];  
+    protected $fillable = ['user_id','room_id','start_at','end_at','status','access_token','token_valid_from','token_expires_at','used_at','qr_code','qr_generated_at','qr_sent_at','price','guest_name','guest_email','guest_phone'];  
+    
     /**
-     * @var array<string,string>
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
      */
-    protected $casts = [
-        'start_at' => 'datetime',
-        'end_at' => 'datetime',
-        'token_valid_from' => 'datetime',
-        'token_expires_at' => 'datetime',
-        'used_at' => 'datetime',
-        'qr_generated_at' => 'datetime',
-        'qr_sent_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'start_at' => 'datetime',
+            'end_at' => 'datetime',
+            'token_valid_from' => 'datetime',
+            'token_expires_at' => 'datetime',
+            'used_at' => 'datetime',
+            'qr_generated_at' => 'datetime',
+            'qr_sent_at' => 'datetime',
+            'price' => 'decimal:2',
+        ];
+    }
 
     protected static function booted() {  
         static::creating(function ($res) {  
@@ -55,7 +63,7 @@ class Reservation extends Model
                 'created',
                 self::class,
                 $res->id,
-                auth()->id(),
+                Auth::id(),
                 null,
                 $res->getAttributes()
             );
@@ -66,14 +74,20 @@ class Reservation extends Model
             $oldValues = $res->getOriginal();
             $newValues = $res->getAttributes();
             
-            // Only log if something actually changed
-            $changes = array_diff_assoc($newValues, $oldValues);
+            // Only log if something actually changed. Use JSON compare to handle nested arrays safely.
+            $changes = [];
+            foreach ($newValues as $k => $v) {
+                $old = $oldValues[$k] ?? null;
+                if (json_encode($v) !== json_encode($old)) {
+                    $changes[$k] = $v;
+                }
+            }
             if (!empty($changes)) {
                 AuditLog::logAction(
                     'updated',
                     self::class,
                     $res->id,
-                    auth()->id(),
+                    Auth::id(),
                     $oldValues,
                     $newValues
                 );
@@ -86,7 +100,7 @@ class Reservation extends Model
                 'deleted',
                 self::class,
                 $res->id,
-                auth()->id(),
+                Auth::id(),
                 $res->getAttributes(),
                 null
             );
@@ -96,6 +110,11 @@ class Reservation extends Model
     public function room(): BelongsTo {  
         return $this->belongsTo(Room::class);  
     }  
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(\App\Models\Payment::class);
+    }
 
     public function user(): BelongsTo {  
         return $this->belongsTo(\App\Models\User::class);  

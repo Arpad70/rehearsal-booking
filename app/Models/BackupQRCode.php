@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int|null $id
+ * @property int|null $reservation_id
+ * @property string|null $qr_code
+ * @property array|string|null $qr_data
+ * @property int|null $sequence_number
+ * @property string|null $status
+ */
 class BackupQRCode extends Model
 {
     use HasFactory;
@@ -22,10 +30,13 @@ class BackupQRCode extends Model
         'used_by_reader',
     ];
 
-    protected $casts = [
-        'qr_data' => 'array',
-        'used_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'qr_data' => 'array',
+            'used_at' => 'datetime',
+        ];
+    }
 
     /**
      * Relationship: Backup QR belongs to Reservation
@@ -38,7 +49,7 @@ class BackupQRCode extends Model
     /**
      * Mark QR as used
      */
-    public function markAsUsed(string $readerName = null): void
+    public function markAsUsed(?string $readerName = null): void
     {
         $this->update([
             'status' => 'used',
@@ -133,7 +144,9 @@ class BackupQRCode extends Model
             $zip->close();
 
             if ($addedCount === 0) {
-                unlink($zipPath);
+                if (file_exists($zipPath)) {
+                    unlink($zipPath);
+                }
                 throw new \Exception('Žádné QR kódy nebyly přidány do archivu. Zkontrolujte, zda soubory existují.');
             }
         }

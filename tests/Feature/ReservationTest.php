@@ -6,6 +6,7 @@ use App\Models\Reservation;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class ReservationTest extends TestCase
@@ -28,7 +29,7 @@ class ReservationTest extends TestCase
     public function test_prevent_overlapping_reservations(): void
     {
         $startTime = now()->addHours(2);
-        $endTime = $startTime->addHours(1);
+        $endTime = (clone $startTime)->addHours(2); // 2 hours (> 60 min minimum)
 
         // Create first reservation
         Reservation::create([
@@ -59,7 +60,7 @@ class ReservationTest extends TestCase
     public function test_minimum_reservation_duration(): void
     {
         $startTime = now()->addHours(2);
-        $endTime = $startTime->addMinutes(5); // Less than 15 minutes
+        $endTime = (clone $startTime)->addMinutes(5); // Less than 60 minutes
 
         $this->actingAs($this->user);
 
@@ -79,7 +80,7 @@ class ReservationTest extends TestCase
     public function test_create_valid_reservation(): void
     {
         $startTime = now()->addHours(2);
-        $endTime = $startTime->addMinutes(30);
+        $endTime = (clone $startTime)->addMinutes(90); // 90 minutes (> 60 min minimum)
 
         $this->actingAs($this->user);
 

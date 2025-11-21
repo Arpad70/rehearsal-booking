@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CreateReservationRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class CreateReservationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->check();
+        return Auth::check();
     }
 
     /**
@@ -34,7 +35,8 @@ class CreateReservationRequest extends FormRequest
                     // Calculate minutes between start and end
                     $startTime = \Carbon\Carbon::parse($this->start_at);
                     $endTime = \Carbon\Carbon::parse($value);
-                    $diffMinutes = $endTime->diffInMinutes($startTime);
+                    // Use signed diff to ensure proper calculation (negative if end is before start)
+                    $diffMinutes = $startTime->diffInMinutes($endTime, false);
                     
                     if ($diffMinutes < $minDuration) {
                         $fail("Minimální délka rezervace je $minDuration minut.");

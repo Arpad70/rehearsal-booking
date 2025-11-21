@@ -20,11 +20,14 @@ class ReaderAlert extends Model
         'metadata',
     ];
 
-    protected $casts = [
-        'metadata' => 'array',
-        'resolved' => 'boolean',
-        'resolved_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'metadata' => 'array',
+            'resolved' => 'boolean',
+            'resolved_at' => 'datetime',
+        ];
+    }
 
     /**
      * Relationship: Alert belongs to RoomReader
@@ -43,9 +46,21 @@ class ReaderAlert extends Model
     }
 
     /**
+     * Get the parent alertable model (RoomReader or GlobalReader)
+     */
+    public function alertable()
+    {
+        if ($this->reader_type === 'room_reader') {
+            return $this->roomReader;
+        }
+        
+        return $this->globalReader;
+    }
+
+    /**
      * Mark as resolved
      */
-    public function markResolved(string $notes = null): void
+    public function markResolved(?string $notes = null): void
     {
         $this->update([
             'resolved' => true,

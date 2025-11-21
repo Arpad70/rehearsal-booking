@@ -7,6 +7,7 @@ use App\Models\Reservation;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class AccessValidationTest extends TestCase
@@ -23,8 +24,12 @@ class AccessValidationTest extends TestCase
         $this->room = Room::factory()->create();
         $this->user = User::factory()->create();
 
-        $startTime = now()->addMinutes(10);
-        $endTime = $startTime->addHours(1);
+        // Make reservation start shortly so token is valid during the test
+        $startTime = now()->addMinutes(1);
+        $endTime = (clone $startTime)->addHours(1);
+
+        $tokenValidFrom = now()->subMinutes(5);
+        $tokenExpiresAt = (clone $endTime)->addMinutes(5);
 
         $this->reservation = Reservation::create([
             'user_id' => $this->user->id,
@@ -32,8 +37,8 @@ class AccessValidationTest extends TestCase
             'start_at' => $startTime,
             'end_at' => $endTime,
             'status' => 'pending',
-            'token_valid_from' => $startTime->subMinutes(5),
-            'token_expires_at' => $endTime->addMinutes(5),
+            'token_valid_from' => $tokenValidFrom,
+            'token_expires_at' => $tokenExpiresAt,
         ]);
     }
 

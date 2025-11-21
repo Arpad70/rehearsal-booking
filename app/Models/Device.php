@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
@@ -17,17 +19,49 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Device extends Model
 {
+    use HasFactory;
     protected $fillable = ['room_id', 'type', 'ip', 'meta'];
     
     /**
-     * @var array<string,string>
+     * @return array<string,string>
      */
-    protected $casts = [
-        'meta' => 'array'
-    ];
+    protected function casts(): array
+    {
+        return [
+            'meta' => 'array'
+        ];
+    }
 
     public function room(): BelongsTo
     {
         return $this->belongsTo(Room::class);
+    }
+
+    public function healthChecks(): HasMany
+    {
+        return $this->hasMany(DeviceHealthCheck::class);
+    }
+
+    public function shellyLogs(): HasMany
+    {
+        return $this->hasMany(ShellyLog::class);
+    }
+
+    /**
+     * Virtual name attribute used by admin UI.
+     * Prefer `meta.name`, fallback to `ip` or id.
+     */
+    public function getNameAttribute(): string
+    {
+        $meta = $this->meta ?? [];
+        if (is_array($meta) && isset($meta['name']) && $meta['name']) {
+            return (string) $meta['name'];
+        }
+
+        if (!empty($this->ip)) {
+            return $this->ip;
+        }
+
+        return 'Device ' . $this->id;
     }
 }

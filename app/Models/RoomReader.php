@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int|null $id
+ * @property int|null $room_id
+ * @property string|null $reader_name
+ * @property string|null $reader_ip
+ * @property int|null $reader_port
+ * @property string|null $reader_token
+ * @property bool|null $enabled
+ * @property array|null $door_lock_config
+ */
 class RoomReader extends Model
 {
     use HasFactory;
@@ -21,10 +31,13 @@ class RoomReader extends Model
         'door_lock_config',
     ];
 
-    protected $casts = [
-        'door_lock_config' => 'array',
-        'enabled' => 'boolean',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'door_lock_config' => 'array',
+            'enabled' => 'boolean',
+        ];
+    }
 
     /**
      * Relationship: Reader belongs to a Room
@@ -90,9 +103,8 @@ class RoomReader extends Model
     public function getAccessAttemptsLast30Days(): int
     {
         return AccessLog::where('reader_type', 'room')
-            ->where('created_at', '>=', now()->subDays(30))
-            ->join('room_readers', 'access_logs.id', '=', 'room_readers.id', 'left')
-            ->where('room_readers.id', $this->id)
+            ->where('room_id', $this->room_id)
+            ->where('access_logs.created_at', '>=', now()->subDays(30))
             ->count();
     }
 
@@ -102,7 +114,8 @@ class RoomReader extends Model
     public function getSuccessRate(): float
     {
         $total = AccessLog::where('reader_type', 'room')
-            ->where('created_at', '>=', now()->subDays(30))
+            ->where('room_id', $this->room_id)
+            ->where('access_logs.created_at', '>=', now()->subDays(30))
             ->count();
 
         if ($total === 0) {
@@ -110,8 +123,9 @@ class RoomReader extends Model
         }
 
         $successful = AccessLog::where('reader_type', 'room')
+            ->where('room_id', $this->room_id)
             ->where('access_granted', true)
-            ->where('created_at', '>=', now()->subDays(30))
+            ->where('access_logs.created_at', '>=', now()->subDays(30))
             ->count();
 
         return ($successful / $total) * 100;

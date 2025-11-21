@@ -14,16 +14,21 @@ use Carbon\Carbon;
 class ReservationFactory extends Factory {  
     protected $model = Reservation::class;  
     public function definition() {  
-        $start = Carbon::now()->addDays($this->faker->numberBetween(1,10))->hour(18)->minute(0);  
+        $start = Carbon::now()->addDays($this->faker->numberBetween(1,10))->setTime(18, 0);  
         $end = (clone $start)->addHours(2);  
+
+        // Use clones when adjusting times so we don't mutate $start/$end
+        $validFrom = (clone $start)->subMinutes(5);
+        $expiresAt = (clone $end)->addMinutes(5);
+
         return [  
-            'user_id'=>User::factory(),  
-            'room_id'=>Room::factory(),  
-            'start_at'=>$start,  
-            'end_at'=>$end,  
-            'status'=>'pending',  
-            'token_valid_from'=>$start->subMinutes(5),  
-            'token_expires_at'=>$end->addMinutes(5),  
+            'user_id' => User::factory(),  
+            'room_id' => Room::factory(),  
+            'start_at' => $start,  
+            'end_at' => $end,  
+            'status' => 'pending',  
+            'token_valid_from' => $validFrom,  
+            'token_expires_at' => $expiresAt,  
         ];  
     }  
 }  

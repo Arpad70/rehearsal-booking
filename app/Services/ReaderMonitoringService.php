@@ -115,7 +115,7 @@ class ReaderMonitoringService
             ->where('created_at', '>=', now()->subHours(24))
             ->count();
 
-        return round((($ total - $successful) / $total) * 100, 2);
+        return round((($total - $successful) / $total) * 100, 2);
     }
 
     /**

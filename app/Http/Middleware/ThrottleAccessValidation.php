@@ -33,8 +33,8 @@ class ThrottleAccessValidation
         }
         
         // Apply rate limiting
-        $maxAttempts = config('reservations.api_access_rate_limit', 60);
-        $decayMinutes = config('reservations.api_access_rate_window', 1);
+        $maxAttempts = (int) config('reservations.api_access_rate_limit', 60);
+        $decayMinutes = (int) config('reservations.api_access_rate_window', 1);
         
         if (RateLimiter::tooManyAttempts($key, $maxAttempts)) {
             $seconds = RateLimiter::availableIn($key);

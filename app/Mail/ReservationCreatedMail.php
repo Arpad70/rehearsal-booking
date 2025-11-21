@@ -54,10 +54,14 @@ class ReservationCreatedMail extends Mailable
      */
     public function attachments(): array
     {
+        // Generate PNG QR code. Requires imagick extension.
         // Ensure the generator result is cast to a native string. The QR library
         // may return an HtmlString instance; casting prevents passing HtmlString
         // into Symfony's DataPart which expects a string/resource/File.
-        $qr = (string) QrCode::format('png')->size(300)->generate($this->reservation->access_token);
+        $qr = (string) QrCode::format('png')
+            ->size(300)
+            ->errorCorrection('H')
+            ->generate($this->reservation->access_token);
         
         return [
             \Illuminate\Mail\Mailables\Attachment::fromData(

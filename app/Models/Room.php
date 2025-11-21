@@ -20,11 +20,49 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Room extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','location','capacity','shelly_ip','shelly_token','enabled'];
+    
+    protected $fillable = [
+        'name',
+        'location',
+        'address',
+        'latitude',
+        'longitude',
+        'image',
+        'capacity',
+        'price_per_hour',
+        'is_public',
+        'description',
+        'image_url',
+        'size',
+        'shelly_token',
+        'enabled',
+        'reservation_default_price',
+        'power_monitoring_enabled',
+        'power_monitoring_type',
+        'auto_lights_enabled',
+        'auto_outlets_enabled',
+        'access_control_device',
+        'access_mode',
+        'camera_enabled',
+        'mixer_enabled',
+    ];
 
-    protected $casts = [
-        'enabled' => 'boolean',
-    ];  
+    protected function casts(): array
+    {
+        return [
+            'enabled' => 'boolean',
+            'is_public' => 'boolean',
+            'reservation_default_price' => 'decimal:2',
+            'price_per_hour' => 'decimal:2',
+            'latitude' => 'decimal:8',
+            'longitude' => 'decimal:8',
+            'power_monitoring_enabled' => 'boolean',
+            'auto_lights_enabled' => 'boolean',
+            'auto_outlets_enabled' => 'boolean',
+            'camera_enabled' => 'boolean',
+            'mixer_enabled' => 'boolean',
+        ];
+    }  
 
     public function reservations(): HasMany {  
         return $this->hasMany(Reservation::class);  

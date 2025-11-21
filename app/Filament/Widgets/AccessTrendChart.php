@@ -10,12 +10,24 @@ use Illuminate\Support\Facades\DB;
 class AccessTrendChart extends ChartWidget
 {
     protected static ?string $heading = 'Trend přístupů (posledních 7 dní)';
-    protected static ?int $sort = 2;
+    
+    protected static ?int $sort = 3;
+
+    protected int | string | array $columnSpan = [
+        'default' => 'full',
+        'sm' => 2,
+        'md' => 2,
+        'lg' => 2,
+        'xl' => 3,
+        '2xl' => 3,
+    ];
 
     protected function getData(): array
     {
-        $startDate = Carbon::now()->subDays(6)->startOfDay();
-        $endDate = Carbon::now()->endOfDay();
+        $now = Carbon::now();
+
+        $startDate = $now->copy()->subDays(6)->startOfDay();
+        $endDate = $now->copy()->endOfDay();
 
         $data = AccessLog::selectRaw('DATE(created_at) as date')
             ->selectRaw('COUNT(*) as total')
@@ -31,12 +43,14 @@ class AccessTrendChart extends ChartWidget
         $failed = [];
 
         for ($i = 6; $i >= 0; $i--) {
-            $date = Carbon::now()->subDays($i)->format('d.m.');
+            $day = $now->copy()->subDays($i);
+            $date = $day->format('d.m.');
             $labels[] = $date;
 
-            $record = $data->firstWhere('date', Carbon::now()->subDays($i)->toDateString());
-            $successful[] = $record?->successful ?? 0;
-            $failed[] = ($record?->total ?? 0) - ($record?->successful ?? 0);
+                $record = $data->firstWhere('date', $day->toDateString());
+                /** @var \App\Models\AccessLog|null $record */
+                $successful[] = $record?->successful ?? 0;
+                $failed[] = ($record?->total ?? 0) - ($record?->successful ?? 0);
         }
 
         return [

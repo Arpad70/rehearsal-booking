@@ -8,21 +8,25 @@
     "require": {
         "php": "^8.2",
         "filament/filament": "^3.0",
+        "gopay/payments-sdk-php": "^1.10",
         "laravel/framework": "^12.35",
         "laravel/tinker": "^2.10.1",
-        "simplesoftwareio/simple-qrcode": "^4.2"
+        "maatwebsite/excel": "^3.1",
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "stripe/stripe-php": "^19.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
+        "larastan/larastan": "^3.8",
         "laravel/breeze": "^2.3",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.24",
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
-        "phpunit/phpunit": "^11.5.3",
-        "phpstan/phpstan": "^1.11",
-        "phpstan/phpstan-strict-rules": "^1.2"
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpunit/phpunit": "^11.5.3"
     },
     "autoload": {
         "psr-4": {

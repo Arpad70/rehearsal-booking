@@ -37,6 +37,14 @@ class UserResource extends Resource
                     ->maxLength(255)
                     ->dehydrateStateUsing(fn (string|null $state): string|null => filled($state) ? bcrypt($state) : null)
                     ->dehydrated(fn (string|null $state) => filled($state)),
+                Forms\Components\Toggle::make('is_admin')
+                    ->label('Administrátor')
+                    ->helperText('Administrátoři mají plný přístup ke všem funkcím.')
+                    ->default(false),
+                Forms\Components\Toggle::make('receive_critical_notifications')
+                    ->label('Přijímat notifikace o kritickém vybavení')
+                    ->helperText('Uživatel bude dostávat emailové a in-app notifikace při změně stavu kritického vybavení.')
+                    ->default(false),
             ]);
     }
 
@@ -49,6 +57,14 @@ class UserResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable()
+                    ->sortable(),
+                Tables\Columns\IconColumn::make('is_admin')
+                    ->label('Admin')
+                    ->boolean()
+                    ->sortable(),
+                Tables\Columns\IconColumn::make('receive_critical_notifications')
+                    ->label('Notifikace')
+                    ->boolean()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()

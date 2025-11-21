@@ -2,42 +2,64 @@
 
 namespace App\Providers;
 
-use Filament\Facades\Filament;
 use Filament\Panel;
-use Filament\Navigation\NavigationItem;
+use Filament\PanelProvider;
+use Filament\Support\Colors\Color;
+use Filament\Http\Middleware\Authenticate;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Pages;
+use Filament\Widgets;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\AuthenticateSession;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Pages\AdminDashboard;
+use App\Filament\Resources\RoomResource;
+use App\Filament\Resources\ReservationResource;
+use App\Filament\Resources\UserResource;
 use App\Filament\Resources\RoomReaderResource;
 use App\Filament\Resources\GlobalReaderResource;
 use App\Filament\Resources\ServiceAccessResource;
 use App\Filament\Resources\ReaderAlertResource;
-use Illuminate\Support\ServiceProvider;
+use App\Filament\Resources\PowerMonitoringResource;
+use App\Filament\Resources\EquipmentResource;
+use App\Filament\Resources\PaymentResource;
+use App\Filament\Resources\BackupQRCodeResource;
+use App\Filament\Resources\AccessReportResource;
+use App\Filament\Resources\ReaderStatsResource;
 
-class FilamentServiceProvider extends ServiceProvider
+class FilamentServiceProvider extends PanelProvider
 {
-    public function boot(): void
+    public function panel(Panel $panel): Panel
     {
-        Filament::registerPanels([
-            Panel::make()
-                ->id('admin')
-                ->path('admin')
-                ->default()
-                ->pages([
-                    AdminDashboard::class,
-                ])
-                ->resources([
-                    RoomReaderResource::class,
-                    GlobalReaderResource::class,
-                    ServiceAccessResource::class,
-                    ReaderAlertResource::class,
-                ])
-                ->navigation(function (): array {
-                    return [
-                        NavigationItem::make('Admin Panel')
-                            ->icon('heroicon-o-home')
-                            ->isActiveWhen(fn (): bool => request()->routeIs('filament.admin.pages.admin-dashboard'))
-                            ->url(AdminDashboard::getUrl()),
-                    ];
-                })
-        ]);
+        return $panel
+            ->id('admin')
+            ->path('admin')
+            ->login()
+            ->colors([
+                'primary' => Color::Amber,
+            ])
+            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
+            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->pages([])
+            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->middleware([
+                EncryptCookies::class,
+                AddQueuedCookiesToResponse::class,
+                StartSession::class,
+                AuthenticateSession::class,
+                ShareErrorsFromSession::class,
+                VerifyCsrfToken::class,
+                SubstituteBindings::class,
+                DisableBladeIconComponents::class,
+                DispatchServingFilamentEvent::class,
+            ])
+            ->authMiddleware([
+                Authenticate::class,
+            ]);
     }
 }  

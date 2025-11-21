@@ -127,6 +127,69 @@
                     @endif
                 </div>
             </div>
+
+            <!-- Sekce s přehledem místností -->
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mt-6">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-medium">{{ __('Dostupné zkušebny') }}</h3>
+                        <a href="{{ route('rooms.index') }}" class="text-sm text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300">
+                            {{ __('Zobrazit všechny') }} →
+                        </a>
+                    </div>
+
+                    @if($rooms->isEmpty())
+                        <p class="text-gray-500 dark:text-gray-400">{{ __('Momentálně nejsou k dispozici žádné zkušebny.') }}</p>
+                    @else
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            @foreach($rooms as $room)
+                                <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition">
+                                    @if($room->image)
+                                        <div class="h-32 overflow-hidden">
+                                            <img src="{{ Storage::url($room->image) }}" 
+                                                 alt="{{ $room->name }}" 
+                                                 class="w-full h-full object-cover">
+                                        </div>
+                                    @else
+                                        <div class="h-32 bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center">
+                                            <i class="fas fa-music text-4xl text-indigo-300 dark:text-gray-500"></i>
+                                        </div>
+                                    @endif
+                                    <div class="p-4">
+                                        <h4 class="font-semibold text-base mb-2">{{ $room->name }}</h4>
+                                        <div class="space-y-1 mb-3 text-sm text-gray-600 dark:text-gray-400">
+                                            <div class="flex items-center">
+                                                <i class="fas fa-users w-4 mr-2"></i>
+                                                <span>{{ $room->capacity }} osob</span>
+                                            </div>
+                                            @if($room->size)
+                                            <div class="flex items-center">
+                                                <i class="fas fa-ruler-combined w-4 mr-2"></i>
+                                                <span>{{ $room->size }}</span>
+                                            </div>
+                                            @endif
+                                            <div class="flex items-center">
+                                                <i class="fas fa-money-bill-wave w-4 mr-2"></i>
+                                                <span class="font-semibold text-indigo-600 dark:text-indigo-400">{{ number_format($room->price_per_hour, 0, ',', ' ') }} Kč/hod</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <a href="{{ route('rooms.show', $room) }}" 
+                                               class="flex-1 text-center px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 transition">
+                                                {{ __('Detail') }}
+                                            </a>
+                                            <a href="{{ route('reservations.create', ['room' => $room->id]) }}" 
+                                               class="flex-1 text-center px-3 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition">
+                                                {{ __('Rezervovat') }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>
